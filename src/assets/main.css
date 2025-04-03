@@ -1,0 +1,52 @@
+@import 'https://js.arcgis.com/calcite-components/3.0.3/calcite.css';
+@import 'https://js.arcgis.com/4.32/@arcgis/core/assets/esri/themes/light/main.css';
+@import 'https://js.arcgis.com/map-components/4.32/arcgis-map-components.css';
+
+html,
+main {
+  margin: 0;
+}
+body {
+  margin: 0;
+  color: var(--q-dark);
+  font-weight: 400;
+  font-family: 'Barlow', sans-serif !important;
+}
+.text-h1 {
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  line-height: 2rem !important;
+}
+.text-h2 {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.5rem !important;
+}
+.text-h3 {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.5rem !important;
+}
+arcgis-map {
+  display: block;
+  min-height: calc(100vh - 225px);
+  height: calc(100vh - 50px);
+}
+
+/* .esri-legend {
+  width: 160px !important;
+} */
+
+/* .esri-legend__service .esri-widget__heading {
+  font-weight: normal !important;
+} */
+
+.esri-legend__service h3 {
+  line-height: unset;
+}
+#app {
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
