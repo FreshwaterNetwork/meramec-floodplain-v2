@@ -189,7 +189,6 @@ export const useMapStore = defineStore('mapStore', () => ({
     let webMap = document.querySelector('arcgis-map').view.map;
 
     webMap.layers.items.forEach((layer) => {
-      console.log(layer.title);
       if (layer.title == 'Select Flood Frequency') {
         layer.sublayers.items.forEach((sub) => {
           if (sub.title == '5-Year Floodplain') {
@@ -205,7 +204,6 @@ export const useMapStore = defineStore('mapStore', () => ({
       } else if (layer.title == 'View Floodplains by Watershed') {
         layer.layers.items.forEach((sub) => {
           this.watershedType.push({ label: sub.title, value: sub.id });
-          console.log(this.watershedType);
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
           }

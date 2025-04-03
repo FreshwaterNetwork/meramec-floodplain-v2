@@ -126,7 +126,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useMapStore } from '../../store';
-import FilterCheckbox from './filterCheckbox.vue';
+import FilterCheckbox from './FilterSelect.vue';
 import FilterRadio from './FilterRadio.vue';
 
 const ms = useMapStore();
@@ -2056,7 +2056,8 @@ function updateRadio(option) {
 }
 
 function createSliderModel(option) {
-  console.log(option);
+  // console.log(option);
+  // console.log(option.min, option.max);
   return ref({ min: option.min, max: option.max });
 }
 </script>
