@@ -190,17 +190,19 @@ export const useMapStore = defineStore('mapStore', () => ({
 
     webMap.layers.items.forEach((layer) => {
       if (layer.title == 'Select Flood Frequency') {
-        layer.sublayers.items.forEach((sub) => {
-          if (sub.title == '5-Year Floodplain') {
-            this.floodFrequency.push({ label: '20%', value: sub.id });
-            this.ffModel = sub.id;
-          } else if (sub.title == '100-Year Floodplain') {
-            this.floodFrequency.push({ label: '1%', value: sub.id });
-          } else if (sub.title == '500-Year Floodplain') {
-            this.floodFrequency.push({ label: '0.2%', value: sub.id });
-          }
+        layer.when(() => {
+          layer.sublayers.items.forEach((sub) => {
+            if (sub.title == '5-Year Floodplain') {
+              this.floodFrequency.push({ label: '20%', value: sub.id });
+              this.ffModel = sub.id;
+            } else if (sub.title == '100-Year Floodplain') {
+              this.floodFrequency.push({ label: '1%', value: sub.id });
+            } else if (sub.title == '500-Year Floodplain') {
+              this.floodFrequency.push({ label: '0.2%', value: sub.id });
+            }
+          });
+          this.floodFrequency.reverse();
         });
-        this.floodFrequency.reverse();
       } else if (layer.title == 'View Floodplains by Watershed') {
         layer.layers.items.forEach((sub) => {
           this.watershedType.push({ label: sub.title, value: sub.id });
