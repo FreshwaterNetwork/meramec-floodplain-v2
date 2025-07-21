@@ -1,158 +1,29 @@
 import { defineStore } from 'pinia';
+import { ref } from 'vue';
 import pdfMake from 'pdfmake/build/pdfmake';
 import htmlToPdfmake from 'html-to-pdfmake';
+import Graphic from '@arcgis/core/Graphic.js';
 import 'pdfmake/build/vfs_fonts';
 
 export const useMapStore = defineStore('mapStore', () => ({
+  // app.vue models
+  mobileSplitterModel: 37,
+
   // filters
-  filters: [
-    {
-      expLabel: 'Available Floodplain Area',
-      // options: [
-      //   {
-      //     label:
-      //       'Available floodplain area for given flood frequency and management action',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Area of floodplain in natural land cover that is not currently in protected status.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Water Quality',
-      // options: [
-      //   {
-      //     label: 'Total nitrogen (SWAT model)',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments lower in this metric.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      //   {
-      //     label: 'Total phosphorus (SWAT model)',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments lower in this metric.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      //   {
-      //     label: 'Sediment (SWAT model)',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments lower in this metric.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      //   {
-      //     label: 'Accumulated sediment (SWAT model)',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments lower in this metric.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      //   {
-      //     label: 'Nutrient loading to Gulf of Mexico (SPARROW model)',
-      //     model: false,
-      //     type: 'range',
-      //     infoText:
-      //       'Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments lower in this metric.',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Connectivity',
-      // options: [
-      //   {
-      //     label: '',
-      //     model: false,
-      //     type: '',
-      //     infoText: '',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Priority Conservation Area/Natural Areas',
-      // options: [
-      //   {
-      //     label: '',
-      //     model: false,
-      //     type: '',
-      //     infoText: '',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Habitat',
-      // options: [
-      //   {
-      //     label: '',
-      //     model: false,
-      //     type: '',
-      //     infoText: '',
-      //     nSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Population Exposure',
-      // options: [
-      //   {
-      //     label: '',
-      //     model: false,
-      //     type: '',
-      //     infoText: '',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Flood Damages',
-      // options: [
-      //   {
-      //     label: '',
-      //     type: '',
-      //     model: false,
-      //     infoText: '',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-    {
-      expLabel: 'Social Vulnerability',
-      // options: [
-      //   {
-      //     label: '',
-      //     model: false,
-      //     type: '',
-      //     infoText: '',
-      //     pSliderValues: { min: 0, max: 0 },
-      //     mSliderValues: { min: 0, max: 0 },
-      //   },
-      // ],
-    },
-  ],
   selectedFilters: [],
-  selectedFields: [],
+  activeFilters: [],
+  defExp: '',
+  reset: false,
+  filterArray: [],
+
+  // pdf variables
   mapScreenshot: '',
+  printMap: false,
+  selectionMade: false,
+  pdfFilters: [],
+  pdfWsType: '5-Year Floodplain',
+  pdfSuppLayers: [],
+  clickType: '',
 
   // panels
   leftPanelWidth: 450,
@@ -164,25 +35,24 @@ export const useMapStore = defineStore('mapStore', () => ({
   // create v-models and create layer groups
   floodFrequency: [],
   ffModel: '',
-
   watershedType: [],
   wsModel: '',
-
   maModel: 'natural',
+  sliderModel: 60,
 
   infoText: {},
   supportingLayers: [],
   showHelp: true,
 
-  testRange: { min: 25, max: 75 },
-
   graphicsLayer: null,
   selectionGraphic: null,
+  runSupLayGraphic: false,
 
   // Info button models
   ffInfo: false,
   wsInfo: false,
   maInfo: false,
+  opacSlider: false,
 
   // FUNCTIONS
   getLayerInfos() {
@@ -209,6 +79,7 @@ export const useMapStore = defineStore('mapStore', () => ({
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
           }
+          sub.definitionExpression = this.defExp;
         });
       } else if (layer.title == 'Supporting Layers') {
         layer.layers.items.forEach((sub) => {
@@ -233,6 +104,7 @@ export const useMapStore = defineStore('mapStore', () => ({
           layer.sublayers.items.forEach((sub) => {
             if (id == sub.id) {
               sub.visible = true;
+              this.pdfWsType = sub.title;
             } else {
               sub.visible = false;
             }
@@ -255,17 +127,49 @@ export const useMapStore = defineStore('mapStore', () => ({
       });
     } else {
       let layer = webMap.findLayerById(id);
+
+      if (this.pdfSuppLayers.includes(layer.title) == false) {
+        this.pdfSuppLayers.push(layer.title);
+      } else {
+        this.pdfSuppLayers = this.pdfSuppLayers.filter((title) => {
+          return title !== layer.title;
+        });
+      }
+
       if (layer) {
-        layer.visible = !layer.visible;
+        if (layer.title == 'USA Wetlands') {
+          this.runSupLayGraphic = !this.runSupLayGraphic;
+        } else {
+          layer.visible = !layer.visible;
+        }
       }
     }
   },
 
-  updateDefinitionExpression(values) {
-    console.log(values);
-  },
+  updateDefinitionExpression(obj) {
+    let filterString = '';
+    this.filterArray = [];
+    let webMap = document.querySelector('arcgis-map').view.map;
+    let layer = webMap.findLayerById(this.wsModel);
 
-  updateSelectedFields() {},
+    if (!obj) {
+      this.activeFilters.forEach((f) => {
+        this.filterArray.push(f.exp);
+      });
+    } else {
+      this.activeFilters.forEach((f) => {
+        if (f.id == obj.field || f.id == obj.id) {
+          f.exp = obj.exp;
+          this.filterArray.push(f.exp);
+        } else {
+          this.filterArray.push(f.exp);
+        }
+      });
+    }
+
+    filterString = this.filterArray.join(' AND ');
+    layer.definitionExpression = filterString;
+  },
 
   async generatePdf() {
     pdfMake.fonts = {
@@ -288,19 +192,40 @@ export const useMapStore = defineStore('mapStore', () => ({
       day: 'numeric',
     });
 
+    // code to loop through pdffilters and compare a property (probably whatever is used during defExp) to grab slider values and radio values for filters section of pdf
+
+    let webMap = document.querySelector('arcgis-map').view.map;
+    let wsLabel = webMap.findLayerById(this.wsModel).title;
+
     let sf = '<ul>';
-    this.selectedFilters.forEach((filter) => {
-      sf +=
-        '<li><strong>' +
-        filter.label +
-        '</strong> Min: ' +
-        filter.min +
-        ', Max: ' +
-        filter.max +
-        '</li>';
+    this.pdfFilters.forEach((filter) => {
+      if (filter.type == 'slider') {
+        sf +=
+          '<li><strong>' +
+          filter.label +
+          '</strong> <br /> Min: ' +
+          filter.min +
+          '<br /> Max: ' +
+          filter.max +
+          '</li>';
+      } else {
+        sf +=
+          '<li><strong>' +
+          filter.label +
+          '</strong> Value: ' +
+          filter.radioVal +
+          '</li>';
+      }
     });
     sf += '</ul>';
     let selectedFiltersHtml = htmlToPdfmake(sf);
+
+    let supportingLayersString;
+    if (this.pdfSuppLayers.length > 0) {
+      supportingLayersString = htmlToPdfmake(this.pdfSuppLayers.join('<br>'));
+    } else {
+      supportingLayersString = 'None';
+    }
 
     let docDefinition = {
       header: {
@@ -318,40 +243,44 @@ export const useMapStore = defineStore('mapStore', () => ({
       },
       content: [
         {
-          text: 'Lower Meramec Floodplain Tool',
+          text: 'Meramec Floodplain Tool Report',
           style: ['header1', 'centerItem'],
           margin: [0, 0, 0, 10],
         },
         {
           image: this.mapScreenshot,
           width: 375,
-          height: 375,
+          height: 325,
           style: ['centerItem'],
           margin: [0, 0, 0, 10],
         },
         {
           text: 'Selected Flood Frequency: ',
+          style: ['underlineItem'],
         },
         {
-          text: this.ffModel,
+          text: this.pdfWsType,
+          margin: [0, 0, 0, 10],
         },
         {
           text: 'Selected Watershed Type: ',
+          style: ['underlineItem'],
         },
         {
-          text: this.wsModel,
-        },
-        {
-          text: 'Selected Management Action: ',
-        },
-        {
-          text: this.maModel,
+          text: wsLabel,
+          margin: [0, 0, 0, 10],
         },
         {
           text: 'Active Supporting Layers: ',
+          style: ['underlineItem'],
+        },
+        {
+          text: supportingLayersString,
+          margin: [0, 0, 0, 10],
         },
         {
           text: 'Selected Filters:',
+          style: ['underlineItem'],
         },
         selectedFiltersHtml,
       ],
@@ -389,9 +318,207 @@ export const useMapStore = defineStore('mapStore', () => ({
         centerItem: {
           alignment: 'center',
         },
+        underlineItem: {
+          decoration: 'underline',
+        },
       },
     };
+
+    let docDefinitionSelection = {
+      header: {
+        text: dateString,
+        alignment: 'right',
+        margin: [0, 20, 20, 0],
+      },
+      footer: function (currentPage, pageCount) {
+        return {
+          text:
+            'Page ' + currentPage.toString() + ' of ' + pageCount.toString(),
+          alignment: 'center',
+          margin: [0, 0, 0, 10],
+        };
+      },
+      content: [
+        {
+          text: 'Meramec Floodplain Tool Report',
+          style: ['header1', 'centerItem'],
+          margin: [0, 0, 0, 10],
+        },
+        {
+          image: this.mapScreenshot,
+          width: 375,
+          height: 375,
+          style: ['centerItem'],
+          margin: [0, 0, 0, 20],
+        },
+        {
+          table: {
+            widths: ['50%', '50%'],
+            body: [
+              [{ text: 'Name', fillColor: '#ebebeb' }, this.clickResults.name],
+              [
+                { text: 'Watershed area (acres)', fillColor: '#ebebeb' },
+                this.clickResults.watershedAcres,
+              ],
+              [
+                {
+                  text: 'Acres of floodplain (5-year) in forest or wetland',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.floodplainAcres,
+              ],
+              [
+                {
+                  text: 'Local nitrogen loading (5-year) 1-100 scale',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.nitrogenScale,
+              ],
+              [
+                {
+                  text: 'Local phosphorus loading (5-year) 1-100 scale',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.phosphorusScale,
+              ],
+              [
+                {
+                  text: 'Local sediment loading (5-year) 1-100 scale',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.sedimentScale,
+              ],
+              [
+                {
+                  text: 'Number of federally endangered species occurrences',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.endageredSpecies,
+              ],
+              [
+                {
+                  text: 'Current pop in 5 yr floodplain in forest/wetland/grassland/ag/pasture',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.currentPop,
+              ],
+              [
+                {
+                  text: 'People currently living in the floodplain of the selected flood frequency, in all land covers',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.peopleFloodplain,
+              ],
+              [
+                {
+                  text: '2050 pop. in 5 yr. floodplain in forest/wetland/grassland/ag/pasture',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.futurePop,
+              ],
+              [
+                {
+                  text: 'Potential 2050 flood damage to buildings in 5-year floodplain',
+                  fillColor: '#ebebeb',
+                },
+                this.clickResults.floodDamage,
+              ],
+              [
+                { text: 'Social vulnerability index', fillColor: '#ebebeb' },
+                this.clickResults.vulnerabilityIndex,
+              ],
+            ],
+          },
+          margin: [0, 0, 0, 10],
+          pageBreak: 'after',
+        },
+        {
+          text: 'Selected Flood Frequency: ',
+          style: ['underlineItem'],
+        },
+        {
+          text: this.pdfWsType,
+          margin: [0, 0, 0, 10],
+        },
+        {
+          text: 'Selected Watershed Type: ',
+          style: ['underlineItem'],
+        },
+        {
+          text: wsLabel,
+          margin: [0, 0, 0, 10],
+        },
+        {
+          text: 'Active Supporting Layers: ',
+          style: ['underlineItem'],
+        },
+        {
+          text: supportingLayersString,
+          margin: [0, 0, 0, 10],
+        },
+        {
+          text: 'Selected Filters:',
+          style: ['underlineItem'],
+        },
+        selectedFiltersHtml,
+      ],
+      defaultStyle: {
+        fontSize: 11,
+        color: '#374269',
+      },
+      styles: {
+        header1: {
+          bold: true,
+          fontSize: 18,
+        },
+        header1a: {
+          bold: true,
+          fontSize: 16,
+        },
+        header2: {
+          bold: true,
+          fontSize: 14,
+        },
+        header3: {
+          bold: true,
+          fontSize: 12,
+        },
+        header4: {
+          fontSize: 12,
+        },
+        anotherStyle: {
+          italics: true,
+          alignment: 'right',
+        },
+        boldItem: {
+          bold: true,
+        },
+        centerItem: {
+          alignment: 'center',
+        },
+        underlineItem: {
+          decoration: 'underline',
+        },
+      },
+    };
+
+    if (!this.selectionMade) {
+      pdfMake.createPdf(docDefinition).download();
+    } else {
+      pdfMake.createPdf(docDefinitionSelection).download();
+    }
+
+    this.printMap = false;
   },
 
-  // WATCHERS
+  getMapPrint() {
+    const mapView = document.querySelector('arcgis-map').view;
+
+    mapView.takeScreenshot().then((screenshot) => {
+      let image = screenshot.dataUrl;
+      this.mapScreenshot = image;
+
+      this.generatePdf();
+    });
+  },
 }));

@@ -4,7 +4,6 @@
     rounded
     dense
     flat
-    class="shadow-2"
     :color="iconInfo.color"
     text-color="primary"
     :padding="iconInfo.padding"

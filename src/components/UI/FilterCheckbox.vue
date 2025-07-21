@@ -6,8 +6,6 @@
     toggle-order="tf"
     checked-icon="task_alt"
     unchecked-icon="panorama_fish_eye"
-    class="self-center"
-    style="width: 45%"
     @update:model-value="$emit(method, index)"
   ></q-checkbox>
 </template>
@@ -19,6 +17,6 @@ export default {
       model: false,
     };
   },
-  props: ['label', 'index', 'method', 'type'],
+  props: ['label', 'index', 'method'],
 };
 </script>
