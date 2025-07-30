@@ -163,7 +163,7 @@
       </div> -->
     </div>
     <q-separator class="q-my-md" inset />
-    <div :key="componentKey">
+    <div>
       <div
         class="q-my-sm"
         style="
@@ -318,14 +318,11 @@ import IconButton from './UI/IconButton.vue';
 
 const ms = useMapStore();
 
-let componentKey = 0;
-
 function resetFilters() {
   ms.selectedFilters = [];
   ms.activeFilters = [];
   ms.pdfFilters = [];
   ms.pdfSuppLayers = [];
-  ms.reset = !ms.reset;
 
   let webMap = document.querySelector('arcgis-map').view.map;
   let layer = webMap.findLayerById(ms.wsModel);
@@ -339,14 +336,6 @@ watch(
   () => {
     if (ms.printMap == true) {
       ms.getMapPrint();
-    }
-  }
-);
-watch(
-  () => ms.reset,
-  () => {
-    if (ms.reset) {
-      resetFilters();
     }
   }
 );

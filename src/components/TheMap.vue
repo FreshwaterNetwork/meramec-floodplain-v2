@@ -298,8 +298,6 @@ const onReady = (event) => {
     });
   });
 
-  // update USA wetlands supporting layer "definition expression"
-
   // METHODS
   function queryClick(geo, response) {
     let layer;

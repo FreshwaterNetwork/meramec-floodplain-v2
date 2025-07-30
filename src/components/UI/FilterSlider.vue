@@ -41,7 +41,6 @@ export default {
   },
   watch: {
     compKey() {
-      console.log('component key changed');
       this.option.checkboxModel.value = false;
       this.slider.values = [this.slider.min, this.slider.max];
     },
@@ -82,8 +81,6 @@ export default {
       let val = this.slider.values;
       this.$emit('update-sl', this.option, val);
     });
-
-    // console.log(this.slider);
   },
 };
 </script>
