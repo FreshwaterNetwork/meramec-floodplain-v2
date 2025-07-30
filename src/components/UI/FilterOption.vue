@@ -3,7 +3,7 @@
   <div v-for="obj in filterObj" :key="obj">
     <q-expansion-item
       :label="obj.header"
-      class="q-mb-sm"
+      class="q-my-sm"
       header-class="text-weight-medium bg-grey-3"
       dense
       style="border-radius: 15px"
@@ -14,9 +14,11 @@
             <div v-for="(k, key) in range" :key="key">
               <div
                 v-if="key == option.field && option.type == 'slider'"
+                class="q-pt-sm"
                 style="width: 90%; display: block; margin: auto"
               >
                 <FilterCheckbox
+                  :key="ms.componentKey"
                   :label="option.label"
                   :k="k"
                   method="update-de"
@@ -43,10 +45,12 @@
             <div v-for="(k, key) in radio" :key="key">
               <div
                 v-if="key == option.field && option.type == 'radio'"
+                class="q-pt-sm"
                 style="width: 90%; margin: auto"
               >
                 <div style="width: 90%">
                   <FilterCheckbox
+                    :key="ms.componentKey"
                     :label="option.label"
                     :k="k"
                     method="update-de"
@@ -74,8 +78,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useMapStore } from '../../store';
+import { ref, watch, onMounted } from 'vue';
+import { useMapStore } from '../../store/index';
 import FilterCheckbox from './FilterSelect.vue';
 import FilterRadio from './FilterRadio.vue';
 import FilterSlider from './FilterSlider.vue';
@@ -2329,11 +2333,6 @@ function updateCheckbox(option, sliderVals) {
       }
     } else {
       option.checkboxModel.value = false;
-      if (ms.selectedFilters.includes(option.field) == true) {
-        ms.selectedFilters = ms.selectedFilters.filter(
-          (item) => item !== option.field
-        );
-      }
       ms.activeFilters = ms.activeFilters.filter(
         (item) => item.id !== option.field
       );
@@ -2404,21 +2403,7 @@ function updateCheckbox(option, sliderVals) {
   ms.updateDefinitionExpression();
 }
 
-function updateRadio(option) {
-  // let stringVal;
-  // console.log(option);
-  // if (option.radioModel == 'present') {
-  //   stringVal = option.field + ' = 0.00';
-  // } else {
-  //   stringVal = option.field + ' = 1.00';
-  // }
-  // console.log(option.field);
-  // console.log(stringVal);
-  // ms.updateDefinitionExpression({
-  //   field: option.field,
-  //   exp: stringVal,
-  // });
-}
+function updateRadio(option) {}
 
 function updateSlider(option, val) {
   let stringVal = '';

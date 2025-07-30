@@ -14,8 +14,9 @@
 </template>
 
 <script>
-import { markRaw } from 'vue';
+import { markRaw, watch } from 'vue';
 import Slider from '@arcgis/core/widgets/Slider';
+import { useMapStore } from '../../store';
 
 export default {
   data() {
@@ -26,6 +27,25 @@ export default {
   },
   props: ['method', 'option', 'k'],
   emits: ['update-sl'],
+  computed: {
+    compKey: {
+      get() {
+        const ms = useMapStore();
+        return ms.componentKey;
+      },
+      set(value) {
+        const ms = useMapStore();
+        ms.componentKey = value;
+      },
+    },
+  },
+  watch: {
+    compKey() {
+      console.log('component key changed');
+      this.option.checkboxModel.value = false;
+      this.slider.values = [this.slider.min, this.slider.max];
+    },
+  },
   mounted() {
     this.slider = markRaw(
       new Slider({
@@ -62,6 +82,8 @@ export default {
       let val = this.slider.values;
       this.$emit('update-sl', this.option, val);
     });
+
+    // console.log(this.slider);
   },
 };
 </script>

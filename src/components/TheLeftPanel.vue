@@ -163,7 +163,7 @@
       </div> -->
     </div>
     <q-separator class="q-my-md" inset />
-    <div>
+    <div :key="componentKey">
       <div
         class="q-my-sm"
         style="
@@ -188,7 +188,7 @@
             color="primary"
             class="q-ml-sm"
             label="Reset Filters"
-            @click="ms.reset = true"
+            @click="resetFilters()"
           />
         </div>
       </div>
@@ -318,10 +318,20 @@ import IconButton from './UI/IconButton.vue';
 
 const ms = useMapStore();
 
+let componentKey = 0;
+
 function resetFilters() {
   ms.selectedFilters = [];
+  ms.activeFilters = [];
   ms.pdfFilters = [];
   ms.pdfSuppLayers = [];
+  ms.reset = !ms.reset;
+
+  let webMap = document.querySelector('arcgis-map').view.map;
+  let layer = webMap.findLayerById(ms.wsModel);
+  layer.definitionExpression = '';
+
+  ms.componentKey += 1;
 }
 
 watch(
@@ -329,6 +339,14 @@ watch(
   () => {
     if (ms.printMap == true) {
       ms.getMapPrint();
+    }
+  }
+);
+watch(
+  () => ms.reset,
+  () => {
+    if (ms.reset) {
+      resetFilters();
     }
   }
 );

@@ -5,57 +5,73 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import Graphic from '@arcgis/core/Graphic.js';
 import 'pdfmake/build/vfs_fonts';
 
-export const useMapStore = defineStore('mapStore', () => ({
+export const useMapStore = defineStore('mapStore', () => {
   // app.vue models
-  mobileSplitterModel: 37,
+  const mobileSplitterModel = 37;
 
   // filters
-  selectedFilters: [],
-  activeFilters: [],
-  defExp: '',
-  reset: false,
-  filterArray: [],
+  let selectedFilters = ref([]);
+  let activeFilters = ref([]);
+  let defExp = ref('');
+  let reset = ref(false);
+  let filterArray = ref([]);
+  let componentKey = ref(1);
 
   // pdf variables
-  mapScreenshot: '',
-  printMap: false,
-  selectionMade: false,
-  pdfFilters: [],
-  pdfWsType: '5-Year Floodplain',
-  pdfSuppLayers: [],
-  clickType: '',
+  let mapScreenshot = ref('');
+  let printMap = ref(false);
+  let selectionMade = ref(false);
+  let pdfFilters = ref([]);
+  let pdfWsType = ref('5-Year Floodplain');
+  let pdfSuppLayers = ref([]);
+  let clickType = ref('');
 
   // panels
-  leftPanelWidth: 450,
-  rightPanelWidth: 450,
-  rightDrawerOpen: false,
-  clickResults: {},
-  clickResultsLabels: {},
+  const leftPanelWidth = 450;
+  const rightPanelWidth = 450;
+  let rightDrawerOpen = ref(false);
+  let clickResults = ref({});
+  let clickResultsLabels = ref({});
 
   // create v-models and create layer groups
-  floodFrequency: [],
-  ffModel: '',
-  watershedType: [],
-  wsModel: '',
-  maModel: 'natural',
-  sliderModel: 60,
+  let floodFrequency = ref([]);
+  let ffModel = ref('');
+  let watershedType = ref([]);
+  let wsModel = ref('');
+  let maModel = ref('natural');
+  let sliderModel = ref(60);
 
-  infoText: {},
-  supportingLayers: [],
-  showHelp: true,
+  let infoText = ref({});
+  let supportingLayers = ref([]);
+  let showHelp = ref(true);
 
-  graphicsLayer: null,
-  selectionGraphic: null,
-  runSupLayGraphic: false,
+  let graphicsLayer = null;
+  let selectionGraphic = null;
+  let runSupLayGraphic = ref(false);
 
   // Info button models
-  ffInfo: false,
-  wsInfo: false,
-  maInfo: false,
-  opacSlider: false,
+  let ffInfo = ref(false);
+  let wsInfo = ref(false);
+  let maInfo = ref(false);
+  let opacSlider = ref(false);
+
+  // Filter options
+  const checkboxStates = ref([]); // Array of checked checkbox keys
+
+  function toggleCheckbox(key) {
+    if (checkboxStates.value.includes(key)) {
+      checkboxStates.value = checkboxStates.value.filter((k) => k !== key);
+    } else {
+      checkboxStates.value.push(key);
+    }
+  }
+
+  function resetCheckboxStates() {
+    checkboxStates.value = [];
+  }
 
   // FUNCTIONS
-  getLayerInfos() {
+  function getLayerInfos() {
     let webMap = document.querySelector('arcgis-map').view.map;
 
     webMap.layers.items.forEach((layer) => {
@@ -93,9 +109,9 @@ export const useMapStore = defineStore('mapStore', () => ({
         });
       }
     });
-  },
+  }
 
-  updateLayerVisibility(group, id) {
+  function updateLayerVisibility(group, id) {
     let webMap = document.querySelector('arcgis-map').view.map;
 
     if (group == 'ff') {
@@ -144,9 +160,9 @@ export const useMapStore = defineStore('mapStore', () => ({
         }
       }
     }
-  },
+  }
 
-  updateDefinitionExpression(obj) {
+  function updateDefinitionExpression(obj) {
     let filterString = '';
     this.filterArray = [];
     let webMap = document.querySelector('arcgis-map').view.map;
@@ -169,9 +185,11 @@ export const useMapStore = defineStore('mapStore', () => ({
 
     filterString = this.filterArray.join(' AND ');
     layer.definitionExpression = filterString;
-  },
 
-  async generatePdf() {
+    console.log(layer.definitionExpression);
+  }
+
+  function generatePdf() {
     pdfMake.fonts = {
       Roboto: {
         normal:
@@ -509,9 +527,9 @@ export const useMapStore = defineStore('mapStore', () => ({
     }
 
     this.printMap = false;
-  },
+  }
 
-  getMapPrint() {
+  function getMapPrint() {
     const mapView = document.querySelector('arcgis-map').view;
 
     mapView.takeScreenshot().then((screenshot) => {
@@ -520,5 +538,51 @@ export const useMapStore = defineStore('mapStore', () => ({
 
       this.generatePdf();
     });
-  },
-}));
+  }
+
+  return {
+    mobileSplitterModel,
+    selectedFilters,
+    activeFilters,
+    defExp,
+    reset,
+    filterArray,
+    mapScreenshot,
+    printMap,
+    selectionMade,
+    pdfFilters,
+    pdfWsType,
+    pdfSuppLayers,
+    clickType,
+    leftPanelWidth,
+    rightPanelWidth,
+    rightDrawerOpen,
+    clickResults,
+    clickResultsLabels,
+    floodFrequency,
+    ffModel,
+    watershedType,
+    wsModel,
+    maModel,
+    sliderModel,
+    infoText,
+    supportingLayers,
+    showHelp,
+    graphicsLayer,
+    selectionGraphic,
+    runSupLayGraphic,
+    ffInfo,
+    wsInfo,
+    maInfo,
+    opacSlider,
+    getLayerInfos,
+    updateLayerVisibility,
+    updateDefinitionExpression,
+    generatePdf,
+    getMapPrint,
+    checkboxStates,
+    toggleCheckbox,
+    resetCheckboxStates,
+    componentKey,
+  };
+});
