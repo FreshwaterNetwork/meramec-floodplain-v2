@@ -24,7 +24,18 @@ export default {
     };
   },
   props: ['method', 'option'],
-  computed: {},
+  computed: {
+    compKey: {
+      get() {
+        const ms = useMapStore();
+        return ms.componentKey;
+      },
+      set(value) {
+        const ms = useMapStore();
+        ms.componentKey = value;
+      },
+    },
+  },
   methods: {
     firstUpdate(newValue, option) {
       let ms = useMapStore();
@@ -181,22 +192,6 @@ export default {
         ms.updateDefinitionExpression(obj);
       }
     },
-    // update(newValue, option) {
-    //   let ms = useMapStore();
-    //   if (newValue == 'present') {
-    //     let obj = {
-    //       field: option.field,
-    //       exp: option.field + ' = 1.00',
-    //     };
-    //     ms.updateDefinitionExpression(obj);
-    //   } else if (newValue == 'absent') {
-    //     let obj = {
-    //       field: option.field,
-    //       exp: option.field + ' = 0.00',
-    //     };
-    //     ms.updateDefinitionExpression(obj);
-    //   }
-    // },
   },
   watch: {
     model(newValue) {
@@ -274,6 +269,9 @@ export default {
       //   }
       // }
       // ms.updateDefinitionExpression();
+    },
+    compKey() {
+      this.option.checkboxModel.value = false;
     },
   },
 };

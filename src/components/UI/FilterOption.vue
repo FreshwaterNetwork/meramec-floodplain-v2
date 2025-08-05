@@ -60,7 +60,7 @@
                 <div
                   class="self-center"
                   style="margin: auto; width: fit-content; display: block"
-                  v-show="option.checkboxModel.value == true"
+                  v-if="option.checkboxModel.value == true"
                 >
                   <FilterRadio
                     :option="option"
