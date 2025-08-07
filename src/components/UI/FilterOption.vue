@@ -3,9 +3,10 @@
   <div v-for="obj in filterObj" :key="obj">
     <q-expansion-item
       :label="obj.header"
-      class="q-my-sm"
+      class="q-mt-md"
       header-class="text-weight-medium bg-grey-3"
       dense
+      default-opened
       style="border-radius: 15px"
     >
       <div v-for="option in obj.controls" :key="option">

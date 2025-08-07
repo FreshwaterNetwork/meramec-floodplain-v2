@@ -185,6 +185,7 @@ export const useMapStore = defineStore('mapStore', () => {
 
     filterString = this.filterArray.join(' AND ');
     layer.definitionExpression = filterString;
+    console.log(filterString);
   }
 
   function generatePdf() {

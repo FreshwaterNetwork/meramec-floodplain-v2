@@ -180,7 +180,7 @@
             dense
             color="primary"
             class="q-mr-sm"
-            label="Save and Share"
+            label="Save Map"
             @click="ms.printMap = true"
           />
           <q-btn
