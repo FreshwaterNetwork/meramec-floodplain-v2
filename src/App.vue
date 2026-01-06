@@ -5,7 +5,7 @@
         <q-toolbar-title style="font-weight: 600; color: #eae8f5"
           ><span class="q-mr-sm">Freshwater Network</span>
           <span class="text-weight-light"
-            >Lower Meramec Floodplain Tool</span
+            >Meramec Floodplain Tool</span
           ></q-toolbar-title
         >
         <q-btn
@@ -47,13 +47,13 @@
       <q-card>
         <q-card-section class="q-ma-md">
           <div class="text-h5 text-center q-mb-md text-weight-medium">
-            Lower Meramec Floodplain Tool
+            Meramec Floodplain Tool
           </div>
           <div class="q-ma-md">
             <div>
               This floodplain prioritization tool is designed to identify
               critical opportunities for floodplain protection and restoration
-              in the lower Meramec River basin in Missouri.
+              in the Meramec River basin in Missouri.
             </div>
             <br />
             <div>
@@ -119,7 +119,7 @@
       <q-toolbar-title style="font-weight: 600; color: #eae8f5"
         ><span class="q-mr-sm">Freshwater Network</span>
         <span class="text-weight-light"
-          >Lower Meramec Floodplain Tool</span
+          >Meramec Floodplain Tool</span
         ></q-toolbar-title
       >
       <q-btn
@@ -161,13 +161,13 @@
       <q-card>
         <q-card-section class="q-ma-md">
           <div class="text-h5 text-center q-mb-md text-weight-medium">
-            Lower Meramec Floodplain Tool
+            Meramec Floodplain Tool
           </div>
           <div class="q-ma-md">
             <div>
               This floodplain prioritization tool is designed to identify
               critical opportunities for floodplain protection and restoration
-              in the lower Meramec River basin in Missouri.
+              in the Meramec River basin in Missouri.
             </div>
             <br />
             <div>

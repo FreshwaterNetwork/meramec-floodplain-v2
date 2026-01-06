@@ -99,8 +99,7 @@ const filterObj = {
       con0: {
         type: 'slider',
         field: 'Acres',
-        label:
-          'Available floodplain area for given return interval and management action',
+        label: 'Available floodplain area',
         checkboxModel: ref(false),
         radioModel: ref('present'),
         single: true,
@@ -113,14 +112,14 @@ const filterObj = {
       con0: {
         type: 'slider',
         field: 'TN',
-        label: 'Total nitrogen (SWAT model)',
+        label: 'Total nitrogen (SPARROW model)',
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
       con1: {
         type: 'slider',
         field: 'TP',
-        label: 'Total phosphorus (SWAT model)',
+        label: 'Total phosphorus (SPARROW model)',
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
@@ -128,7 +127,7 @@ const filterObj = {
       con2: {
         type: 'slider',
         field: 'Sed',
-        label: 'Sediment (SWAT model)',
+        label: 'Sediment (SPARROW model)',
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
@@ -136,7 +135,7 @@ const filterObj = {
       con3: {
         type: 'slider',
         field: 'SedAcc',
-        label: 'Accumulated sediment (SWAT model)',
+        label: 'Accumulated sediment (SPARROW model)',
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
@@ -150,40 +149,40 @@ const filterObj = {
       },
     },
   },
-  // group2: {
-  //   // this group is only for "modified land cover"
-  //   header: 'Land Conversion',
-  //   controls: {
-  //     con0: {
-  //       type: 'slider',
-  //       field: 'NCCPI',
-  //       label: 'Agricultural productivity potential of soils',
-  //       single: true,
-  //       checkboxModel: ref(false),
-  //       radioModel: ref('present'),
-  //     },
-  //   },
-  // },
-  group3: {
-    header: 'Connectivity',
+  group2: {
+    // this group is only for "modified land cover"
+    header: 'Land Conversion',
     controls: {
       con0: {
-        type: 'radio',
-        field: 'impWet',
-        label: 'Floodplain Wetland Importance Rank',
+        type: 'slider',
+        field: 'NCCPI',
+        label: 'Agricultural productivity potential of soils',
+        single: true,
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
-
-      // con1: {
-      //   type: 'radio',
-      //   field: 'fprank',
-      //   label: 'Floodplain Restoration Rank',
-      //   checkboxModel: ref(false),
-      //   radioModel: ref('present'),
-      // },
     },
   },
+  // group3: {
+  //   header: 'Connectivity',
+  //   controls: {
+  //     con0: {
+  //       type: 'radio',
+  //       field: 'impWet',
+  //       label: 'Floodplain Wetland Importance Rank',
+  //       checkboxModel: ref(false),
+  //       radioModel: ref('present'),
+  //     },
+
+  // con1: {
+  //   type: 'radio',
+  //   field: 'fprank',
+  //   label: 'Floodplain Restoration Rank',
+  //   checkboxModel: ref(false),
+  //   radioModel: ref('present'),
+  // },
+  //   },
+  // },
   group4: {
     header: 'Priority Conservation Area/Natural Areas',
     controls: {
@@ -195,13 +194,13 @@ const filterObj = {
         radioModel: ref('present'),
       },
 
-      con1: {
-        type: 'slider',
-        field: 'EcoSig',
-        label: 'Ecological Significance Ranking',
-        checkboxModel: ref(false),
-        radioModel: ref('present'),
-      },
+      // con1: {
+      //   type: 'slider',
+      //   field: 'EcoSig',
+      //   label: 'Ecological Significance Ranking',
+      //   checkboxModel: ref(false),
+      //   radioModel: ref('present'),
+      // },
     },
   },
   group5: {
@@ -267,33 +266,33 @@ const filterObj = {
         checkboxModel: ref(false),
         radioModel: ref('present'),
       },
-      con1: {
-        type: 'slider',
-        field: 'pop5',
-        label:
-          'Population exposed to floods (present-day) (in all land covers)',
-        checkboxModel: ref(false),
-        radioModel: ref('present'),
-        unit: '',
-      },
-      con2: {
-        type: 'slider',
-        field: 'pop100',
-        label:
-          'Population exposed to floods (present-day) (in all land covers)',
-        checkboxModel: ref(false),
-        radioModel: ref('present'),
-        unit: '',
-      },
-      con3: {
-        type: 'slider',
-        field: 'pop500',
-        label:
-          'Population exposed to floods (present-day) (in all land covers)',
-        checkboxModel: ref(false),
-        radioModel: ref('present'),
-        unit: '',
-      },
+      // con1: {
+      //   type: 'slider',
+      //   field: 'pop5',
+      //   label:
+      //     'Population exposed to floods (present-day) (in all land covers)',
+      //   checkboxModel: ref(false),
+      //   radioModel: ref('present'),
+      //   unit: '',
+      // },
+      // con2: {
+      //   type: 'slider',
+      //   field: 'pop100',
+      //   label:
+      //     'Population exposed to floods (present-day) (in all land covers)',
+      //   checkboxModel: ref(false),
+      //   radioModel: ref('present'),
+      //   unit: '',
+      // },
+      // con3: {
+      //   type: 'slider',
+      //   field: 'pop500',
+      //   label:
+      //     'Population exposed to floods (present-day) (in all land covers)',
+      //   checkboxModel: ref(false),
+      //   radioModel: ref('present'),
+      //   unit: '',
+      // },
       con4: {
         type: 'slider',
         field: 'pop2050',
@@ -310,7 +309,7 @@ const filterObj = {
       con0: {
         type: 'slider',
         field: 'Dam2050',
-        label: 'Potential Future Flood Damages to Structures (2050) ($)',
+        label: 'Projected future flood damages (2050) ($)',
         unit: '',
         checkboxModel: ref(false),
         radioModel: ref('present'),
@@ -333,52 +332,56 @@ const filterObj = {
 };
 
 // object for range sliders
-const sliderObj = {
-  // huc 12 + protection + 1 in 5 year flood
+const sliderObj = ref({
+  // huc 12 + 1 in 5 year flood
   h12p1: {
     Acres: {
       values: [],
       vis: true,
       min: 16,
       max: 633,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     TN: {
       values: [],
       vis: true,
       min: 0,
       max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: `<b>Total nitrogen (SPARROW model)</b><br>Kg/yr of nitrogen from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>`,
     },
     TP: {
       values: [],
       vis: true,
       min: 0,
       max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: "<b>Total phosphorus (SPARROW model)</b><br>Kg/yr of phosphorus from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     Sed: {
       values: [],
       vis: true,
       min: 0,
       max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: "<b>Sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     SedAcc: {
       values: [],
       vis: true,
       min: 0,
       max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: "<b>Accumulated sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of the watershed (as estimated by USGS SPARROW model), accounting for all sediment coming in from upstream, normalized to a 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     DINCY: {
       values: [],
       vis: true,
       min: 0,
       max: 100,
-      info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
+      info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed's area, and normalized to a 0-100 scale, with the normalized values for nitrogen and phosphorus averaged together. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More Info</a>",
     },
     NCCPI: {
+      values: [],
+      vis: true,
+      min: 0,
+      max: 1,
       vis: false,
     },
     adjProt: {
@@ -410,7 +413,7 @@ const sliderObj = {
       max: 3.622,
       step: 0.001,
       shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     HPFedEnd: {
       values: [],
@@ -418,7 +421,7 @@ const sliderObj = {
       min: 0,
       max: 37,
       shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources.',
     },
     popnow: {
       values: [],
@@ -465,7 +468,7 @@ const sliderObj = {
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
   },
-  // huc 12 + protection + 1 in 100 year flood
+  // huc 12 + 1 in 100 year flood
   h12p2: {
     Acres: {
       values: [],
@@ -596,7 +599,7 @@ const sliderObj = {
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
   },
-  // huc 12 + protection + 1 in 500 year flood
+  // huc 12 + 1 in 500 year flood
   h12p3: {
     Acres: {
       values: [],
@@ -728,416 +731,416 @@ const sliderObj = {
     },
   },
 
-  // huc 12 + restoration + 1 in 5 year flood
-  h12r1: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 2,
-      max: 712,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0.147,
-      max: 0.599,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 98,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 217,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.686,
-      max: 3.622,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 37,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 17,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      values: [],
-      vis: true,
-      min: 1,
-      max: 70,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop100: {
-      vis: false,
-    },
-    pop500: {
-      vis: false,
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 62,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 105857,
-      max: 5013107,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -2.166,
-      max: -0.458,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
-  // huc 12 + restoration + 1 in 100 year flood
-  h12r2: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 183,
-      max: 4076,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0.429,
-      max: 0.544,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 554,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 123,
-      max: 1343,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.686,
-      max: 3.622,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 37,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 14,
-      max: 270,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      vis: false,
-    },
-    pop100: {
-      values: [],
-      vis: true,
-      min: 90,
-      max: 1097,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop500: {
-      vis: false,
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 11,
-      max: 410,
-      info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 983579,
-      max: 61200000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -2.166,
-      max: -0.458,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
-  // huc 12 + restoration + 1 in 500 year flood
-  h12r3: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 295,
-      max: 5523,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0.412,
-      max: 0.522,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 651,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 135,
-      max: 2319,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.686,
-      max: 3.622,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 37,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 32,
-      max: 731,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      vis: false,
-    },
-    pop100: {
-      vis: false,
-    },
-    pop500: {
-      values: [],
-      vis: true,
-      min: 145,
-      max: 4476,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 23,
-      max: 861,
-      info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 2043340,
-      max: 134000000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -2.166,
-      max: -0.458,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
+  // // huc 12 + restoration + 1 in 5 year flood
+  // h12r1: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 2,
+  //     max: 712,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0.147,
+  //     max: 0.599,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b><br>The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration.",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 98,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 217,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.686,
+  //     max: 3.622,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 37,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 17,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1,
+  //     max: 70,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop100: {
+  //     vis: false,
+  //   },
+  //   pop500: {
+  //     vis: false,
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 62,
+  //     info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 105857,
+  //     max: 5013107,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -2.166,
+  //     max: -0.458,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
+  // // huc 12 + restoration + 1 in 100 year flood
+  // h12r2: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 183,
+  //     max: 4076,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0.429,
+  //     max: 0.544,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 554,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 123,
+  //     max: 1343,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.686,
+  //     max: 3.622,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 37,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 14,
+  //     max: 270,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     vis: false,
+  //   },
+  //   pop100: {
+  //     values: [],
+  //     vis: true,
+  //     min: 90,
+  //     max: 1097,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop500: {
+  //     vis: false,
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 11,
+  //     max: 410,
+  //     info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 983579,
+  //     max: 61200000,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -2.166,
+  //     max: -0.458,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
+  // // huc 12 + restoration + 1 in 500 year flood
+  // h12r3: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 295,
+  //     max: 5523,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0.412,
+  //     max: 0.522,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 651,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 135,
+  //     max: 2319,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.686,
+  //     max: 3.622,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 37,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 32,
+  //     max: 731,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     vis: false,
+  //   },
+  //   pop100: {
+  //     vis: false,
+  //   },
+  //   pop500: {
+  //     values: [],
+  //     vis: true,
+  //     min: 145,
+  //     max: 4476,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 23,
+  //     max: 861,
+  //     info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 2043340,
+  //     max: 134000000,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -2.166,
+  //     max: -0.458,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
 
-  // catchment + protection + 1 in 5 year flood
+  // catchment + 1 in 5 year flood
   catchp1: {
     Acres: {
       values: [],
@@ -1268,7 +1271,7 @@ const sliderObj = {
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
   },
-  // catchment + protection + 1 in 100 year flood
+  // catchment + 1 in 100 year flood
   catchp2: {
     Acres: {
       values: [],
@@ -1399,7 +1402,7 @@ const sliderObj = {
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
   },
-  // catchment + protection + 1 in 500 year flood
+  // catchment + 1 in 500 year flood
   catchp3: {
     Acres: {
       values: [],
@@ -1530,415 +1533,415 @@ const sliderObj = {
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
   },
-  // catchment + restoration + 1 in 5 year flood
-  catchr1: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 159,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 0.746,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 39,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 75,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.0,
-      max: 4.801,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 9,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 12,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 21,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop100: {
-      vis: false,
-    },
-    pop500: {
-      vis: false,
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 19,
-      info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2797809,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
-  // catchment + restoration + 1 in 100 year flood
-  catchr2: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 636,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 0.764,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 172,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 186,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.0,
-      max: 4.801,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 9,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 95,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      vis: false,
-    },
-    pop100: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 745,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop500: {
-      vis: false,
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 155,
-      info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 19500000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
-  // catchment + restoration + 1 in 500 year flood
-  catchr3: {
-    Acres: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 965,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
-    },
-    TN: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    TP: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    Sed: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    SedAcc: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    DINCY: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 100,
-      info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
-    },
-    NCCPI: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 0.764,
-      step: 0.001,
-      info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
-    },
-    adjProt: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 191,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
-    },
-    EcoSig: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 297,
-      info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
-    },
-    WT_TOT: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 2,
-      shfld: true,
-      info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
-    },
-    cumu_hci: {
-      values: [],
-      vis: true,
-      min: 1.0,
-      max: 4.801,
-      step: 0.001,
-      shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
-    },
-    HPFedEnd: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 9,
-      shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
-    },
-    popnow: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 437,
-      info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
-    },
-    pop5: {
-      vis: false,
-    },
-    pop100: {
-      vis: false,
-    },
-    pop500: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 1503,
-      shfld: true,
-      info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
-    },
-    pop2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 254,
-      info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
-    },
-    Dam2050: {
-      values: [],
-      vis: true,
-      min: 0,
-      max: 52300000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
-    },
-    SOVI: {
-      values: [],
-      vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
-      shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
-    },
-  },
-};
+  // // catchment + restoration + 1 in 5 year flood
+  // catchr1: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 159,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 0.746,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 39,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 75,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.0,
+  //     max: 4.801,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 9,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 12,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 21,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop100: {
+  //     vis: false,
+  //   },
+  //   pop500: {
+  //     vis: false,
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 19,
+  //     info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2797809,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -3.881,
+  //     max: 1.749,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
+  // // catchment + restoration + 1 in 100 year flood
+  // catchr2: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 636,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 0.764,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 172,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 186,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.0,
+  //     max: 4.801,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 9,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 95,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     vis: false,
+  //   },
+  //   pop100: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 745,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop500: {
+  //     vis: false,
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 155,
+  //     info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 19500000,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -3.881,
+  //     max: 1.749,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
+  // // catchment + restoration + 1 in 500 year flood
+  // catchr3: {
+  //   Acres: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 965,
+  //     info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in ag or potentially grazed land that could potentially be restored.',
+  //   },
+  //   TN: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   TP: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   Sed: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   SedAcc: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   DINCY: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 100,
+  //     info: '<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For restoration priorities, identify catchments <i>higher</i> in this metric.',
+  //   },
+  //   NCCPI: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 0.764,
+  //     step: 0.001,
+  //     info: "<b>Agricultural productivity potential of soils</b>The National Commodity Crop Productivity Index -- an index characterizing soil's inherent capacity to produce non-irrigated commodity crops (0 - 1). Lower value suggests less productive soil, and therefore more viable opportunity for restoration.<br>",
+  //   },
+  //   adjProt: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 191,
+  //     info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in ag or potentially grazed land within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. & Great Rivers Greenway infrastructure.',
+  //   },
+  //   EcoSig: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 297,
+  //     info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in ag or potentially grazed land within an ecologically significant area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   WT_TOT: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 2,
+  //     shfld: true,
+  //     info: "<b>At-Risk Wetland Species</b><br>Total number of wetland species in catchment considered Imperiled (G1/G2) by NatureServe or threatened or endangered under the Endangered Species Act. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/ESN/Totalnumberofatriskwetlandspecies.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   cumu_hci: {
+  //     values: [],
+  //     vis: true,
+  //     min: 1.0,
+  //     max: 4.801,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+  //   },
+  //   HPFedEnd: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 9,
+  //     shfld: true,
+  //     info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+  //   },
+  //   popnow: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 437,
+  //     info: '<b>Population exposed to floods (present-day)</b><br>People currently living in ag/pasture floodplain of the selected flood frequency.',
+  //   },
+  //   pop5: {
+  //     vis: false,
+  //   },
+  //   pop100: {
+  //     vis: false,
+  //   },
+  //   pop500: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 1503,
+  //     shfld: true,
+  //     info: "People currently living in the floodplain of the selected flood frequency, in all land covers.  <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+  //   },
+  //   pop2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 254,
+  //     info: '<b>Population exposed to floods (2050)</b><br>People expected to be living in ag/pasture floodplain of the selected flood frequency in 2050.',
+  //   },
+  //   Dam2050: {
+  //     values: [],
+  //     vis: true,
+  //     min: 0,
+  //     max: 52300000,
+  //     info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+  //   },
+  //   SOVI: {
+  //     values: [],
+  //     vis: true,
+  //     min: -3.881,
+  //     max: 1.749,
+  //     step: 0.001,
+  //     shfld: true,
+  //     info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+  //   },
+  // },
+});
 
 // object for radio groups
 const radioObj = {
@@ -1953,16 +1956,16 @@ const radioObj = {
     },
     inIBA: {
       vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+      info: "<b>Important Bird Areas</b></br>Whether any floodplain is located in sites identified by Audubon as having significance for the conservation of birds & supporting rare and endangered species, as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
     },
     ABCcorr: {
       vis: true,
       shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>Whether any floodplain is located in key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
     },
     anyHab: {
       vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+      info: '<b>Whether there is floodplain in an Important Bird Area, or the watershed contains at-risk wetland species, or there is floodplain in an American Bird Conservancy corridor.',
     },
   },
   // huc 12 + protection + 1 in 100 year flood
@@ -2011,78 +2014,78 @@ const radioObj = {
       info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
     },
   },
-  // huc 12 + restoration + 1 in 5 year flood
-  h12r1: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
-  // huc 12 + restoration + 1 in 100 year flood
-  h12r2: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
-  // huc 12 + restoration + 1 in 500 year flood
-  h12r3: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
+  // // huc 12 + restoration + 1 in 5 year flood
+  // h12r1: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
+  // // huc 12 + restoration + 1 in 100 year flood
+  // h12r2: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
+  // // huc 12 + restoration + 1 in 500 year flood
+  // h12r3: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
   // catchment + protection + 1 in 5 year flood
   catchp1: {
     impWet: {
@@ -2152,78 +2155,78 @@ const radioObj = {
       info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
     },
   },
-  // catchment + restoration + 1 in 5 year flood
-  catchr1: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
-  // catchment + restoration + 1 in 100 year flood
-  catchr2: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
-  // catchment + restoration + 1 in 500 year flood
-  catchr3: {
-    impWet: {
-      vis: true,
-      info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
-    },
-    fprank: {
-      vis: true,
-      info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
-    },
-    inIBA: {
-      vis: true,
-      info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
-    },
-    ABCcorr: {
-      vis: true,
-      shfld: true,
-      info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
-    },
-    anyHab: {
-      vis: true,
-      info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
-    },
-  },
+  // // catchment + restoration + 1 in 5 year flood
+  // catchr1: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
+  // // catchment + restoration + 1 in 100 year flood
+  // catchr2: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
+  // // catchment + restoration + 1 in 500 year flood
+  // catchr3: {
+  //   impWet: {
+  //     vis: true,
+  //     info: "<b>Floodplain Wetland Importance Rank</b><br>Watershed contains floodplain in an area of wetland importance rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI _wetland_importance.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   fprank: {
+  //     vis: true,
+  //     info: "<b>Floodplain Restoration Rank</b><br>Watershed contains floodplain in an area of floodplain restoration rank 5 or above. Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2015_EAI_restoration.pdf' target='_blank'>More Info</a>",
+  //   },
+  //   inIBA: {
+  //     vis: true,
+  //     info: "<b>Important Bird Areas</b></br>Sites identified by Audubon as having significance for the conservation of birds, supporting rare and endangered species as well as globally important concentrations of non-endangered species. <a href='https://www.audubon.org/important-bird-areas' target='_blank'>More Info</a>",
+  //   },
+  //   ABCcorr: {
+  //     vis: true,
+  //     shfld: true,
+  //     info: "<b>American Bird Conservancy Corridors & Key Habitat Bird Areas</b><br>This layer represents key bird migration corridors and habitat for birds on the Red WatchList. <a href='https://www.sciencebase.gov/catalog/item/58497c09e4b06d80b7b09483' target='_blank'>More Info</a>",
+  //   },
+  //   anyHab: {
+  //     vis: true,
+  //     info: '<b>In any of the above 3 habitat layers</b><br>In an Important Bird Area, contains at-risk wetland species, or in an American Bird Conservancy corridor.',
+  //   },
+  // },
 };
 
 function updateCheckbox(option, sliderVals) {
@@ -2239,6 +2242,10 @@ function updateCheckbox(option, sliderVals) {
           c.max = sliderVals.max;
         }
       });
+
+      // fields that dont have ffmodel
+      //   water quality fields
+      //
 
       if (
         option.field == 'WT_TOT' ||
@@ -2332,6 +2339,10 @@ function updateCheckbox(option, sliderVals) {
           });
         }
       }
+
+      // if ffmodel = 4,5,6
+      // for each of those, assign the appropriate _1, _2, _3
+      //
     } else {
       option.checkboxModel.value = false;
       ms.activeFilters = ms.activeFilters.filter(

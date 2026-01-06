@@ -175,7 +175,7 @@
         <div class="text-bold" style="font-size: large">
           Filter Floodplain Units
         </div>
-        <div v-if="ms.selectedFilters.length !== 0" class="text-center q-mb-sm">
+        <div v-if="ms.selectedFilters.length > 0" class="text-center q-mb-sm">
           <q-btn
             dense
             color="primary"

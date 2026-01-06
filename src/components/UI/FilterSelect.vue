@@ -10,15 +10,38 @@
       class="self-center"
       @update:model-value="$emit(method, model)"
     ></q-checkbox>
+    <!-- <IconButton
+      type="info"
+      method="show-info"
+      @show-info="showInfo = !showInfo"
+    ></IconButton>
+    <div v-if="showInfo">
+      <div v-html="k.info"></div>
+    </div> -->
     <q-btn
+      v-if="!showInfo"
       dense
       flat
       rounded
       color="primary"
       style="border: none !important"
       icon="info"
-    >
+      @click="showInfo = true"
+    ></q-btn>
+    <q-btn
+      v-if="showInfo"
+      dense
+      flat
+      rounded
+      color="primary"
+      style="border: none !important"
+      icon="info"
+      @click="showInfo = false"
+    ></q-btn>
+    <div>
       <q-tooltip
+        v-model="showInfo"
+        persistent
         anchor="center end"
         self="center left"
         style="
@@ -29,18 +52,26 @@
           font-size: medium;
           width: 350px;
         "
-        ><div v-html="k.info"></div></q-tooltip
-    ></q-btn>
+        ><div v-html="k.info"></div
+      ></q-tooltip>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
+import IconButton from './IconButton.vue';
+
 export default {
   data() {
     return {
       model: false,
+      showInfo: ref(false),
     };
   },
   props: ['label', 'index', 'method', 'type', 'k'],
+  components: {
+    IconButton,
+  },
 };
 </script>

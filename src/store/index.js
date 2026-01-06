@@ -8,6 +8,8 @@ import 'pdfmake/build/vfs_fonts';
 export const useMapStore = defineStore('mapStore', () => {
   // app.vue models
   const mobileSplitterModel = 37;
+  let fullHuc = ref('');
+  let fullCatch = ref('');
 
   // filters
   let selectedFilters = ref([]);
@@ -38,6 +40,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let ffModel = ref('');
   let watershedType = ref([]);
   let wsModel = ref('');
+  let wsModelText = ref('');
   let maModel = ref('natural');
   let sliderModel = ref(60);
 
@@ -91,9 +94,11 @@ export const useMapStore = defineStore('mapStore', () => {
         });
       } else if (layer.title == 'View Floodplains by Watershed') {
         layer.layers.items.forEach((sub) => {
+          console.log(sub);
           this.watershedType.push({ label: sub.title, value: sub.id });
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
+            this.wsModelText = sub.title;
           }
           sub.definitionExpression = this.defExp;
         });
@@ -106,6 +111,13 @@ export const useMapStore = defineStore('mapStore', () => {
             checkedIcon: 'task_alt',
             uncheckedIcon: 'panorama_fish_eye',
           });
+
+          // if (sub.title == 'HUC12s') {
+          //   this.fullHuc = ref(sub);
+          // }
+          // if (sub.title == 'NHD Catchments') {
+          //   this.fullCatch = ref(sub);
+          // }
         });
       }
     });
@@ -583,5 +595,8 @@ export const useMapStore = defineStore('mapStore', () => {
     toggleCheckbox,
     resetCheckboxStates,
     componentKey,
+    fullHuc,
+    fullCatch,
+    wsModelText,
   };
 });

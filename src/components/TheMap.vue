@@ -26,6 +26,7 @@ import { useMapStore } from '../store/index';
 import { markRaw, watch, computed } from 'vue';
 import { useQuasar } from 'quasar';
 import Point from '@arcgis/core/geometry/Point.js';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer.js';
 import GraphicsLayer from '@arcgis/core/layers/GraphicsLayer.js';
 import Graphic from '@arcgis/core/Graphic.js';
 import * as unionOperator from '@arcgis/core/geometry/operators/unionOperator.js';
@@ -34,6 +35,19 @@ import * as clipOperator from '@arcgis/core/geometry/operators/clipOperator.js';
 const ms = useMapStore();
 const $q = useQuasar();
 let smallScreen = computed(() => $q.screen.lt.sm);
+
+//
+// REMOVE WHEN NEW FLOOD FREQUENCY LAYERS ARE READY AND ADD FUNCTIONALITY FOR NEW WATERSHED LAYERS
+//
+
+let fullHuc = new FeatureLayer({
+  url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/arcgis/rest/services/meramac_122325/FeatureServer/0',
+});
+let fullCatch = new FeatureLayer({
+  url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/ArcGIS/rest/services/meramac_122325/FeatureServer/1',
+});
+
+//
 
 ms.graphicsLayer = markRaw(
   new GraphicsLayer({
@@ -45,7 +59,7 @@ ms.graphicsLayer = markRaw(
 );
 
 function formatValue(val) {
-  val = val.toFixed(2);
+  // val = val.toFixed(2);
   val = parseFloat(val).toLocaleString('en-US');
 
   return val;
@@ -69,6 +83,97 @@ const onReady = (event) => {
     let query;
     ms.graphicsLayer.remove(selectionGraphic);
     ms.selectionMade = true;
+
+    let newLayer;
+
+    if (ms.wsModelText == 'HUC 12s') {
+      newLayer = fullHuc;
+    } else if (ms.wsModelText == 'NHD Catchments') {
+      newLayer = fullCatch;
+    }
+    console.log(event);
+
+    let point = new Point({
+      x: event.mapPoint.longitude,
+      y: event.mapPoint.latitude,
+    });
+
+    let newQuery = newLayer.createQuery(point);
+    newQuery.geometry = point;
+    newQuery.spatialRelationship = 'intersects';
+
+    console.log(ms.ffModel);
+
+    newLayer.queryFeatures(newQuery).then(function (result) {
+      console.log(result);
+      if (ms.ffModel == 4) {
+        //20%
+        ms.clickResults = {
+          name: result.features[0].attributes.name,
+          watershedAcres: formatValue(result.features[0].attributes.areaacres),
+          floodplainAcres: formatValue(
+            result.features[0].attributes.fpacres_unp_1
+          ),
+          nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          phosphorusScale: formatValue(
+            result.features[0].attributes.iy_tp_perc
+          ),
+          sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          endageredSpecies: formatValue(
+            result.features[0].attributes.fedendspecies
+          ),
+          currentPop: formatValue(result.features[0].attributes.popnow_1),
+          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          futurePop: formatValue(result.features[0].attributes.pop2050_1),
+          floodDamage: formatValue(result.features[0].attributes.damages_1),
+          vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_1),
+        };
+      } else if (ms.ffModel == 5) {
+        // 1%
+        ms.clickResults = {
+          name: result.features[0].attributes.name,
+          watershedAcres: formatValue(result.features[0].attributes.areaacres),
+          floodplainAcres: formatValue(
+            result.features[0].attributes.fpacres_unp_2
+          ),
+          nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          phosphorusScale: formatValue(
+            result.features[0].attributes.iy_tp_perc
+          ),
+          sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          endageredSpecies: formatValue(
+            result.features[0].attributes.fedendspecies
+          ),
+          currentPop: formatValue(result.features[0].attributes.popnow_2),
+          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          futurePop: formatValue(result.features[0].attributes.pop2050_2),
+          floodDamage: formatValue(result.features[0].attributes.damages_2),
+          vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_2),
+        };
+      } else if (ms.ffModel == 6) {
+        // 0.2% 1/500
+        ms.clickResults = {
+          name: result.features[0].attributes.name,
+          watershedAcres: formatValue(result.features[0].attributes.areaacres),
+          floodplainAcres: formatValue(
+            result.features[0].attributes.fpacres_unp_3
+          ),
+          nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          phosphorusScale: formatValue(
+            result.features[0].attributes.iy_tp_perc
+          ),
+          sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          endageredSpecies: formatValue(
+            result.features[0].attributes.fedendspecies
+          ),
+          currentPop: formatValue(result.features[0].attributes.popnow_3),
+          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          futurePop: formatValue(result.features[0].attributes.pop2050_3),
+          floodDamage: formatValue(result.features[0].attributes.damages_3),
+          vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_3),
+        };
+      }
+    });
 
     mapView.hitTest(event).then(function (response) {
       if (response.results) {
@@ -103,110 +208,110 @@ const onReady = (event) => {
                 },
               });
 
-              // 1-in-5 natural
-              if (ms.ffModel == 4 && ms.maModel == 'natural') {
-                ms.clickResults = {
-                  name: feature.attributes.NAME,
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_p1),
-                  nitrogenScale: formatValue(feature.attributes.TN_p1),
-                  phosphorusScale: formatValue(feature.attributes.TP_p1),
-                  sedimentScale: formatValue(feature.attributes.Sed_p1),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_p1),
-                  peopleFloodplain: formatValue(feature.attributes.pop5),
-                  futurePop: formatValue(feature.attributes.pop2050_p1),
-                  floodDamage: formatValue(feature.attributes.Dam2050_p1),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
-              // 1-in-5 modified
-              if (ms.ffModel == 4 && ms.maModel == 'modified') {
-                ms.clickResults = {
-                  name: formatValue(feature.attributes.NAME),
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_r1),
-                  nitrogenScale: formatValue(feature.attributes.TN_r1),
-                  phosphorusScale: formatValue(feature.attributes.TP_r1),
-                  sedimentScale: formatValue(feature.attributes.Sed_r1),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_r1),
-                  peopleFloodplain: formatValue(feature.attributes.pop5),
-                  futurePop: formatValue(feature.attributes.pop2050_r1),
-                  floodDamage: formatValue(feature.attributes.Dam2050_r1),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
+              // // 1-in-5 natural
+              // if (ms.ffModel == 4 && ms.maModel == 'natural') {
+              //   ms.clickResults = {
+              //     name: feature.attributes.NAME,
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_p1),
+              //     nitrogenScale: formatValue(feature.attributes.TN_p1),
+              //     phosphorusScale: formatValue(feature.attributes.TP_p1),
+              //     sedimentScale: formatValue(feature.attributes.Sed_p1),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_p1),
+              //     peopleFloodplain: formatValue(feature.attributes.pop5),
+              //     futurePop: formatValue(feature.attributes.pop2050_p1),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_p1),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
+              // // 1-in-5 modified
+              // if (ms.ffModel == 4 && ms.maModel == 'modified') {
+              //   ms.clickResults = {
+              //     name: formatValue(feature.attributes.NAME),
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_r1),
+              //     nitrogenScale: formatValue(feature.attributes.TN_r1),
+              //     phosphorusScale: formatValue(feature.attributes.TP_r1),
+              //     sedimentScale: formatValue(feature.attributes.Sed_r1),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_r1),
+              //     peopleFloodplain: formatValue(feature.attributes.pop5),
+              //     futurePop: formatValue(feature.attributes.pop2050_r1),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_r1),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
 
-              // 1-in-100 natural
-              if (ms.ffModel == 5 && ms.maModel == 'natural') {
-                ms.clickResults = {
-                  name: formatValue(feature.attributes.NAME),
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_p2),
-                  nitrogenScale: formatValue(feature.attributes.TN_p2),
-                  phosphorusScale: formatValue(feature.attributes.TP_p2),
-                  sedimentScale: formatValue(feature.attributes.Sed_p2),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_p2),
-                  peopleFloodplain: formatValue(feature.attributes.pop100),
-                  futurePop: formatValue(feature.attributes.pop2050_p2),
-                  floodDamage: formatValue(feature.attributes.Dam2050_p2),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
-              // 1-in-100 modeified
-              if (ms.ffModel == 5 && ms.maModel == 'modified') {
-                ms.clickResults = {
-                  name: formatValue(feature.attributes.NAME),
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_r2),
-                  nitrogenScale: formatValue(feature.attributes.TN_r2),
-                  phosphorusScale: formatValue(feature.attributes.TP_r2),
-                  sedimentScale: formatValue(feature.attributes.Sed_r2),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_r2),
-                  peopleFloodplain: formatValue(feature.attributes.pop100),
-                  futurePop: formatValue(feature.attributes.pop2050_r2),
-                  floodDamage: formatValue(feature.attributes.Dam2050_r2),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
+              // // 1-in-100 natural
+              // if (ms.ffModel == 5 && ms.maModel == 'natural') {
+              //   ms.clickResults = {
+              //     name: formatValue(feature.attributes.NAME),
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_p2),
+              //     nitrogenScale: formatValue(feature.attributes.TN_p2),
+              //     phosphorusScale: formatValue(feature.attributes.TP_p2),
+              //     sedimentScale: formatValue(feature.attributes.Sed_p2),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_p2),
+              //     peopleFloodplain: formatValue(feature.attributes.pop100),
+              //     futurePop: formatValue(feature.attributes.pop2050_p2),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_p2),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
+              // // 1-in-100 modeified
+              // if (ms.ffModel == 5 && ms.maModel == 'modified') {
+              //   ms.clickResults = {
+              //     name: formatValue(feature.attributes.NAME),
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_r2),
+              //     nitrogenScale: formatValue(feature.attributes.TN_r2),
+              //     phosphorusScale: formatValue(feature.attributes.TP_r2),
+              //     sedimentScale: formatValue(feature.attributes.Sed_r2),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_r2),
+              //     peopleFloodplain: formatValue(feature.attributes.pop100),
+              //     futurePop: formatValue(feature.attributes.pop2050_r2),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_r2),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
 
-              // 1-in-500 natural
-              if (ms.ffModel == 6 && ms.maModel == 'natural') {
-                ms.clickResults = {
-                  name: formatValue(feature.attributes.NAME),
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_p3),
-                  nitrogenScale: formatValue(feature.attributes.TN_p3),
-                  phosphorusScale: formatValue(feature.attributes.TP_p3),
-                  sedimentScale: formatValue(feature.attributes.Sed_p3),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_p3),
-                  peopleFloodplain: formatValue(feature.attributes.pop500),
-                  futurePop: formatValue(feature.attributes.pop2050_p3),
-                  floodDamage: formatValue(feature.attributes.Dam2050_p3),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
-              // 1-in-500 modified
-              if (ms.ffModel == 6 && ms.maModel == 'modified') {
-                ms.clickResults = {
-                  name: formatValue(feature.attributes.NAME),
-                  watershedAcres: formatValue(feature.attributes.AreaAc),
-                  floodplainAcres: formatValue(feature.attributes.Acres_r3),
-                  nitrogenScale: formatValue(feature.attributes.TN_r3),
-                  phosphorusScale: formatValue(feature.attributes.TP_r3),
-                  sedimentScale: formatValue(feature.attributes.Sed_r3),
-                  endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-                  currentPop: formatValue(feature.attributes.popnow_r3),
-                  peopleFloodplain: formatValue(feature.attributes.pop500),
-                  futurePop: formatValue(feature.attributes.pop2050_r3),
-                  floodDamage: formatValue(feature.attributes.Dam2050_r3),
-                  vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-                };
-              }
+              // // 1-in-500 natural
+              // if (ms.ffModel == 6 && ms.maModel == 'natural') {
+              //   ms.clickResults = {
+              //     name: formatValue(feature.attributes.NAME),
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_p3),
+              //     nitrogenScale: formatValue(feature.attributes.TN_p3),
+              //     phosphorusScale: formatValue(feature.attributes.TP_p3),
+              //     sedimentScale: formatValue(feature.attributes.Sed_p3),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_p3),
+              //     peopleFloodplain: formatValue(feature.attributes.pop500),
+              //     futurePop: formatValue(feature.attributes.pop2050_p3),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_p3),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
+              // // 1-in-500 modified
+              // if (ms.ffModel == 6 && ms.maModel == 'modified') {
+              //   ms.clickResults = {
+              //     name: formatValue(feature.attributes.NAME),
+              //     watershedAcres: formatValue(feature.attributes.AreaAc),
+              //     floodplainAcres: formatValue(feature.attributes.Acres_r3),
+              //     nitrogenScale: formatValue(feature.attributes.TN_r3),
+              //     phosphorusScale: formatValue(feature.attributes.TP_r3),
+              //     sedimentScale: formatValue(feature.attributes.Sed_r3),
+              //     endageredSpecies: formatValue(feature.attributes.HPFedEnd),
+              //     currentPop: formatValue(feature.attributes.popnow_r3),
+              //     peopleFloodplain: formatValue(feature.attributes.pop500),
+              //     futurePop: formatValue(feature.attributes.pop2050_r3),
+              //     floodDamage: formatValue(feature.attributes.Dam2050_r3),
+              //     vulnerabilityIndex: formatValue(feature.attributes.SOVI),
+              //   };
+              // }
 
               ms.graphicsLayer.add(selectionGraphic);
               ms.graphicsLayer.visible = true;
@@ -591,15 +696,24 @@ const onReady = (event) => {
       ms.activeFilters = [];
       let webMap = document.querySelector('arcgis-map').view.map;
       let layer = webMap.findLayerById(ms.wsModel);
-      layer.definitionExpression = '';
+      // if (layer.definitionExpression) {
+      //   layer.definitionExpression = '';
+      // }
     }
   );
   watch(
     () => ms.wsModel,
     () => {
-      if (ms.rightDrawerOpen == true) {
-        queryClick(clickPoint);
+      // if (ms.rightDrawerOpen == true) {
+      //   queryClick(clickPoint);
+      // }
+
+      if (ms.wsModel == '195a5a220fb-layer-6') {
+        ms.wsModelText = 'HUC 12s';
+      } else if (ms.wsModel == '195a55dbf5c-layer-5') {
+        ms.wsModelText = 'NHD Catchments';
       }
+
       let webMap = document.querySelector('arcgis-map').view.map;
       let layer = webMap.findLayerById(ms.wsModel);
       layer.definitionExpression = '';
