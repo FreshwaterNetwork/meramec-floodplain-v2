@@ -11,14 +11,21 @@
       @update:model-value="$emit(method, model)"
     ></q-checkbox>
     <!-- <IconButton
+      v-if="!modelInfo"
       type="info"
       method="show-info"
-      @show-info="showInfo = !showInfo"
+      @show-info="modelInfo = true"
     ></IconButton>
-    <div v-if="showInfo">
-      <div v-html="k.info"></div>
+    <IconButton
+      v-if="modelInfo"
+      type="close"
+      method="hide-info"
+      @hide-info="modelInfo = false"
+    ></IconButton>
+    <div v-if="modelInfo">
+      {{ k.info }}
     </div> -->
-    <q-btn
+    <!-- <q-btn
       v-if="!showInfo"
       dense
       flat
@@ -54,7 +61,7 @@
         "
         ><div v-html="k.info"></div
       ></q-tooltip>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -66,7 +73,7 @@ export default {
   data() {
     return {
       model: false,
-      showInfo: ref(false),
+      modelInfo: false,
     };
   },
   props: ['label', 'index', 'method', 'type', 'k'],

@@ -271,7 +271,7 @@ let smallScreen = computed(() => $q.screen.lt.sm);
 }
 
 a {
-  text-decoration: none !important;
-  color: black;
+  text-decoration: underline !important;
+  color: #2c3854;
 }
 </style>

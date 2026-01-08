@@ -123,7 +123,7 @@ const onReady = (event) => {
             result.features[0].attributes.fedendspecies
           ),
           currentPop: formatValue(result.features[0].attributes.popnow_1),
-          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          peopleFloodplain: formatValue(result.features[0].attributes.popnow_1),
           futurePop: formatValue(result.features[0].attributes.pop2050_1),
           floodDamage: formatValue(result.features[0].attributes.damages_1),
           vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_1),
