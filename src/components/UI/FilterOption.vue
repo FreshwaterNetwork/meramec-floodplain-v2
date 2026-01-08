@@ -1240,7 +1240,11 @@ const sliderObj = ref({
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
     },
     NCCPI: {
-      vis: false,
+      values: [],
+      vis: true,
+      min: 0,
+      max: 1,
+      info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
     },
     adjProt: {
       values: [],
@@ -1371,7 +1375,11 @@ const sliderObj = ref({
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
     },
     NCCPI: {
-      vis: false,
+      values: [],
+      vis: true,
+      min: 0,
+      max: 1,
+      info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
     },
     adjProt: {
       values: [],
@@ -1502,7 +1510,11 @@ const sliderObj = ref({
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
     },
     NCCPI: {
-      vis: false,
+      values: [],
+      vis: true,
+      min: 0,
+      max: 1,
+      info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
     },
     adjProt: {
       values: [],
@@ -2572,6 +2584,35 @@ function updateSlider(option, val) {
       option.field +
       ' <= ' +
       Math.round(val[1]);
+  } else if (option.field == 'NCCPI') {
+    if (ms.ffModel == 4) {
+      stringVal =
+        option.field +
+        '_r1 >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        '_r2 <= ' +
+        val[1];
+    } else if (ms.ffModel == 5) {
+      stringVal =
+        option.field +
+        '_r2 >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        '_r2 <= ' +
+        val[1];
+    } else if (ms.ffModel == 6) {
+      stringVal =
+        option.field +
+        '_r3 >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        '_r3 <= ' +
+        val[1];
+    }
   } else {
     if (ms.ffModel == 4 && ms.maModel == 'natural') {
       stringVal =
