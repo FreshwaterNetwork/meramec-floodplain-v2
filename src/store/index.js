@@ -112,13 +112,6 @@ export const useMapStore = defineStore('mapStore', () => {
             checkedIcon: 'task_alt',
             uncheckedIcon: 'panorama_fish_eye',
           });
-
-          // if (sub.title == 'HUC12s') {
-          //   this.fullHuc = ref(sub);
-          // }
-          // if (sub.title == 'NHD Catchments') {
-          //   this.fullCatch = ref(sub);
-          // }
         });
       }
     });

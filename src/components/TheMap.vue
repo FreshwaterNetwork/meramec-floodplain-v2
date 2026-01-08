@@ -578,8 +578,12 @@ const onReady = (event) => {
   }
 
   function updateSuppOpacity(val) {
-    let layer = webMap.findLayerById('19b9e7742df-layer-13');
-    layer.opacity = val / 100;
+    ms.supportingLayers.forEach((l) => {
+      if (l.label == 'National Wetlands Inventory') {
+        let layer = webMap.findLayerById(l.value);
+        layer.opacity = val / 100;
+      }
+    });
   }
 
   function updateSupLay() {
