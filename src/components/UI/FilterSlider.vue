@@ -57,10 +57,11 @@ export default {
           labels: true,
           rangeLabels: false,
         },
+        steps: 0.1,
         draggableSegmentsEnabled: true,
         disabled: false,
         labelFormatFunction: function (value) {
-          return Math.round(value);
+          return value.toFixed(1);
         },
       })
     );

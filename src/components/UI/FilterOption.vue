@@ -2319,6 +2319,44 @@ function updateCheckbox(option, sliderVals) {
             ' <= ' +
             sliderVals.max,
         });
+      } else if (option.field == 'NCCPI') {
+        if (ms.ffModel == 4) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r1 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r2 <= ' +
+              sliderVals.max,
+          });
+        } else if (ms.ffModel == 5) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r2 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r2 <= ' +
+              sliderVals.max,
+          });
+        } else if (ms.ffModel == 6) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r3 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r3 <= ' +
+              sliderVals.max,
+          });
+        }
       } else {
         if (ms.ffModel == 4 && ms.maModel == 'natural') {
           ms.activeFilters.push({
@@ -2418,6 +2456,44 @@ function updateCheckbox(option, sliderVals) {
           id: option.field,
           exp: option.field + '= 1.00',
         });
+      } else if (option.field == 'NCCPI') {
+        if (ms.ffModel == 4) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r1 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r2 <= ' +
+              sliderVals.max,
+          });
+        } else if (ms.ffModel == 5) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r2 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r2 <= ' +
+              sliderVals.max,
+          });
+        } else if (ms.ffModel == 6) {
+          ms.activeFilters.push({
+            id: option.field,
+            exp:
+              option.field +
+              '_r3 >= ' +
+              sliderVals.min +
+              ' AND ' +
+              option.field +
+              '_r3 <= ' +
+              sliderVals.max,
+          });
+        }
       } else {
         if (ms.ffModel == 4 && ms.maModel == 'natural') {
           ms.activeFilters.push({

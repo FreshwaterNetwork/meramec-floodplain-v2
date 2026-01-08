@@ -577,6 +577,11 @@ const onReady = (event) => {
     layer.opacity = val / 100;
   }
 
+  function updateSuppOpacity(val) {
+    let layer = webMap.findLayerById('19b9e7742df-layer-13');
+    layer.opacity = val / 100;
+  }
+
   function updateSupLay() {
     ms.graphicsLayer.remove(suppLayGraphic);
     const boundaryLayer = webMap.findLayerById(ms.wsModel);
@@ -723,6 +728,12 @@ const onReady = (event) => {
     () => ms.sliderModel,
     () => {
       updateOpacitySlider(ms.sliderModel);
+    }
+  );
+  watch(
+    () => ms.suppModel,
+    () => {
+      updateSuppOpacity(ms.suppModel);
     }
   );
   watch(

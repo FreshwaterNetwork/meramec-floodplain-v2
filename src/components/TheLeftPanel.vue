@@ -175,7 +175,7 @@
         <div class="text-bold" style="font-size: large">
           Filter Floodplain Units
         </div>
-        <div v-if="ms.selectedFilters.length > 0" class="text-center q-mb-sm">
+        <div v-if="ms.rightDrawerOpen" class="text-center q-mb-sm">
           <q-btn
             dense
             color="primary"
@@ -305,6 +305,25 @@
           :unchecked-icon="layer.uncheckedIcon"
           @click="ms.updateLayerVisibility('', layer.value)"
         ></q-checkbox>
+        <div
+          style="width: 90%; margin: 0 auto; display: block"
+          v-if="layer.label == 'National Wetlands Inventory'"
+        >
+          <div v-if="layer.model" class="q-my-sm">
+            Transparency:
+            <q-slider
+              class="q-mb-md"
+              v-model="ms.suppModel"
+              :min="0"
+              :max="100"
+              label-always
+              switch-label-side
+              label-color="transparent"
+              label-text-color="black"
+              :label-value="ms.suppModel + '%'"
+            ></q-slider>
+          </div>
+        </div>
       </div>
     </div>
   </div>

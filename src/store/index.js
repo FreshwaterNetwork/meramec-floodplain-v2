@@ -43,6 +43,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let wsModelText = ref('');
   let maModel = ref('natural');
   let sliderModel = ref(60);
+  let suppModel = ref(60);
 
   let infoText = ref({});
   let supportingLayers = ref([]);
@@ -576,6 +577,7 @@ export const useMapStore = defineStore('mapStore', () => {
     wsModel,
     maModel,
     sliderModel,
+    suppModel,
     infoText,
     supportingLayers,
     showHelp,
