@@ -496,7 +496,7 @@ const sliderObj = ref({
       vis: true,
       min: 1,
       max: 70,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland/grassland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     Dam2050: {
       values: [],

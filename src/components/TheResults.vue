@@ -96,7 +96,7 @@
           >
         </q-item-section>
       </q-item>
-      <q-item dense class="q-py-sm">
+      <!-- <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
             >People currently living in the floodplain of the selected flood
@@ -108,7 +108,7 @@
             }}</strong></q-item-label
           >
         </q-item-section>
-      </q-item>
+      </q-item> -->
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline

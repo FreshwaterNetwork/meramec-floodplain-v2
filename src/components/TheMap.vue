@@ -145,7 +145,7 @@ const onReady = (event) => {
             result.features[0].attributes.fedendspecies
           ),
           currentPop: formatValue(result.features[0].attributes.popnow_2),
-          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          peopleFloodplain: formatValue(result.features[0].attributes.popnow_2),
           futurePop: formatValue(result.features[0].attributes.pop2050_2),
           floodDamage: formatValue(result.features[0].attributes.damages_2),
           vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_2),
@@ -167,7 +167,7 @@ const onReady = (event) => {
             result.features[0].attributes.fedendspecies
           ),
           currentPop: formatValue(result.features[0].attributes.popnow_3),
-          peopleFloodplain: formatValue(result.features[0].attributes.pop5),
+          peopleFloodplain: formatValue(result.features[0].attributes.popnow_3),
           futurePop: formatValue(result.features[0].attributes.pop2050_3),
           floodDamage: formatValue(result.features[0].attributes.damages_3),
           vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_3),
