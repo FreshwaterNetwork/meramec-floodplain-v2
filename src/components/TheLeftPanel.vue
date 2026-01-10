@@ -126,41 +126,6 @@
           @update:model-value="ms.updateLayerVisibility('ws', ms.wsModel)"
         />
       </div>
-      <!-- <div class="text-weight-medium q-my-md">
-        Select Management Action
-        <IconButton
-          v-if="!ms.maInfo"
-          type="info"
-          method="show-info"
-          @show-info="ms.maInfo = true"
-        ></IconButton>
-        <IconButton
-          v-if="ms.maInfo"
-          type="close"
-          method="hide-info"
-          @hide-info="ms.maInfo = false"
-        ></IconButton>
-        <div v-show="ms.maInfo" class="q-ma-sm">
-          If you choose "Natural Land Cover", you are basing analysis on
-          floodplains in forest/wetland/grassland. If you choose "Modified Land
-          Cover", you are basing analysis on floodplain in agricultural and
-          pasture land.
-        </div>
-        <q-btn-toggle
-          class="q-ma-sm"
-          v-model="ms.maModel"
-          spread
-          dense
-          no-caps
-          toggle-color="primary"
-          color="white"
-          text-color="black"
-          :options="[
-            { label: 'Natural Land Cover', value: 'natural' },
-            { label: 'Modified Land Cover', value: 'modified' },
-          ]"
-        />
-      </div> -->
     </div>
     <q-separator class="q-my-md" inset />
     <div>
@@ -342,6 +307,7 @@ function resetFilters() {
   ms.activeFilters = [];
   ms.pdfFilters = [];
   ms.pdfSuppLayers = [];
+  ms.rightDrawerOpen = false;
 
   let webMap = document.querySelector('arcgis-map').view.map;
   let layer = webMap.findLayerById(ms.wsModel);
