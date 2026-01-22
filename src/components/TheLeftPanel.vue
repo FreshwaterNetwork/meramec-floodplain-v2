@@ -128,6 +128,37 @@
       </div>
     </div>
     <q-separator class="q-my-md" inset />
+    <div class="text-weight-medium q-mb-md">
+      <div class="text-bold" style="font-size: large">Upload Shapefile</div>
+      <div class="q-mt-sm q-ml-sm">
+        To upload a shapefile of your area, click the "Upload" button and select
+        a
+        <strong>zipped</strong> shapefile from the file explorer.
+      </div>
+      <q-btn
+        v-if="!ms.activeShapefile"
+        @click="startUpload()"
+        label="Upload"
+        color="primary"
+        class="q-mt-md q-ml-sm"
+      ></q-btn>
+      <form
+        enctype="multipart/form-data"
+        method="post"
+        id="uploadForm"
+        @change="sendUpload"
+      >
+        <input type="file" name="file" id="inFile" hidden />
+      </form>
+      <q-btn
+        v-if="ms.activeShapefile"
+        class="q-mt-md q-ml-sm"
+        @click="removeUpload()"
+        label="Remove Area"
+        color="negative"
+      ></q-btn>
+    </div>
+    <q-separator class="q-my-md" inset />
     <div>
       <div
         class="q-my-sm"
@@ -314,6 +345,32 @@ function resetFilters() {
   layer.definitionExpression = '';
 
   ms.componentKey += 1;
+}
+
+function startUpload() {
+  // this.userSelection = 'shapefile';
+  ms.activeShapefile = true;
+  document.getElementById('inFile').click();
+}
+
+function sendUpload(event) {
+  const fileName = event.target.value.toLowerCase();
+  if (fileName.indexOf('.zip') !== -1) {
+    ms.generateFeatureCollection(fileName);
+  } else {
+    document.getElementById('upload-status').innerHTML =
+      '<p style="color:red">Add shapefile as .zip file</p>';
+  }
+}
+
+function removeUpload() {
+  let home = document.getElementById('home');
+  if (home) {
+    home.go();
+  }
+  ms.activeShapefile = false;
+  ms.rightDrawerOpen = false;
+  ms.clearShapefilePoly();
 }
 
 watch(

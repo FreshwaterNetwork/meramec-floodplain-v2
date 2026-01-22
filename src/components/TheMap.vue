@@ -16,7 +16,7 @@
     </arcgis-expand>
     <arcgis-basemap-toggle position="top-right"></arcgis-basemap-toggle>
     <arcgis-zoom position="top-left"></arcgis-zoom>
-    <arcgis-home position="top-left"></arcgis-home>
+    <arcgis-home id="home" position="top-left"></arcgis-home>
   </arcgis-map>
   <!-- <div id="opacitySlider"></div> -->
 </template>
@@ -751,6 +751,17 @@ const onReady = (event) => {
       }
     }
   );
+  // watch(
+  //   () => ms.activeShapefile,
+  //   () => {
+  //     if (ms.activeShapefile == false) {
+  //       let home = document.getElementById('home');
+  //       if (home) {
+  //         home.go();
+  //       }
+  //     }
+  //   }
+  // );
 };
 </script>
 

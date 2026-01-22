@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import pdfMake from 'pdfmake/build/pdfmake';
 import htmlToPdfmake from 'html-to-pdfmake';
 import Graphic from '@arcgis/core/Graphic.js';
+import FeatureLayer from '@arcgis/core/layers/FeatureLayer';
+import Field from '@arcgis/core/layers/support/Field';
+import esriRequest from '@arcgis/core/request';
 import 'pdfmake/build/vfs_fonts';
 
 export const useMapStore = defineStore('mapStore', () => {
@@ -53,6 +56,8 @@ export const useMapStore = defineStore('mapStore', () => {
   let selectionGraphic = null;
   let runSupLayGraphic = ref(false);
 
+  let activeShapefile = ref(false);
+
   // Info button models
   let ffInfo = ref(false);
   let wsInfo = ref(false);
@@ -74,7 +79,7 @@ export const useMapStore = defineStore('mapStore', () => {
     checkboxStates.value = [];
   }
 
-  // FUNCTIONS
+  // Layer Control Functions
   function getLayerInfos() {
     let webMap = document.querySelector('arcgis-map').view.map;
 
@@ -194,6 +199,261 @@ export const useMapStore = defineStore('mapStore', () => {
     console.log(filterString);
   }
 
+  // Shapefile Upload Functions
+  let shapefileLayers = [];
+  let shapefileName;
+  function addShapefileToMap(featureCollection) {
+    let webMap = document.querySelector('arcgis-map').view.map;
+    let mapView = document.querySelector('arcgis-map').view;
+    let sourceGraphics = [];
+
+    shapefileLayers = featureCollection.layers.map((layer) => {
+      const graphicsObject = layer.featureSet.features.map((feature) => {
+        return Graphic.fromJSON(feature);
+      });
+      let sym = {
+        type: 'simple',
+        symbol: {
+          type: 'simple-fill', // autocasts as new SimpleFillSymbol()
+          color: {
+            r: 51,
+            g: 51,
+            b: 204,
+            a: 0,
+          },
+          outline: {
+            // autocasts as new SimpleLineSymbol()
+            color: [5, 5, 5, 1],
+            width: '2 px',
+          },
+        },
+      };
+
+      sourceGraphics = sourceGraphics.concat(graphicsObject);
+
+      const featureLayer = new FeatureLayer({
+        objectIdField: 'FID',
+        source: graphicsObject,
+        renderer: sym,
+        fields: layer.layerDefinition.fields.map((field) => {
+          return Field.fromJSON(field);
+        }),
+        title: shapefileName,
+      });
+      mapView.goTo(graphicsObject);
+      this.queryShapefile(graphicsObject[0].geometry);
+
+      return featureLayer;
+    });
+    webMap.addMany(shapefileLayers);
+  }
+
+  function clearShapefilePoly() {
+    let webMap = document.querySelector('arcgis-map').view.map;
+    if (shapefileLayers.length > 0) {
+      webMap.removeMany(shapefileLayers);
+    }
+  }
+
+  function generateFeatureCollection(fileName) {
+    let mapView = document.querySelector('arcgis-map').view;
+    const portalUrl = 'https://www.arcgis.com';
+    let name = fileName.split('.');
+    // Chrome adds c:fakepath to the value - we need to remove it
+    name = name[0].replace('c:\\fakepath\\', '');
+    const params = {
+      name: name,
+      targetSR: mapView.spatialReference,
+      maxRecordCount: 1000,
+      enforceInputFileSizeLimit: true,
+      enforceOutputJsonSizeLimit: true,
+    };
+
+    // generalize features to 10 meters for better performance
+    params.generalize = true;
+    params.maxAllowableOffset = 10;
+    params.reducePrecision = true;
+    params.numberOfDigitsAfterDecimal = 0;
+
+    const myContent = {
+      filetype: 'shapefile',
+      publishParameters: JSON.stringify(params),
+      f: 'json',
+    };
+
+    // use the REST generate operation to generate a feature collection from the zipped shapefile
+    esriRequest(portalUrl + '/sharing/rest/content/features/generate', {
+      query: myContent,
+      body: document.getElementById('uploadForm'),
+      responseType: 'json',
+    }).then((response) => {
+      this.addShapefileToMap(response.data.featureCollection);
+    });
+  }
+
+  function queryShapefile(geom) {
+    // const webMap = document.querySelector('arcgis-map').view.map;
+    // let layer = webMap.findLayerById(this.wsModel);
+    let layer;
+    let fullHuc = new FeatureLayer({
+      url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/arcgis/rest/services/meramac_122325/FeatureServer/0',
+    });
+    let fullCatch = new FeatureLayer({
+      url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/ArcGIS/rest/services/meramac_122325/FeatureServer/1',
+    });
+    if (this.wsModelText == 'HUC 12s') {
+      layer = fullHuc;
+    } else if (this.wsModelText == 'NHD Catchments') {
+      layer = fullCatch;
+    }
+
+    this.clickResults = {
+      name: 'Area of Interest',
+      watershedAcres: 0,
+      floodplainAcres: 0,
+      nitrogenScale: 0,
+      phosphorusScale: 0,
+      sedimentScale: 0,
+      endageredSpecies: 0,
+      currentPop: 0,
+      peopleFloodplain: 0,
+      futurePop: 0,
+      floodDamage: 0,
+      vulnerabilityIndex: 0,
+    };
+    this.clickType = 'watershed';
+
+    function formatValue(val) {
+      // val = val.toFixed(2);
+      val = parseFloat(val).toLocaleString('en-US');
+
+      return val;
+    }
+
+    let query = layer.createQuery();
+    query.geometry = geom;
+    query.outFields = ['*'];
+
+    layer.queryFeatures(query).then((results) => {
+      if (results.features.length > 0) {
+        // console.log(results);
+        results.features.forEach((feature) => {
+          if (this.ffModel == 4) {
+            this.clickResults.watershedAcres += formatValue(
+              feature.attributes.areaacres
+            );
+            this.clickResults.floodplainAcres += formatValue(
+              feature.attributes.fpacres_unp_1
+            );
+            this.clickResults.nitrogenScale += formatValue(
+              feature.attributes.iy_tn_perc
+            );
+            this.clickResults.phosphorusScale += formatValue(
+              feature.attributes.iy_tp_perc
+            );
+            this.clickResults.sedimentScale += formatValue(
+              feature.attributes.iy_ss_perc
+            );
+            this.clickResults.endageredSpecies += formatValue(
+              feature.attributes.fedendspecies
+            );
+            this.clickResults.currentPop += formatValue(
+              feature.attributes.popnow_1
+            );
+            this.clickResults.peopleFloodplain += formatValue(
+              feature.attributes.popnow_1
+            );
+            this.clickResults.futurePop += formatValue(
+              feature.attributes.pop2050_1
+            );
+            this.clickResults.floodDamage += formatValue(
+              feature.attributes.damages_1
+            );
+            this.clickResults.vulnerabilityIndex += formatValue(
+              feature.attributes.SOVI_1
+            );
+          }
+
+          if (this.ffModel == 5) {
+            this.clickResults.watershedAcres += formatValue(
+              feature.attributes.areaacres
+            );
+            this.clickResults.floodplainAcres += formatValue(
+              feature.attributes.fpacres_unp_2
+            );
+            this.clickResults.nitrogenScale += formatValue(
+              feature.attributes.iy_tn_perc
+            );
+            this.clickResults.phosphorusScale += formatValue(
+              feature.attributes.iy_tp_perc
+            );
+            this.clickResults.sedimentScale += formatValue(
+              feature.attributes.iy_ss_perc
+            );
+            this.clickResults.endageredSpecies += formatValue(
+              feature.attributes.fedendspecies
+            );
+            this.clickResults.currentPop += formatValue(
+              feature.attributes.popnow_2
+            );
+            this.clickResults.peopleFloodplain += formatValue(
+              feature.attributes.popnow_2
+            );
+            this.clickResults.futurePop += formatValue(
+              feature.attributes.pop2050_2
+            );
+            this.clickResults.floodDamage += formatValue(
+              feature.attributes.damages_2
+            );
+            this.clickResults.vulnerabilityIndex += formatValue(
+              feature.attributes.SOVI_2
+            );
+          }
+
+          if (this.ffModel == 6) {
+            this.clickResults.watershedAcres += formatValue(
+              feature.attributes.areaacres
+            );
+            this.clickResults.floodplainAcres += formatValue(
+              feature.attributes.fpacres_unp_3
+            );
+            this.clickResults.nitrogenScale += formatValue(
+              feature.attributes.iy_tn_perc
+            );
+            this.clickResults.phosphorusScale += formatValue(
+              feature.attributes.iy_tp_perc
+            );
+            this.clickResults.sedimentScale += formatValue(
+              feature.attributes.iy_ss_perc
+            );
+            this.clickResults.endageredSpecies += formatValue(
+              feature.attributes.fedendspecies
+            );
+            this.clickResults.currentPop += formatValue(
+              feature.attributes.popnow_3
+            );
+            this.clickResults.peopleFloodplain += formatValue(
+              feature.attributes.popnow_3
+            );
+            this.clickResults.futurePop += formatValue(
+              feature.attributes.pop2050_3
+            );
+            this.clickResults.floodDamage += formatValue(
+              feature.attributes.damages_3
+            );
+            this.clickResults.vulnerabilityIndex += formatValue(
+              feature.attributes.SOVI_3
+            );
+          }
+        });
+        this.rightDrawerOpen = true;
+      } else {
+        this.rightDrawerOpen = false;
+      }
+    });
+  }
+
+  // PDF Functions
   function generatePdf() {
     pdfMake.fonts = {
       Roboto: {
@@ -593,5 +853,12 @@ export const useMapStore = defineStore('mapStore', () => {
     fullHuc,
     fullCatch,
     wsModelText,
+    addShapefileToMap,
+    clearShapefilePoly,
+    generateFeatureCollection,
+    queryShapefile,
+    shapefileLayers,
+    shapefileName,
+    activeShapefile,
   };
 });
