@@ -42,7 +42,7 @@ export default {
   watch: {
     compKey() {
       this.option.checkboxModel.value = false;
-      this.slider.values = [this.slider.min, this.slider.max];
+      this.slider.values = [this.option.min, this.option.max];
     },
   },
   mounted() {
@@ -63,7 +63,7 @@ export default {
         labelFormatFunction: function (value) {
           return value.toFixed(1);
         },
-      })
+      }),
     );
     this.sliderDisable = markRaw(
       new Slider({
@@ -76,12 +76,26 @@ export default {
           rangeLabels: false,
         },
         disabled: true,
-      })
+      }),
     );
     this.slider.on('thumb-drag', (event) => {
       let val = this.slider.values;
       this.$emit('update-sl', this.option, val);
     });
+
+    watch(
+      () => this.option.checkboxModel.value,
+      (newVal) => {
+        if (newVal == true) {
+          console.log(newVal);
+          this.slider.values = [this.option.min, this.option.max];
+          this.$emit('update-sl', this.option, [
+            this.option.min,
+            this.option.max,
+          ]);
+        }
+      },
+    );
   },
 };
 </script>

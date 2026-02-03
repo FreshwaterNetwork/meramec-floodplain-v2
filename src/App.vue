@@ -94,7 +94,7 @@
       elevated
       :width="ms.leftPanelWidth"
     >
-      <div class="q-ma-sm">
+      <div class="q-ma-sm" style="height: calc(100vh - 150px)">
         <TheLeftPanel></TheLeftPanel>
       </div>
     </q-drawer>

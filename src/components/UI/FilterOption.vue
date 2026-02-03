@@ -436,7 +436,7 @@ const sliderObj = ref({
       vis: true,
       min: 0,
       max: 186,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
+      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain within 1/4 mile of protected land. Protected land includes areas from the Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
     },
     EcoSig: {
       values: [],
@@ -571,7 +571,7 @@ const sliderObj = ref({
       vis: true,
       min: 0,
       max: 732,
-      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
+      info: '<b>Public Lands Adjacency</b><br>Acres of floodplain within 1/4 mile of protected land. Protected land includes areas from the Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
     },
     EcoSig: {
       values: [],
@@ -1202,7 +1202,7 @@ const sliderObj = ref({
       vis: true,
       min: 0,
       max: 232,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
     },
     TN: {
       values: [],
@@ -1337,7 +1337,7 @@ const sliderObj = ref({
       vis: true,
       min: 0,
       max: 400,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
     },
     TN: {
       values: [],
@@ -1472,7 +1472,7 @@ const sliderObj = ref({
       vis: true,
       min: 0,
       max: 454,
-      info: '<b>Available floodplain area for given flood frequency and management action</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
     },
     TN: {
       values: [],
@@ -2451,10 +2451,10 @@ function updateCheckbox(option, sliderVals) {
     } else {
       option.checkboxModel.value = false;
       ms.activeFilters = ms.activeFilters.filter(
-        (item) => item.id !== option.field
+        (item) => item.id !== option.field,
       );
       ms.pdfFilters = ms.pdfFilters.filter(
-        (item) => item.label !== option.label
+        (item) => item.label !== option.label,
       );
     }
   } else {
@@ -2543,11 +2543,11 @@ function updateCheckbox(option, sliderVals) {
       option.checkboxModel.value = false;
       if (ms.selectedFilters.includes(option.field) == true) {
         ms.selectedFilters = ms.selectedFilters.filter(
-          (item) => item !== option.field
+          (item) => item !== option.field,
         );
       }
       ms.activeFilters = ms.activeFilters.filter(
-        (item) => item.id !== option.field
+        (item) => item.id !== option.field,
       );
       if (ms.pdfFilters.includes(option)) {
         ms.pdfFilters = ms.pdfFilters.filter((item) => item !== option);

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="padding-bottom: 50px">
     <div>
       <div class="text-bold" style="font-size: large">
         Identify Floodplain Units
@@ -171,22 +171,34 @@
         <div class="text-bold" style="font-size: large">
           Filter Floodplain Units
         </div>
-        <div v-if="ms.rightDrawerOpen" class="text-center q-mb-sm">
-          <q-btn
-            dense
-            color="primary"
-            class="q-mr-sm"
-            label="Save Map"
-            @click="ms.printMap = true"
-          />
-          <q-btn
-            dense
-            color="primary"
-            class="q-ml-sm"
-            label="Reset Filters"
-            @click="resetFilters()"
-          />
-        </div>
+      </div>
+      <div>
+        <q-expansion-item
+          dense
+          label="HUC"
+          class="q-mt-md"
+          header-class="text-weight-medium bg-grey-3"
+          default-opened
+          style="border-radius: 15px"
+        >
+          <div class="q-ml-md q-mt-md" style="display: flex">
+            <FilterSelect
+              method="update-de"
+              @update-de="activateHucFilter()"
+            ></FilterSelect>
+            <q-select
+              dense
+              outlined
+              style="width: 75%"
+              class="q-ml-sm"
+              :options="ms.hucFilter"
+              v-model="ms.hucFilterModel"
+              label="HUC Name"
+              :disable="ms.hucFilterSelected ? false : true"
+              @update:model-value="ms.updateHucFilter(ms.hucFilterModel)"
+            ></q-select>
+          </div>
+        </q-expansion-item>
       </div>
       <FilterOption
         v-if="
@@ -323,6 +335,24 @@
       </div>
     </div>
   </div>
+  <div id="panel-footer">
+    <div class="text-center q-mt-sm">
+      <q-btn
+        dense
+        color="primary"
+        class="q-mr-sm"
+        label="Save Map"
+        @click="ms.printMap = true"
+      />
+      <q-btn
+        dense
+        color="primary"
+        class="q-ml-sm"
+        label="Reset Filters"
+        @click="resetFilters()"
+      />
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -330,6 +360,7 @@ import { watch } from 'vue';
 import { useMapStore } from '../store/index';
 import FilterOption from './UI/FilterOption.vue';
 import IconButton from './UI/IconButton.vue';
+import FilterSelect from './UI/FilterSelect.vue';
 
 const ms = useMapStore();
 
@@ -349,13 +380,26 @@ function resetFilters() {
 
 function startUpload() {
   // this.userSelection = 'shapefile';
-  ms.activeShapefile = true;
+  // ms.activeShapefile = true;
   document.getElementById('inFile').click();
+}
+
+function activateHucFilter() {
+  ms.hucFilterSelected = !ms.hucFilterSelected;
+
+  if (!ms.hucFilterSelected) {
+    ms.hucFilterModel = '';
+    ms.graphicsLayer.removeAll();
+    ms.rightDrawerOpen = false;
+    let home = document.querySelector('arcgis-home');
+    home.go();
+  }
 }
 
 function sendUpload(event) {
   const fileName = event.target.value.toLowerCase();
   if (fileName.indexOf('.zip') !== -1) {
+    ms.activeShapefile = true;
     ms.generateFeatureCollection(fileName);
   } else {
     document.getElementById('upload-status').innerHTML =
@@ -379,6 +423,18 @@ watch(
     if (ms.printMap == true) {
       ms.getMapPrint();
     }
-  }
+  },
 );
 </script>
+
+<style scoped>
+#panel-footer {
+  height: 50px;
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  background-color: white;
+  width: 95%;
+  /* border-top: 1px solid black; */
+}
+</style>
