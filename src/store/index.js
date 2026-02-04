@@ -101,15 +101,14 @@ export const useMapStore = defineStore('mapStore', () => {
     let webMap = document.querySelector('arcgis-map').view.map;
 
     webMap.layers.items.forEach((layer) => {
-      console.log(layer.title);
       if (layer.title == 'CCS Rasters 1') {
         layer.when(() => {
           layer.sublayers.items.forEach((sub) => {
-            console.log(sub);
             sub.sublayers.items.forEach((l) => {
               if (l.title == '5-Year Floodplain') {
                 this.floodFrequency.push({ label: '20%', value: l.id });
                 this.ffModel = l.id;
+                l.opacity = 0.6;
               } else if (l.title == '100-Year Floodplain') {
                 this.floodFrequency.push({ label: '1%', value: l.id });
               } else if (l.title == '500-Year Floodplain') {
@@ -129,7 +128,6 @@ export const useMapStore = defineStore('mapStore', () => {
         });
       } else if (layer.title == 'View Floodplains by Watershed') {
         layer.layers.items.forEach((sub) => {
-          console.log(sub.title, sub.id);
           this.watershedType.push({ label: sub.title, value: sub.id });
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
@@ -232,7 +230,6 @@ export const useMapStore = defineStore('mapStore', () => {
   }
 
   function updateHucFilter(val) {
-    console.log(val);
     let webMap = document.querySelector('arcgis-map').view.map;
     let mapView = document.querySelector('arcgis-map').view;
     let layer;
@@ -257,7 +254,6 @@ export const useMapStore = defineStore('mapStore', () => {
       query.where = "name = '" + val + "'";
       this.clickType = 'watershed';
       layer.queryFeatures(query).then((result) => {
-        console.log(result);
         if (this.ffModel == 251) {
           //20%
           this.clickResults = {
@@ -460,6 +456,7 @@ export const useMapStore = defineStore('mapStore', () => {
             sub.sublayers.items.forEach((l) => {
               if (id == l.id) {
                 l.visible = true;
+                l.opacity = 0.6;
                 this.pdfWsType = l.title;
               } else {
                 l.visible = false;
@@ -516,8 +513,6 @@ export const useMapStore = defineStore('mapStore', () => {
     let webMap = document.querySelector('arcgis-map').view.map;
     let layer = this.findAnyLayerById(webMap, this.wsModel);
 
-    console.log(this.activeFilters);
-
     if (!obj) {
       this.activeFilters.forEach((f) => {
         this.filterArray.push(f.exp);
@@ -535,7 +530,6 @@ export const useMapStore = defineStore('mapStore', () => {
 
     filterString = this.filterArray.join(' AND ');
     layer.definitionExpression = filterString;
-    console.log(filterString);
   }
 
   // Shapefile Upload Functions
@@ -585,7 +579,6 @@ export const useMapStore = defineStore('mapStore', () => {
 
       return featureLayer;
     });
-    console.log(this.shapefileLayers);
     webMap.addMany(this.shapefileLayers);
   }
 

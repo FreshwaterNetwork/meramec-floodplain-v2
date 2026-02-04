@@ -1294,12 +1294,6 @@ function updateCheckbox(option, sliderVals) {
         }
       });
 
-      // fields that dont have ffmodel
-      //   water quality fields
-      //
-
-      console.log(option.field);
-
       if (
         option.field == 'WT_TOT' ||
         option.field == 'cumu_hci' ||

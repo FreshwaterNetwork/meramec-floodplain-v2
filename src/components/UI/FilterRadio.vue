@@ -40,7 +40,6 @@ export default {
     firstUpdate(newValue, option) {
       let ms = useMapStore();
       let obj = {};
-      console.log(newValue);
       if (newValue == 'present') {
         if (ms.ffModel == 251 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {

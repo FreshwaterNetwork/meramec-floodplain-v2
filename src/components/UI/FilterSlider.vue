@@ -87,7 +87,6 @@ export default {
       () => this.option.checkboxModel.value,
       (newVal) => {
         if (newVal == true) {
-          console.log(newVal);
           this.slider.values = [this.option.min, this.option.max];
           this.$emit('update-sl', this.option, [
             this.option.min,

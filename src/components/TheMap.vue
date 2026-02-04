@@ -251,15 +251,11 @@ const onReady = (event) => {
 
     let newLayer;
 
-    console.log(ms.ffModel);
-
     if (ms.wsModel == '19b4bcc2506-layer-10') {
       newLayer = ms.fullHuc;
     } else if (ms.wsModel == '19b4bcc7eec-layer-11') {
       newLayer = ms.fullCatch;
     }
-    console.log(newLayer);
-    console.log(ms.wsModelText);
 
     let point = new Point({
       x: event.mapPoint.longitude,
@@ -271,7 +267,6 @@ const onReady = (event) => {
     newQuery.spatialRelationship = 'intersects';
 
     newLayer.queryFeatures(newQuery).then(function (result) {
-      console.log(result);
       let watershedAcresValue =
         newLayer === ms.fullHuc
           ? result.features[0].attributes.areaacres
@@ -348,7 +343,6 @@ const onReady = (event) => {
 
     mapView.hitTest(event).then(function (response) {
       if (response.results) {
-        console.log(response.results[0].layer.title);
         if (
           response.results[0].layer.title == 'HUC 12s' ||
           response.results[0].layer.title == 'NHD Catchments' ||
@@ -410,57 +404,11 @@ const onReady = (event) => {
     ms.graphicsLayer.remove(suppLayGraphic);
     const boundaryLayer = ms.findAnyLayerById(webMap, ms.wsModel);
     const layer = ms.findAnyLayerById(webMap, '19712edcb1a-layer-10');
-
-    // let query = {
-    //   where: '1=1',
-    //   returnGeometry: true,
-    //   outFields: ['*'],
-    // };
-
-    // const layerResults = await layer.queryFeatures(query);
-    // const boundaryResults = await boundaryLayer.queryFeatures(query);
-
-    // console.log(boundaryResults);
-
-    // const clipGeom = unionOperator.executeMany(
-    //   layerResults.features.map((f) => f.geometry)
-    // );
-
-    // let clipExtent = unionOperator.executeMany(
-    //   boundaryResults.features.map((f) => f.geometry)
-    // );
-
-    // const clipped = clipOperator.executeMany(clipGeom, clipExtent.extent);
-
-    // if (clipped) {
-    //   suppLayGraphic = new Graphic({
-    //     geometry: clipped,
-    //     symbol: {
-    //       type: 'simple-fill',
-    //       color: [76, 129, 205],
-    //       outline: {
-    //         type: 'simple-line',
-    //         color: [0, 0, 0],
-    //         width: 0.5,
-    //         style: 'solid',
-    //       },
-    //     },
-    //     attributes: {
-    //       id: 'wetlandsGraphic',
-    //     },
-    //   });
-
-    //   ms.graphicsLayer.effect = '';
-    //   ms.graphicsLayer.add(suppLayGraphic);
-    //   ms.graphicsLayer.visible = true;
-    // }
-
     const query = boundaryLayer.createQuery();
     query.returnGeometry = true;
 
     boundaryLayer.queryFeatures(query).then(function (result) {
       const geometries = result.features.map((f) => f.geometry);
-      console.log(geometries);
       const combinedGeom = unionOperator.executeMany(geometries);
 
       const spatialQuery = layer.createQuery();
