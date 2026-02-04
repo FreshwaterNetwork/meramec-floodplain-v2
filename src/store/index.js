@@ -22,6 +22,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let hucFilter = [];
   let hucFilterModel = ref('');
   let hucFilterSelected = ref(false);
+  let boundaryGraphic = ref('');
 
   // pdf variables
   let mapScreenshot = ref('');
@@ -80,11 +81,6 @@ export const useMapStore = defineStore('mapStore', () => {
       url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/ArcGIS/rest/services/meramac_122325/FeatureServer/1',
     }),
   );
-  let partialCatch = markRaw(
-    new FeatureLayer({
-      url: 'https://cirrus.tnc.org/arcgis/rest/services/FN_AGR/Meramec/MapServer/1',
-    }),
-  );
 
   function toggleCheckbox(key) {
     if (checkboxStates.value.includes(key)) {
@@ -103,23 +99,35 @@ export const useMapStore = defineStore('mapStore', () => {
     let webMap = document.querySelector('arcgis-map').view.map;
 
     webMap.layers.items.forEach((layer) => {
-      if (layer.title == 'Select Flood Frequency') {
+      console.log(layer.title);
+      if (layer.title == 'CCS Rasters 1') {
         layer.when(() => {
           layer.sublayers.items.forEach((sub) => {
-            if (sub.title == '5-Year Floodplain') {
-              this.floodFrequency.push({ label: '20%', value: sub.id });
-              this.ffModel = sub.id;
-            } else if (sub.title == '100-Year Floodplain') {
-              this.floodFrequency.push({ label: '1%', value: sub.id });
-            } else if (sub.title == '500-Year Floodplain') {
-              this.floodFrequency.push({ label: '0.2%', value: sub.id });
-            }
+            console.log(sub);
+            sub.sublayers.items.forEach((l) => {
+              if (l.title == '5-Year Floodplain') {
+                this.floodFrequency.push({ label: '20%', value: l.id });
+                this.ffModel = l.id;
+              } else if (l.title == '100-Year Floodplain') {
+                this.floodFrequency.push({ label: '1%', value: l.id });
+              } else if (l.title == '500-Year Floodplain') {
+                this.floodFrequency.push({ label: '0.2%', value: l.id });
+              } else {
+                this.supportingLayers.push({
+                  label: l.title,
+                  value: l.id,
+                  model: l.visible,
+                  checkedIcon: 'task_alt',
+                  uncheckedIcon: 'panorama_fish_eye',
+                });
+              }
+            });
           });
           this.floodFrequency.reverse();
         });
       } else if (layer.title == 'View Floodplains by Watershed') {
         layer.layers.items.forEach((sub) => {
-          console.log(sub);
+          console.log(sub.title, sub.id);
           this.watershedType.push({ label: sub.title, value: sub.id });
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
@@ -137,34 +145,86 @@ export const useMapStore = defineStore('mapStore', () => {
             uncheckedIcon: 'panorama_fish_eye',
           });
         });
-      } else {
-        layer.sublayers.items.forEach((sub) => {
-          sub.sublayers.items.forEach((l) => {
-            this.supportingLayers.push({
-              label: l.title.replaceAll('_', ' '),
-              value: l.id,
-              model: l.visible,
-              checkedIcon: 'task_alt',
-              uncheckedIcon: 'panorama_fish_eye',
-            });
-          });
-        });
-        // console.log(this.supportingLayers);
       }
+      // else {
+      //   layer.sublayers.items.forEach((sub) => {
+      //     sub.sublayers.items.forEach((l) => {
+      //       this.supportingLayers.push({
+      //         label: l.title.replaceAll('_', ' '),
+      //         value: l.id,
+      //         model: l.visible,
+      //         checkedIcon: 'task_alt',
+      //         uncheckedIcon: 'panorama_fish_eye',
+      //       });
+      //     });
+      //   });
+      //   // console.log(this.supportingLayers);
+      // }
     });
+  }
+
+  function findAnyLayerById(webMap, id) {
+    if (!webMap) return null;
+    const target = String(id);
+
+    // recursive check for a layer-like object (supports sublayers and group children)
+    function checkLayer(layer) {
+      if (!layer) return null;
+      if (String(layer.id) === target) return layer;
+
+      // MapImageLayer sublayers / Dynamic sublayers: check allSublayers
+      if (layer.allSublayers && Array.isArray(layer.allSublayers.items)) {
+        for (const sub of layer.allSublayers.items) {
+          const r = checkLayer(sub);
+          if (r) return r;
+        }
+      }
+
+      // GroupLayer children
+      if (layer.layers && Array.isArray(layer.layers.items)) {
+        for (const child of layer.layers.items) {
+          const r = checkLayer(child);
+          if (r) return r;
+        }
+      }
+
+      // Some layers expose .sublayers or .allLayers instead — be defensive
+      if (layer.sublayers && Array.isArray(layer.sublayers.items)) {
+        for (const s of layer.sublayers.items) {
+          const r = checkLayer(s);
+          if (r) return r;
+        }
+      }
+
+      return null;
+    }
+
+    // iterate top-level layers
+    for (const top of webMap.layers.items) {
+      const found = checkLayer(top);
+      if (found) return found;
+    }
+
+    // last resort: try webMap.allLayers (if available)
+    if (webMap.allLayers && Array.isArray(webMap.allLayers.items)) {
+      const f = webMap.allLayers.items.find((l) => String(l.id) === target);
+      if (f) return f;
+    }
+
+    return null;
   }
 
   // WILL NEED TO UPDATE URL WITH FULL HUC
   function getHucFilter() {
-    let layer = new FeatureLayer({
-      url: 'https://cirrus.tnc.org/arcgis/rest/services/FN_AGR/Meramec/MapServer/0',
-    });
+    // let layer = new FeatureLayer({
+    //   url: 'https://cirrus.tnc.org/arcgis/rest/services/FN_AGR/Meramec/MapServer/0',
+    // });
 
-    let query = layer.createQuery();
-    query.outFields = ['NAME'];
-    layer.queryFeatures(query).then((results) => {
+    let query = this.fullHuc.createQuery();
+    query.outFields = ['name'];
+    this.fullHuc.queryFeatures(query).then((results) => {
       results.features.forEach((feature) => {
-        this.hucFilter.push(feature.attributes.NAME);
+        this.hucFilter.push(feature.attributes.name);
       });
     });
   }
@@ -177,6 +237,10 @@ export const useMapStore = defineStore('mapStore', () => {
     let query;
     let selectionGraphic;
     this.graphicsLayer.removeAll();
+    if (this.highlightHandle) {
+      this.highlightHandle.remove();
+      this.highlightHandle = null;
+    }
 
     function formatValue(val) {
       // val = val.toFixed(2);
@@ -185,14 +249,14 @@ export const useMapStore = defineStore('mapStore', () => {
       return val;
     }
 
-    if (this.wsModel == '195a55dbf5c-layer-5') {
+    if (this.wsModel == '19b4bcc2506-layer-10') {
       layer = this.fullHuc;
       query = layer.createQuery();
-      query.where = "NAME = '" + val + "'";
+      query.where = "name = '" + val + "'";
       this.clickType = 'watershed';
       layer.queryFeatures(query).then((result) => {
         console.log(result);
-        if (this.ffModel == 4) {
+        if (this.ffModel == 251) {
           //20%
           this.clickResults = {
             name: result.features[0].attributes.name,
@@ -224,7 +288,7 @@ export const useMapStore = defineStore('mapStore', () => {
               result.features[0].attributes.SOVI_1,
             ),
           };
-        } else if (this.ffModel == 5) {
+        } else if (this.ffModel == 253) {
           // 1%
           this.clickResults = {
             name: result.features[0].attributes.name,
@@ -254,7 +318,7 @@ export const useMapStore = defineStore('mapStore', () => {
               result.features[0].attributes.SOVI_2,
             ),
           };
-        } else if (this.ffModel == 6) {
+        } else if (this.ffModel == 255) {
           // 0.2% 1/500
           this.clickResults = {
             name: result.features[0].attributes.name,
@@ -307,50 +371,84 @@ export const useMapStore = defineStore('mapStore', () => {
         this.rightDrawerOpen = true;
         mapView.goTo(selectionGraphic);
       });
-    } else if (this.wsModel == '195a5a220fb-layer-6') {
+    } else if (this.wsModel == '19b4bcc7eec-layer-11') {
       this.clickType = '';
-      layer = this.partialCatch;
-      layer.visible = false;
-      webMap.add(layer);
+      layer = this.fullHuc;
+      query = layer.createQuery();
+      query.where = "NAME = '" + val + "'";
+      // layer = this.partialCatch;
+      // layer.visible = false;
+      // webMap.add(layer);
 
-      let newQuery = this.fullHuc.createQuery();
-      newQuery.where = "NAME = '" + val + "'";
+      // let newQuery = this.fullHuc.createQuery();
+      // newQuery.where = "NAME = '" + val + "'";
 
-      this.fullHuc.queryFeatures(newQuery).then((result) => {
-        mapView.when(() => {
-          mapView.whenLayerView(layer).then((layerView) => {
-            layerView.filter = {
-              geometry: result.features[0].geometry,
-              spatialRelationship: 'intersects',
-            };
-          });
+      // this.fullHuc.queryFeatures(newQuery).then((result) => {
+      //   mapView.when(() => {
+      //     mapView.whenLayerView(layer).then((layerView) => {
+      //       layerView.filter = {
+      //         geometry: result.features[0].geometry,
+      //         spatialRelationship: 'intersects',
+      //       };
+      //     });
+      //   });
+      // });
+
+      layer.queryFeatures(query).then((result) => {
+        mapView.goTo(result.features[0].geometry.extent);
+
+        selectionGraphic = new Graphic({
+          geometry: result.features[0].geometry,
+          symbol: {
+            type: 'simple-fill',
+            color: [0, 0, 0, 0],
+            outline: {
+              type: 'simple-line',
+              color: [169, 169, 169, 0.6],
+              width: 2,
+              style: 'solid',
+            },
+          },
+          attributes: {
+            id: 'selectionBoundaryGraphic',
+          },
         });
+
+        this.boundaryGraphic = markRaw(
+          new FeatureLayer({
+            title: 'HUC Boundary',
+            source: [selectionGraphic],
+            objectIdField: 'ObjectID',
+            geometryType: 'polygon',
+            fields: [
+              { name: 'ObjectID', type: 'oid' },
+              { name: 'id', type: 'string' },
+            ],
+            renderer: {
+              type: 'simple',
+              symbol: {
+                type: 'simple-fill',
+                color: [0, 0, 0, 0],
+                outline: {
+                  type: 'simple-line',
+                  color: [99, 99, 99, 1],
+                  width: 2,
+                  style: 'solid',
+                },
+              },
+            },
+            legendEnabled: false,
+            popupEnabled: false,
+            hitTestEnabled: false,
+            effect: 'brightness(1) drop-shadow(1px, 1px, 1px)',
+          }),
+        );
+        webMap.add(this.boundaryGraphic);
+
+        // this.graphicsLayer.add(selectionGraphic);
+        // this.graphicsLayer.visible = true;
+        // this.graphicsLayer.hitTestable = false;
       });
-
-      // layer.queryFeatures(query).then((result) => {
-      // mapView.goTo(result.features[0].geometry.extent);
-
-      // selectionGraphic = new Graphic({
-      //   geometry: result.features[0].geometry,
-      //   symbol: {
-      //     type: 'simple-fill',
-      //     color: [0, 0, 0, 0],
-      //     outline: {
-      //       type: 'simple-line',
-      //       color: [169, 169, 169, 0.6],
-      //       width: 2,
-      //       style: 'solid',
-      //     },
-      //   },
-      //   attributes: {
-      //     id: 'selectionGraphic',
-      //   },
-      // });
-
-      // this.graphicsLayer.add(selectionGraphic);
-      // this.graphicsLayer.visible = true;
-      // this.graphicsLayer.hitTestable = false;
-      // });
     }
   }
 
@@ -359,26 +457,28 @@ export const useMapStore = defineStore('mapStore', () => {
 
     if (group == 'ff') {
       webMap.layers.items.forEach((layer) => {
-        if (layer.title == 'Select Flood Frequency') {
+        if (layer.title == 'CCS Rasters 1') {
           layer.sublayers.items.forEach((sub) => {
-            if (id == sub.id) {
-              sub.visible = true;
-              this.pdfWsType = sub.title;
-            } else {
-              sub.visible = false;
-            }
+            sub.sublayers.items.forEach((l) => {
+              if (id == l.id) {
+                l.visible = true;
+                this.pdfWsType = l.title;
+              } else {
+                l.visible = false;
+              }
+            });
           });
         }
       });
     } else if (group == 'ws') {
       this.watershedType.forEach((type) => {
         if (type.value == id) {
-          let layer = webMap.findLayerById(id);
+          let layer = this.findAnyLayerById(webMap, id);
           if (layer) {
             layer.visible = true;
           }
         } else {
-          let layer = webMap.findLayerById(type.value);
+          let layer = this.findAnyLayerById(webMap, type.value);
           if (layer) {
             layer.visible = false;
           }
@@ -393,7 +493,7 @@ export const useMapStore = defineStore('mapStore', () => {
           }
         });
       } else {
-        layer = webMap.findLayerById(id);
+        layer = this.findAnyLayerById(webMap, id);
       }
 
       if (this.pdfSuppLayers.includes(layer.title) == false) {
@@ -416,7 +516,9 @@ export const useMapStore = defineStore('mapStore', () => {
     let filterString = '';
     this.filterArray = [];
     let webMap = document.querySelector('arcgis-map').view.map;
-    let layer = webMap.findLayerById(this.wsModel);
+    let layer = this.findAnyLayerById(webMap, this.wsModel);
+
+    console.log(this.activeFilters);
 
     if (!obj) {
       this.activeFilters.forEach((f) => {
@@ -478,6 +580,8 @@ export const useMapStore = defineStore('mapStore', () => {
           return Field.fromJSON(field);
         }),
         title: shapefileName,
+        hitTestEnabled: false,
+        popupEnabled: false,
       });
       mapView.goTo(graphicsObject);
       // this.queryShapefile(graphicsObject[0].geometry);
@@ -532,7 +636,7 @@ export const useMapStore = defineStore('mapStore', () => {
 
   // function queryShapefile(geom) {
   //   // const webMap = document.querySelector('arcgis-map').view.map;
-  //   // let layer = webMap.findLayerById(this.wsModel);
+  //   // let layer = this.findAnyLayerById(webMap, this.wsModel);
   //   let layer;
   //   let fullHuc = new FeatureLayer({
   //     url: 'https://services.arcgis.com/F7DSX1DSNSiWmOqh/arcgis/rest/services/meramac_122325/FeatureServer/0',
@@ -718,7 +822,7 @@ export const useMapStore = defineStore('mapStore', () => {
     // code to loop through pdffilters and compare a property (probably whatever is used during defExp) to grab slider values and radio values for filters section of pdf
 
     let webMap = document.querySelector('arcgis-map').view.map;
-    let wsLabel = webMap.findLayerById(this.wsModel).title;
+    let wsLabel = this.findAnyLayerById(webMap, this.wsModel).title;
 
     let sf = '<ul>';
     this.pdfFilters.forEach((filter) => {
@@ -1092,7 +1196,6 @@ export const useMapStore = defineStore('mapStore', () => {
     componentKey,
     fullHuc,
     fullCatch,
-    partialCatch,
     wsModelText,
     addShapefileToMap,
     clearShapefilePoly,
@@ -1106,5 +1209,7 @@ export const useMapStore = defineStore('mapStore', () => {
     hucFilterSelected,
     getHucFilter,
     updateHucFilter,
+    boundaryGraphic,
+    findAnyLayerById,
   };
 });

@@ -52,10 +52,10 @@ ms.graphicsLayer = markRaw(
 );
 
 function formatValue(val) {
-  // val = val.toFixed(2);
-  val = parseFloat(val).toLocaleString('en-US');
-
-  return val;
+  if (val == null) return 'No Data';
+  val = parseFloat(val);
+  if (isNaN(val)) return 0;
+  return val.toLocaleString('en-US');
 }
 
 const onReady = (event) => {
@@ -64,10 +64,10 @@ const onReady = (event) => {
 
   const webMap = document.querySelector('arcgis-map').view.map;
   const mapView = document.querySelector('arcgis-map').view;
-  let l = webMap.findLayerById(ms.wsModel);
-  let clickPoint;
+  // let l = ms.findAnyLayerById(webMap, ms.wsModel);
+  // let clickPoint;
   mapView.popupEnabled = false;
-  webMap.add(ms.graphicsLayer, webMap.layers.length - 1);
+  webMap.add(ms.graphicsLayer);
   let selectionGraphic;
   let suppLayGraphic;
 
@@ -88,7 +88,7 @@ const onReady = (event) => {
     //   if (response.results) {
     //     if (response.results[0].layer.title == 'Watershed Selection') {
     //       ms.clickType = 'watershed';
-    //       layer = webMap.findLayerById(ms.wsModel);
+    //       layer = ms.findAnyLayerById(webMap, ms.wsModel);
     //       query = layer.createQuery(geo);
     //       query.geometry = geo;
     //       query.spatialRelationship = 'intersects';
@@ -251,9 +251,11 @@ const onReady = (event) => {
 
     let newLayer;
 
-    if (ms.wsModel == '195a55dbf5c-layer-5') {
+    console.log(ms.ffModel);
+
+    if (ms.wsModel == '19b4bcc2506-layer-10') {
       newLayer = ms.fullHuc;
-    } else if (ms.wsModel == '195a5a220fb-layer-6') {
+    } else if (ms.wsModel == '19b4bcc7eec-layer-11') {
       newLayer = ms.fullCatch;
     }
     console.log(newLayer);
@@ -274,7 +276,8 @@ const onReady = (event) => {
         newLayer === ms.fullHuc
           ? result.features[0].attributes.areaacres
           : result.features[0].attributes.acres;
-      if (ms.ffModel == 4) {
+
+      if (ms.ffModel == 251) {
         //20%
         ms.clickResults = {
           name: result.features[0].attributes.name,
@@ -296,7 +299,7 @@ const onReady = (event) => {
           floodDamage: formatValue(result.features[0].attributes.damages_1),
           vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_1),
         };
-      } else if (ms.ffModel == 5) {
+      } else if (ms.ffModel == 253) {
         // 1%
         ms.clickResults = {
           name: result.features[0].attributes.name,
@@ -318,7 +321,7 @@ const onReady = (event) => {
           floodDamage: formatValue(result.features[0].attributes.damages_2),
           vulnerabilityIndex: formatValue(result.features[0].attributes.SOVI_2),
         };
-      } else if (ms.ffModel == 6) {
+      } else if (ms.ffModel == 255) {
         // 0.2% 1/500
         ms.clickResults = {
           name: result.features[0].attributes.name,
@@ -347,10 +350,11 @@ const onReady = (event) => {
       if (response.results) {
         if (
           response.results[0].layer.title == 'HUC 12s' ||
-          response.results[0].layer.title == 'NHD Catchments'
+          response.results[0].layer.title == 'NHD Catchments' ||
+          response.results[0].layer.title == 'HUC Boundary'
         ) {
           ms.clickType = 'watershed';
-          layer = webMap.findLayerById(ms.wsModel);
+          layer = ms.findAnyLayerById(webMap, ms.wsModel);
           query = layer.createQuery();
           query.geometry = response.results[0].mapPoint;
           query.spatialRelationship = 'intersects';
@@ -389,14 +393,14 @@ const onReady = (event) => {
   }
 
   function updateOpacitySlider(val) {
-    let layer = webMap.findLayerById(ms.wsModel);
+    let layer = ms.findAnyLayerById(webMap, ms.wsModel);
     layer.opacity = val / 100;
   }
 
   function updateSuppOpacity(val) {
     ms.supportingLayers.forEach((l) => {
       if (l.label == 'National Wetlands Inventory') {
-        let layer = webMap.findLayerById(l.value);
+        let layer = ms.findAnyLayerById(webMap, l.value);
         layer.opacity = val / 100;
       }
     });
@@ -404,8 +408,8 @@ const onReady = (event) => {
 
   function updateSupLay() {
     ms.graphicsLayer.remove(suppLayGraphic);
-    const boundaryLayer = webMap.findLayerById(ms.wsModel);
-    const layer = webMap.findLayerById('19712edcb1a-layer-10');
+    const boundaryLayer = ms.findAnyLayerById(webMap, ms.wsModel);
+    const layer = ms.findAnyLayerById(webMap, '19712edcb1a-layer-10');
 
     // let query = {
     //   where: '1=1',
@@ -512,7 +516,7 @@ const onReady = (event) => {
       // }
       ms.activeFilters = [];
       let webMap = document.querySelector('arcgis-map').view.map;
-      let layer = webMap.findLayerById(ms.wsModel);
+      let layer = ms.findAnyLayerById(webMap, ms.wsModel);
       ms.rightDrawerOpen = false;
       // if (layer.definitionExpression) {
       //   layer.definitionExpression = '';
@@ -529,9 +533,10 @@ const onReady = (event) => {
       }
 
       let webMap = document.querySelector('arcgis-map').view.map;
-      let layer = webMap.findLayerById(ms.wsModel);
+      let layer = ms.findAnyLayerById(webMap, ms.wsModel);
       layer.definitionExpression = '';
       ms.rightDrawerOpen = false;
+      ms.hucFilterSelected = false;
     },
   );
   watch(

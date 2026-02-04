@@ -182,10 +182,20 @@
           style="border-radius: 15px"
         >
           <div class="q-ml-md q-mt-md" style="display: flex">
-            <FilterSelect
+            <!-- <FilterSelect
               method="update-de"
               @update-de="activateHucFilter()"
-            ></FilterSelect>
+            ></FilterSelect> -->
+
+            <q-checkbox
+              v-model="hucModel"
+              dense
+              toggle-order="tf"
+              checked-icon="task_alt"
+              unchecked-icon="panorama_fish_eye"
+              class="self-center"
+              @update:model-value="activateHucFilter()"
+            ></q-checkbox>
             <q-select
               dense
               outlined
@@ -202,24 +212,24 @@
       </div>
       <FilterOption
         v-if="
-          ms.ffModel == 4 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 251 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'natural'
         "
         objName="h12p1"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 5 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 253 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'natural'
         "
         objName="h12p2"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 6 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 255 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'natural'
         "
         objName="h12p3"
@@ -227,24 +237,24 @@
 
       <FilterOption
         v-if="
-          ms.ffModel == 4 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 251 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'modified'
         "
         objName="h12r1"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 5 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 253 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'modified'
         "
         objName="h12r2"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 6 &&
-          ms.wsModel == '195a55dbf5c-layer-5' &&
+          ms.ffModel == 255 &&
+          ms.wsModel == '19b4bcc2506-layer-10' &&
           ms.maModel == 'modified'
         "
         objName="h12r3"
@@ -252,24 +262,24 @@
 
       <FilterOption
         v-if="
-          ms.ffModel == 4 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 251 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'natural'
         "
         objName="catchp1"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 5 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 253 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'natural'
         "
         objName="catchp2"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 6 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 255 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'natural'
         "
         objName="catchp3"
@@ -277,24 +287,24 @@
 
       <FilterOption
         v-if="
-          ms.ffModel == 4 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 251 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'modified'
         "
         objName="catchr1"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 5 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 253 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'modified'
         "
         objName="catchr2"
       ></FilterOption>
       <FilterOption
         v-if="
-          ms.ffModel == 6 &&
-          ms.wsModel == '195a5a220fb-layer-6' &&
+          ms.ffModel == 255 &&
+          ms.wsModel == '19b4bcc7eec-layer-11' &&
           ms.maModel == 'modified'
         "
         objName="catchr3"
@@ -363,6 +373,7 @@ import IconButton from './UI/IconButton.vue';
 import FilterSelect from './UI/FilterSelect.vue';
 
 const ms = useMapStore();
+let hucModel = false;
 
 function resetFilters() {
   ms.selectedFilters = [];
@@ -391,6 +402,7 @@ function activateHucFilter() {
     ms.hucFilterModel = '';
     ms.graphicsLayer.removeAll();
     ms.rightDrawerOpen = false;
+    ms.boundaryGraphic.visible = false;
     let home = document.querySelector('arcgis-home');
     home.go();
   }
@@ -422,6 +434,16 @@ watch(
   () => {
     if (ms.printMap == true) {
       ms.getMapPrint();
+    }
+  },
+);
+
+watch(
+  () => ms.wsModel,
+  () => {
+    hucModel = false;
+    if (ms.boundaryGraphic.visible) {
+      ms.boundaryGraphic.visible = false;
     }
   },
 );

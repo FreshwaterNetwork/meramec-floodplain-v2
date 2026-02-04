@@ -40,8 +40,9 @@ export default {
     firstUpdate(newValue, option) {
       let ms = useMapStore();
       let obj = {};
+      console.log(newValue);
       if (newValue == 'present') {
-        if (ms.ffModel == 4 && ms.maModel == 'natural') {
+        if (ms.ffModel == 251 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -50,10 +51,10 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_p1 = 1',
+              exp: option.field + '_1 = 1',
             };
           }
-        } else if (ms.ffModel == 4 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 251 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -62,10 +63,10 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_r1 = 1',
+              exp: option.field + '_1 = 1',
             };
           }
-        } else if (ms.ffModel == 5 && ms.maModel == 'natural') {
+        } else if (ms.ffModel == 253 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -74,10 +75,10 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_p2 = 1',
+              exp: option.field + '_2 = 1',
             };
           }
-        } else if (ms.ffModel == 5 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 253 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -86,10 +87,10 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_r2 = 1',
+              exp: option.field + '_2 = 1',
             };
           }
-        } else if (ms.ffModel == 6 && ms.maModel == 'natural') {
+        } else if (ms.ffModel == 255 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -98,10 +99,10 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_p3 = 1',
+              exp: option.field + '_3 = 1',
             };
           }
-        } else if (ms.ffModel == 6 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 255 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: option.field,
@@ -110,13 +111,13 @@ export default {
           } else {
             obj = {
               id: option.field,
-              exp: option.field + '_r3 = 1',
+              exp: option.field + '_3 = 1',
             };
           }
         }
         ms.updateDefinitionExpression(obj);
       } else if (newValue == 'absent') {
-        if (ms.ffModel == 4 && ms.maModel == 'natural') {
+        if (ms.ffModel == 251 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -125,10 +126,10 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_p1 = 0',
+              exp: this.option.field + '_1 = 0',
             };
           }
-        } else if (ms.ffModel == 4 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 251 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -137,10 +138,10 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_r1 = 0',
+              exp: this.option.field + '_1 = 0',
             };
           }
-        } else if (ms.ffModel == 5 && ms.maModel == 'natural') {
+        } else if (ms.ffModel == 253 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -149,10 +150,10 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_p2 = 0',
+              exp: this.option.field + '_2 = 0',
             };
           }
-        } else if (ms.ffModel == 5 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 253 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -161,10 +162,10 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_r2 = 0',
+              exp: this.option.field + '_2 = 0',
             };
           }
-        } else if (ms.ffModel == 6 && ms.maModel == 'natural') {
+        } else if (ms.ffModel == 255 && ms.maModel == 'natural') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -173,10 +174,10 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_p3 = 0',
+              exp: this.option.field + '_3 = 0',
             };
           }
-        } else if (ms.ffModel == 6 && ms.maModel == 'modified') {
+        } else if (ms.ffModel == 255 && ms.maModel == 'modified') {
           if (option.field == 'ABCcorr') {
             obj = {
               id: this.option.field,
@@ -185,7 +186,7 @@ export default {
           } else {
             obj = {
               id: this.option.field,
-              exp: this.option.field + '_r3 = 0',
+              exp: this.option.field + '_3 = 0',
             };
           }
         }
@@ -195,80 +196,7 @@ export default {
   },
   watch: {
     model(newValue) {
-      // ms.activeFilters.forEach((filter) => {
-      //   if (filter.id == this.option.field) {
       this.firstUpdate(newValue, this.option);
-      // } else {
-      //   this.firstUpdate(newValue, this.option);
-      // }
-      // });
-
-      // if (newValue == 'present') {
-      //   if (ms.ffModel == 4 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p1 = 1.00',
-      //     });
-      //   } else if (ms.ffModel == 4 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r1 = 1.00',
-      //     });
-      //   } else if (ms.ffModel == 5 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p2 = 1.00',
-      //     });
-      //   } else if (ms.ffModel == 5 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r2 = 1.00',
-      //     });
-      //   } else if (ms.ffModel == 6 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p3 = 1.00',
-      //     });
-      //   } else if (ms.ffModel == 6 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r3 = 1.00',
-      //     });
-      //   }
-      // } else if (newValue == 'absent') {
-      //   if (ms.ffModel == 4 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p1 = 0.00',
-      //     });
-      //   } else if (ms.ffModel == 4 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r1 = 0.00',
-      //     });
-      //   } else if (ms.ffModel == 5 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p2 = 0.00',
-      //     });
-      //   } else if (ms.ffModel == 5 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r2 = 0.00',
-      //     });
-      //   } else if (ms.ffModel == 6 && ms.maModel == 'natural') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_p3 = 0.00',
-      //     });
-      //   } else if (ms.ffModel == 6 && ms.maModel == 'modified') {
-      //     ms.activeFilters.push({
-      //       id: this.option.field,
-      //       exp: this.option.field + '_r3 = 0.00',
-      //     });
-      //   }
-      // }
-      // ms.updateDefinitionExpression();
     },
     compKey() {
       this.option.checkboxModel.value = false;
