@@ -348,10 +348,12 @@ const onReady = (event) => {
 
     mapView.hitTest(event).then(function (response) {
       if (response.results) {
+        console.log(response.results[0].layer.title);
         if (
           response.results[0].layer.title == 'HUC 12s' ||
           response.results[0].layer.title == 'NHD Catchments' ||
-          response.results[0].layer.title == 'HUC Boundary'
+          response.results[0].layer.title == 'HUC Boundary' ||
+          response.results[0].layer.title == null
         ) {
           ms.clickType = 'watershed';
           layer = ms.findAnyLayerById(webMap, ms.wsModel);

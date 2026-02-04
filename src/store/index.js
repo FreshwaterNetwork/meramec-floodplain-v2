@@ -59,7 +59,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let graphicsLayer = null;
   let selectionGraphic = null;
   let runSupLayGraphic = ref(false);
-  let highlightHandle = null;
+  let shapefileLayers = ref([]);
 
   let activeShapefile = ref(false);
 
@@ -446,10 +446,6 @@ export const useMapStore = defineStore('mapStore', () => {
           }),
         );
         webMap.add(this.boundaryGraphic);
-
-        // this.graphicsLayer.add(selectionGraphic);
-        // this.graphicsLayer.visible = true;
-        // this.graphicsLayer.hitTestable = false;
       });
     }
   }
@@ -543,60 +539,60 @@ export const useMapStore = defineStore('mapStore', () => {
   }
 
   // Shapefile Upload Functions
-  let shapefileLayers = [];
+  // let shapefileLayers = [];
   let shapefileName;
   function addShapefileToMap(featureCollection) {
     let webMap = document.querySelector('arcgis-map').view.map;
     let mapView = document.querySelector('arcgis-map').view;
     let sourceGraphics = [];
 
-    shapefileLayers = featureCollection.layers.map((layer) => {
+    this.shapefileLayers = featureCollection.layers.map((layer) => {
       const graphicsObject = layer.featureSet.features.map((feature) => {
         return Graphic.fromJSON(feature);
       });
       let sym = {
         type: 'simple',
         symbol: {
-          type: 'simple-fill', // autocasts as new SimpleFillSymbol()
-          color: {
-            r: 51,
-            g: 51,
-            b: 204,
-            a: 0,
-          },
+          type: 'simple-fill',
+          color: [0, 0, 0, 0],
           outline: {
-            // autocasts as new SimpleLineSymbol()
+            type: 'simple-line',
             color: [5, 5, 5, 1],
-            width: '2 px',
+            width: 2,
+            style: 'solid',
           },
         },
       };
 
       sourceGraphics = sourceGraphics.concat(graphicsObject);
 
-      const featureLayer = new FeatureLayer({
-        objectIdField: 'FID',
-        source: graphicsObject,
-        renderer: sym,
-        fields: layer.layerDefinition.fields.map((field) => {
-          return Field.fromJSON(field);
+      const featureLayer = markRaw(
+        new FeatureLayer({
+          objectIdField: 'FID',
+          source: graphicsObject,
+          renderer: sym,
+          fields: layer.layerDefinition.fields.map((field) => {
+            return Field.fromJSON(field);
+          }),
+          title: shapefileName,
+          hitTestEnabled: false,
+          popupEnabled: false,
+          effect: 'brightness(1)',
         }),
-        title: shapefileName,
-        hitTestEnabled: false,
-        popupEnabled: false,
-      });
+      );
       mapView.goTo(graphicsObject);
       // this.queryShapefile(graphicsObject[0].geometry);
 
       return featureLayer;
     });
-    webMap.addMany(shapefileLayers);
+    console.log(this.shapefileLayers);
+    webMap.addMany(this.shapefileLayers);
   }
 
   function clearShapefilePoly() {
     let webMap = document.querySelector('arcgis-map').view.map;
-    if (shapefileLayers.length > 0) {
-      webMap.removeMany(shapefileLayers);
+    if (this.shapefileLayers.length > 0) {
+      webMap.removeMany(this.shapefileLayers);
     }
   }
 
