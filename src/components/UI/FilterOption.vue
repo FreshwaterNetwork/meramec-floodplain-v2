@@ -453,8 +453,8 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -2.166,
-      max: -0.458,
+      min: -3,
+      max: 2,
       step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
@@ -588,8 +588,8 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -2.166,
-      max: -0.458,
+      min: -3,
+      max: 2,
       step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
@@ -723,8 +723,8 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -2.166,
-      max: -0.458,
+      min: -3,
+      max: 2,
       step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
@@ -1303,8 +1303,7 @@ function updateCheckbox(option, sliderVals) {
       if (
         option.field == 'WT_TOT' ||
         option.field == 'cumu_hci' ||
-        option.field == 'fedendspecies' ||
-        option.field == 'SOVI'
+        option.field == 'fedendspecies'
       ) {
         ms.activeFilters.push({
           id: option.field,
@@ -1558,7 +1557,6 @@ function updateSlider(option, val) {
     option.field == 'WT_TOT' ||
     option.field == 'cumu_hci' ||
     option.field == 'fedendspecies' ||
-    option.field == 'SOVI' ||
     option.field == 'iy_tn_perc' ||
     option.field == 'iy_tp_perc' ||
     option.field == 'iy_ss_perc' ||
