@@ -399,10 +399,8 @@ const onReady = (event) => {
 
   function updateSuppOpacity(val) {
     ms.supportingLayers.forEach((l) => {
-      if (l.label == 'National Wetlands Inventory') {
-        let layer = ms.findAnyLayerById(webMap, l.value);
-        layer.opacity = val / 100;
-      }
+      let layer = ms.findAnyLayerById(webMap, l.value);
+      layer.opacity = val / 100;
     });
   }
 

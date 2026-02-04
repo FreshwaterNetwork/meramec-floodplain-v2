@@ -88,8 +88,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Current pop in 5 yr floodplain in
-            forest/wetland/grassland/ag/pasture
+            >Population exposed to floods (present-day)
           </q-item-label>
           <q-item-label
             ><strong>{{ ms.clickResults.currentPop }}</strong></q-item-label
@@ -112,8 +111,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >2050 pop. in 5 yr. floodplain in
-            forest/wetland/grassland/ag/pasture
+            >Population exposed to floods (2050)
           </q-item-label>
           <q-item-label
             ><strong>{{ ms.clickResults.futurePop }}</strong></q-item-label
@@ -123,8 +121,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Potential 2050 flood damage to buildings in 5-year
-            floodplain</q-item-label
+            >Projected future flood damages (2050) ($)</q-item-label
           >
           <q-item-label
             ><strong>{{ ms.clickResults.floodDamage }}</strong></q-item-label

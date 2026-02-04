@@ -23,6 +23,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let hucFilterModel = ref('');
   let hucFilterSelected = ref(false);
   let boundaryGraphic = ref('');
+  let hucInfo = ref(false);
 
   // pdf variables
   let mapScreenshot = ref('');
@@ -49,6 +50,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let maModel = ref('natural');
   let sliderModel = ref(60);
   let suppModel = ref(60);
+  let suppSlider = ref(false);
 
   let infoText = ref({});
   let supportingLayers = ref([]);
@@ -1211,5 +1213,7 @@ export const useMapStore = defineStore('mapStore', () => {
     updateHucFilter,
     boundaryGraphic,
     findAnyLayerById,
+    hucInfo,
+    suppSlider,
   };
 });

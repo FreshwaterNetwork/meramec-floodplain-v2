@@ -182,11 +182,6 @@
           style="border-radius: 15px"
         >
           <div class="q-ml-md q-mt-md" style="display: flex">
-            <!-- <FilterSelect
-              method="update-de"
-              @update-de="activateHucFilter()"
-            ></FilterSelect> -->
-
             <q-checkbox
               v-model="hucModel"
               dense
@@ -207,6 +202,26 @@
               :disable="ms.hucFilterSelected ? false : true"
               @update:model-value="ms.updateHucFilter(ms.hucFilterModel)"
             ></q-select>
+            <IconButton
+              v-if="!ms.hucInfo"
+              class="q-ml-sm q-mt-sm"
+              type="info"
+              method="show-info"
+              @show-info="ms.hucInfo = true"
+            ></IconButton>
+            <IconButton
+              v-if="ms.hucInfo"
+              class="q-ml-sm q-mt-sm"
+              type="close"
+              method="hide-info"
+              @hide-info="ms.hucInfo = false"
+            ></IconButton>
+          </div>
+          <div v-if="ms.hucInfo" class="q-ml-lg q-mt-md">
+            <b>Filter by HUC Name</b><br />
+            Select a HUC from the dropdown to make a selection (if selected
+            watershed is HUC 12s) or add it's boundary to the map (if selected
+            watershed is NHD Catchments).
           </div>
         </q-expansion-item>
       </div>
@@ -312,22 +327,47 @@
     </div>
     <q-separator class="q-my-md" inset />
     <div>
-      <div class="text-bold" style="font-size: large">Supporting Layers</div>
-      <div v-for="layer in ms.supportingLayers" :key="layer" class="q-my-xs">
-        <q-checkbox
+      <div style="display: flex">
+        <div class="text-bold" style="font-size: large">Supporting Layers</div>
+        <q-btn
+          :icon="ms.suppSlider == false ? 'opacity' : 'close'"
+          rounded
           dense
-          toggle-order="ft"
-          :label="layer.label"
-          v-model="layer.model"
-          :checked-icon="layer.checkedIcon"
-          :unchecked-icon="layer.uncheckedIcon"
-          @click="ms.updateLayerVisibility('', layer.value)"
-        ></q-checkbox>
-        <div
-          style="width: 90%; margin: 0 auto; display: block"
-          v-if="layer.label == 'National Wetlands Inventory'"
+          flat
+          text-color="primary"
+          size="md"
+          style="padding: 1px !important; margin-left: 2px"
+          @click="ms.suppSlider = !ms.suppSlider"
         >
-          <div v-if="layer.model" class="q-my-sm">
+          <q-tooltip
+            v-if="!ms.suppSlider"
+            anchor="center right"
+            self="center left"
+            class="shadow-2"
+            style="
+              color: green;
+              background-color: white;
+              border: 1px solid grey;
+            "
+            >Transparency</q-tooltip
+          >
+          <q-tooltip
+            v-if="ms.suppSlider"
+            anchor="center right"
+            self="center left"
+            class="shadow-2"
+            style="
+              color: green;
+              background-color: white;
+              border: 1px solid grey;
+            "
+            >Hide Transparency</q-tooltip
+          >
+        </q-btn>
+      </div>
+      <div>
+        <div style="width: 90%; margin: 0 auto; display: block">
+          <div v-if="ms.suppSlider" class="q-my-sm">
             Transparency:
             <q-slider
               class="q-mb-md"
@@ -342,6 +382,17 @@
             ></q-slider>
           </div>
         </div>
+      </div>
+      <div v-for="layer in ms.supportingLayers" :key="layer" class="q-my-xs">
+        <q-checkbox
+          dense
+          toggle-order="ft"
+          :label="layer.label"
+          v-model="layer.model"
+          :checked-icon="layer.checkedIcon"
+          :unchecked-icon="layer.uncheckedIcon"
+          @click="ms.updateLayerVisibility('', layer.value)"
+        ></q-checkbox>
       </div>
     </div>
   </div>
