@@ -32,7 +32,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Acres of floodplain (5-year) in forest or wetland</q-item-label
+            >Acres of floodplain in forest or wetland</q-item-label
           >
           <q-item-label
             ><strong>{{
@@ -44,7 +44,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local nitrogen loading (5-year) 1-100 scale</q-item-label
+            >Local nitrogen loading 1-100 scale</q-item-label
           >
           <q-item-label
             ><strong>{{ ms.clickResults.nitrogenScale }}</strong></q-item-label
@@ -54,7 +54,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local phosphorus loading (5-year) 1-100 scale</q-item-label
+            >Local phosphorus loading 1-100 scale</q-item-label
           >
           <q-item-label
             ><strong>{{
@@ -66,7 +66,7 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local sediment loading (5-year) 1-100 scale</q-item-label
+            >Local sediment loading 1-100 scale</q-item-label
           >
           <q-item-label
             ><strong>{{ ms.clickResults.sedimentScale }}</strong></q-item-label
