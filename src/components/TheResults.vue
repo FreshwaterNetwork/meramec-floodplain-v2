@@ -42,32 +42,39 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local nitrogen loading 1-100 scale</q-item-label
+            >Local nitrogen loading (1-100 scale/raw value)</q-item-label
           >
           <q-item-label
-            ><strong>{{ ms.clickResults.nitrogenScale }}</strong></q-item-label
+            ><strong
+              >{{ ms.clickResults.nitrogenScale }} /
+              {{ ms.clickResults.nitrogenRaw }}</strong
+            ></q-item-label
           >
         </q-item-section>
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local phosphorus loading 1-100 scale</q-item-label
+            >Local phosphorus loading (1-100 scale/raw value)</q-item-label
           >
           <q-item-label
-            ><strong>{{
-              ms.clickResults.phosphorusScale
-            }}</strong></q-item-label
+            ><strong
+              >{{ ms.clickResults.phosphorusScale }} /
+              {{ ms.clickResults.phosphorusRaw }}</strong
+            ></q-item-label
           >
         </q-item-section>
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Local sediment loading 1-100 scale</q-item-label
+            >Local sediment loading (1-100 scale/raw value)</q-item-label
           >
           <q-item-label
-            ><strong>{{ ms.clickResults.sedimentScale }}</strong></q-item-label
+            ><strong
+              >{{ ms.clickResults.sedimentScale }} /
+              {{ ms.clickResults.sedimentRaw }}</strong
+            ></q-item-label
           >
         </q-item-section>
       </q-item>

@@ -91,172 +91,6 @@ const onReady = (event) => {
 
   // METHODS
   function queryClick(event) {
-    // let layer;
-    // let query;
-    // let selectionGraphic;
-    // ms.selectionMade = true;
-    // // ms.graphicsLayer.removeAll();
-
-    // mapView.hitTest(response).then(function (response) {
-    //   if (response.results) {
-    //     if (response.results[0].layer.title == 'Watershed Selection') {
-    //       ms.clickType = 'watershed';
-    //       layer = ms.findAnyLayerById(webMap, ms.wsModel);
-    //       query = layer.createQuery(geo);
-    //       query.geometry = geo;
-    //       query.spatialRelationship = 'intersects';
-
-    //       layer.queryFeatures(query).then(function (result) {
-    //         if (result.features.length > 0) {
-    //           let feature = result.features[0];
-
-    //           selectionGraphic = new Graphic({
-    //             geometry: feature.geometry,
-    //             symbol: {
-    //               type: 'simple-fill',
-    //               color: [0, 0, 0, 0],
-    //               outline: {
-    //                 type: 'simple-line',
-    //                 color: [255, 0, 0, 0.6],
-    //                 // color: [0, 112, 60, 0.6],
-    //                 // color: [73, 169, 66, 0.6],
-    //                 width: 2,
-    //                 style: 'solid',
-    //               },
-    //             },
-    //             attributes: {
-    //               id: 'selectionGraphic',
-    //             },
-    //           });
-
-    //           // 1-in-5 natural
-    //           if (ms.ffModel == 4 && ms.maModel == 'natural') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: formatValue(feature.attributes.AreaAc),
-    //               floodplainAcres: formatValue(feature.attributes.Acres_p1),
-    //               nitrogenScale: formatValue(feature.attributes.TN_p1),
-    //               phosphorusScale: formatValue(feature.attributes.TP_p1),
-    //               sedimentScale: formatValue(feature.attributes.Sed_p1),
-    //               endageredSpecies: formatValue(feature.attributes.HPFedEnd),
-    //               currentPop: formatValue(feature.attributes.popnow_p1),
-    //               peopleFloodplain: formatValue(feature.attributes.pop5),
-    //               futurePop: formatValue(feature.attributes.pop2050_p1),
-    //               floodDamage: formatValue(feature.attributes.Dam2050_p1),
-    //               vulnerabilityIndex: formatValue(feature.attributes.SOVI),
-    //             };
-    //           }
-    //           // 1-in-5 modified
-    //           if (ms.ffModel == 4 && ms.maModel == 'modified') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: feature.attributes.AreaAc,
-    //               floodplainAcres: feature.attributes.Acres_r1,
-    //               nitrogenScale: feature.attributes.TN_r1,
-    //               phosphorusScale: feature.attributes.TP_r1,
-    //               sedimentScale: feature.attributes.Sed_r1,
-    //               endageredSpecies: feature.attributes.HPFedEnd,
-    //               currentPop: feature.attributes.popnow_r1,
-    //               peopleFloodplain: feature.attributes.pop5,
-    //               futurePop: feature.attributes.pop2050_r1,
-    //               floodDamage: feature.attributes.Dam2050_r1,
-    //               vulnerabilityIndex: feature.attributes.SOVI,
-    //             };
-    //           }
-
-    //           // 1-in-100 natural
-    //           if (ms.ffModel == 5 && ms.maModel == 'natural') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: feature.attributes.AreaAc,
-    //               floodplainAcres: feature.attributes.Acres_p2,
-    //               nitrogenScale: feature.attributes.TN_p2,
-    //               phosphorusScale: feature.attributes.TP_p2,
-    //               sedimentScale: feature.attributes.Sed_p2,
-    //               endageredSpecies: feature.attributes.HPFedEnd,
-    //               currentPop: feature.attributes.popnow_p2,
-    //               peopleFloodplain: feature.attributes.pop100,
-    //               futurePop: feature.attributes.pop2050_p2,
-    //               floodDamage: feature.attributes.Dam2050_p2,
-    //               vulnerabilityIndex: feature.attributes.SOVI,
-    //             };
-    //           }
-    //           // 1-in-100 modeified
-    //           if (ms.ffModel == 5 && ms.maModel == 'modified') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: feature.attributes.AreaAc,
-    //               floodplainAcres: feature.attributes.Acres_r2,
-    //               nitrogenScale: feature.attributes.TN_r2,
-    //               phosphorusScale: feature.attributes.TP_r2,
-    //               sedimentScale: feature.attributes.Sed_r2,
-    //               endageredSpecies: feature.attributes.HPFedEnd,
-    //               currentPop: feature.attributes.popnow_r2,
-    //               peopleFloodplain: feature.attributes.pop100,
-    //               futurePop: feature.attributes.pop2050_r2,
-    //               floodDamage: feature.attributes.Dam2050_r2,
-    //               vulnerabilityIndex: feature.attributes.SOVI,
-    //             };
-    //           }
-
-    //           // 1-in-500 natural
-    //           if (ms.ffModel == 6 && ms.maModel == 'natural') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: feature.attributes.AreaAc,
-    //               floodplainAcres: feature.attributes.Acres_p3,
-    //               nitrogenScale: feature.attributes.TN_p3,
-    //               phosphorusScale: feature.attributes.TP_p3,
-    //               sedimentScale: feature.attributes.Sed_p3,
-    //               endageredSpecies: feature.attributes.HPFedEnd,
-    //               currentPop: feature.attributes.popnow_p3,
-    //               peopleFloodplain: feature.attributes.pop500,
-    //               futurePop: feature.attributes.pop2050_p3,
-    //               floodDamage: feature.attributes.Dam2050_p3,
-    //               vulnerabilityIndex: feature.attributes.SOVI,
-    //             };
-    //           }
-    //           // 1-in-500 modified
-    //           if (ms.ffModel == 6 && ms.maModel == 'modified') {
-    //             ms.clickResults = {
-    //               name: feature.attributes.NAME,
-    //               watershedAcres: feature.attributes.AreaAc,
-    //               floodplainAcres: feature.attributes.Acres_r3,
-    //               nitrogenScale: feature.attributes.TN_r3,
-    //               phosphorusScale: feature.attributes.TP_r3,
-    //               sedimentScale: feature.attributes.Sed_r3,
-    //               endageredSpecies: feature.attributes.HPFedEnd,
-    //               currentPop: feature.attributes.popnow_r3,
-    //               peopleFloodplain: feature.attributes.pop500,
-    //               futurePop: feature.attributes.pop2050_r3,
-    //               floodDamage: feature.attributes.Dam2050_r3,
-    //               vulnerabilityIndex: feature.attributes.SOVI,
-    //             };
-    //           }
-
-    //           ms.graphicsLayer.add(selectionGraphic);
-    //           ms.graphicsLayer.visible = true;
-    //           ms.rightDrawerOpen = true;
-    //           mapView.goTo(selectionGraphic);
-    //         } else {
-    //           ms.rightDrawerOpen = false;
-    //         }
-    //       });
-    //     } else if (
-    //       response.results[0].layer.title ==
-    //       'Structures in the 1% Annual Exceedance Probability Floodplain'
-    //     ) {
-    //       // move function below to this else block
-    //       ms.clickType = 'structures';
-    //     } else if (
-    //       response.results[0].layer.title == 'Environmental Hub Analysis'
-    //     ) {
-    //       // move function below to this else block
-    //       ms.clickType = 'hub';
-    //     }
-    //   }
-    // });
-
     let layer;
     let query;
     ms.graphicsLayer.remove(selectionGraphic);
@@ -286,6 +120,7 @@ const onReady = (event) => {
           : result.features[0].attributes.acres;
 
       if (ms.ffModel == 251) {
+        console.log(result.features[0].attributes);
         //20%
         ms.clickResults = {
           name: result.features[0].attributes.name,
@@ -294,10 +129,13 @@ const onReady = (event) => {
             result.features[0].attributes.fpacres_unp_1,
           ),
           nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          nitrogenRaw: formatValue(result.features[0].attributes.iy_tn),
           phosphorusScale: formatValue(
             result.features[0].attributes.iy_tp_perc,
           ),
+          phosphorusRaw: formatValue(result.features[0].attributes.iy_tp),
           sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          sedimentRaw: formatValue(result.features[0].attributes.iy_ss),
           endageredSpecies: formatValue(
             result.features[0].attributes.fedendspecies,
           ),
@@ -316,10 +154,13 @@ const onReady = (event) => {
             result.features[0].attributes.fpacres_unp_2,
           ),
           nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          nitrogenRaw: formatValue(result.features[0].attributes.iy_tn),
           phosphorusScale: formatValue(
             result.features[0].attributes.iy_tp_perc,
           ),
+          phosphorusRaw: formatValue(result.features[0].attributes.iy_tp),
           sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          sedimentRaw: formatValue(result.features[0].attributes.iy_ss),
           endageredSpecies: formatValue(
             result.features[0].attributes.fedendspecies,
           ),
@@ -338,10 +179,13 @@ const onReady = (event) => {
             result.features[0].attributes.fpacres_unp_3,
           ),
           nitrogenScale: formatValue(result.features[0].attributes.iy_tn_perc),
+          nitrogenRaw: formatValue(result.features[0].attributes.iy_tn),
           phosphorusScale: formatValue(
             result.features[0].attributes.iy_tp_perc,
           ),
+          phosphorusRaw: formatValue(result.features[0].attributes.iy_tp),
           sedimentScale: formatValue(result.features[0].attributes.iy_ss_perc),
+          sedimentRaw: formatValue(result.features[0].attributes.iy_ss),
           endageredSpecies: formatValue(
             result.features[0].attributes.fedendspecies,
           ),
