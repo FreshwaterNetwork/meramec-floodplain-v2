@@ -7,6 +7,19 @@
     <arcgis-scale-bar position="bottom-right" unit="dual"></arcgis-scale-bar>
     <arcgis-expand
       close-on-esc
+      position="top-left"
+      mode="floating"
+      collapse-tooltip="Hide Legend"
+      location-disabled
+    >
+      <arcgis-search
+        popup-disabled
+        result-graphic-disabled
+        suggestions-disabled
+      ></arcgis-search>
+    </arcgis-expand>
+    <arcgis-expand
+      close-on-esc
       position="bottom-left"
       mode="floating"
       collapse-tooltip="Hide Legend"

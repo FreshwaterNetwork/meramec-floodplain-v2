@@ -31,9 +31,7 @@
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
-          <q-item-label overline
-            >Acres of floodplain in forest or wetland</q-item-label
-          >
+          <q-item-label overline>Acres of floodplain</q-item-label>
           <q-item-label
             ><strong>{{
               ms.clickResults.floodplainAcres

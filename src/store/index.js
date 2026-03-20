@@ -846,6 +846,9 @@ export const useMapStore = defineStore('mapStore', () => {
     }
 
     let docDefinition = {
+      info: {
+        title: 'Meramec Floodplain Tool - ' + dateString,
+      },
       header: {
         text: dateString,
         alignment: 'right',
@@ -1121,9 +1124,13 @@ export const useMapStore = defineStore('mapStore', () => {
     };
 
     if (!this.selectionMade) {
-      pdfMake.createPdf(docDefinition).download();
+      pdfMake
+        .createPdf(docDefinition)
+        .download('Meramec Floodplain Tool - ' + dateString + '.pdf');
     } else {
-      pdfMake.createPdf(docDefinitionSelection).download();
+      pdfMake
+        .createPdf(docDefinitionSelection)
+        .download('Meramec Floodplain Tool - ' + dateString + '.pdf');
     }
 
     this.printMap = false;

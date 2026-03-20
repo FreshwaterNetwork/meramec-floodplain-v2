@@ -330,6 +330,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 16,
       max: 633,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
@@ -337,6 +338,7 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: `<b>Total nitrogen (SPARROW model)</b><br>Kg/yr of nitrogen from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>`,
@@ -344,6 +346,7 @@ const sliderObj = ref({
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Total phosphorus (SPARROW model)</b><br>Kg/yr of phosphorus from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -351,6 +354,7 @@ const sliderObj = ref({
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -358,6 +362,7 @@ const sliderObj = ref({
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Accumulated sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of the watershed (as estimated by USGS SPARROW model), accounting for all sediment coming in from upstream, normalized to a 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -365,6 +370,7 @@ const sliderObj = ref({
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed's area, and normalized to a 0-100 scale, with the normalized values for nitrogen and phosphorus averaged together. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More Info</a>",
@@ -372,6 +378,7 @@ const sliderObj = ref({
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -379,6 +386,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 186,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain within 1/4 mile of protected land. Protected land includes areas from the Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -393,6 +401,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -401,15 +410,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.686,
       max: 3.622,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 37,
       shfld: true,
@@ -418,6 +428,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 7,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
@@ -439,6 +450,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1,
       max: 70,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
@@ -446,16 +458,17 @@ const sliderObj = ref({
     damages: {
       values: [],
       vis: true,
-      min: 313176,
-      max: 5207579,
+      step: 1000,
+      min: 0,
+      max: 114000000,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
       vis: true,
+      step: 0.1,
       min: -3,
       max: 2,
-      step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
@@ -465,6 +478,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 36,
       max: 1579,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
@@ -472,6 +486,7 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: `<b>Total nitrogen (SPARROW model)</b><br>Kg/yr of nitrogen from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>`,
@@ -479,6 +494,7 @@ const sliderObj = ref({
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Total phosphorus (SPARROW model)</b><br>Kg/yr of phosphorus from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -486,6 +502,7 @@ const sliderObj = ref({
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -493,6 +510,7 @@ const sliderObj = ref({
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Accumulated sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of the watershed (as estimated by USGS SPARROW model), accounting for all sediment coming in from upstream, normalized to a 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -500,6 +518,7 @@ const sliderObj = ref({
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed's area, and normalized to a 0-100 scale, with the normalized values for nitrogen and phosphorus averaged together. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More Info</a>",
@@ -507,6 +526,7 @@ const sliderObj = ref({
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -514,6 +534,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 732,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain within 1/4 mile of protected land. Protected land includes areas from the Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -528,6 +549,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -536,15 +558,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.686,
       max: 3.622,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 37,
       shfld: true,
@@ -553,6 +576,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 7,
       max: 92,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
@@ -574,6 +598,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 15,
       max: 515,
       info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland/grassland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
@@ -581,16 +606,17 @@ const sliderObj = ref({
     damages: {
       values: [],
       vis: true,
-      min: 1116767,
-      max: 82900000,
+      step: 1000,
+      min: 0,
+      max: 295500000,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
       vis: true,
+      step: 0.1,
       min: -3,
       max: 2,
-      step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
@@ -600,6 +626,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 94,
       max: 2500,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
@@ -607,6 +634,7 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: `<b>Total nitrogen (SPARROW model)</b><br>Kg/yr of nitrogen from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>`,
@@ -614,6 +642,7 @@ const sliderObj = ref({
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Total phosphorus (SPARROW model)</b><br>Kg/yr of phosphorus from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -621,6 +650,7 @@ const sliderObj = ref({
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -628,6 +658,7 @@ const sliderObj = ref({
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Accumulated sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of the watershed (as estimated by USGS SPARROW model), accounting for all sediment coming in from upstream, normalized to a 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
@@ -635,6 +666,7 @@ const sliderObj = ref({
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed's area, and normalized to a 0-100 scale, with the normalized values for nitrogen and phosphorus averaged together. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More Info</a>",
@@ -642,6 +674,7 @@ const sliderObj = ref({
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -649,6 +682,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 825,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -663,6 +697,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -671,15 +706,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.686,
       max: 3.622,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 37,
       shfld: true,
@@ -688,6 +724,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 14,
       max: 384,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
@@ -709,6 +746,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 42,
       max: 721,
       info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
@@ -716,16 +754,17 @@ const sliderObj = ref({
     damages: {
       values: [],
       vis: true,
-      min: 3928452,
-      max: 150000000,
+      step: 1000,
+      min: 0,
+      max: 353700000,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
       vis: true,
+      step: 0.1,
       min: -3,
       max: 2,
-      step: 0.001,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
@@ -736,6 +775,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 232,
       info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
@@ -743,41 +783,47 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: `<b>Total nitrogen (SPARROW model)</b><br>Kg/yr of nitrogen from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>`,
     },
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.<br>',
+      info: "<b>Total phosphorus (SPARROW model)</b><br>Kg/yr of phosphorus from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: "<b>Sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of that watershed (as estimated by USGS SPARROW model), divided by the watershed's area, and normalized to 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: "<b>Accumulated sediment (SPARROW model)</b><br>MT/yr of suspended sediment from within a given watershed exported at the mouth of the watershed (as estimated by USGS SPARROW model), accounting for all sediment coming in from upstream, normalized to a 0-100 scale. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More info</a>",
     },
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
+      info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed's area, and normalized to a 0-100 scale, with the normalized values for nitrogen and phosphorus averaged together. <a href='https://sparrow.wim.usgs.gov/sparrow-midwest-2012/' target='_blank'>More Info</a>",
     },
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -785,6 +831,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 94,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -792,6 +839,7 @@ const sliderObj = ref({
     EcoSig: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 230,
       info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in natural cover within an ecologically significant	area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
@@ -799,6 +847,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -807,15 +856,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.0,
       max: 4.801,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 9,
       shfld: true,
@@ -824,13 +874,15 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 5,
-      info: "<b>Population exposed to floods (present-day)</b><br>People currently living in forest/wetland/grassland floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (present-day)</b><br>People currently living in the floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
     },
     pop5: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 21,
       shfld: true,
@@ -838,20 +890,24 @@ const sliderObj = ref({
     },
     pop100: {
       vis: false,
+      step: 0.1,
     },
     pop500: {
       vis: false,
+      step: 0.1,
     },
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 33,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland/grassland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in the floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
     },
     damages: {
       values: [],
       vis: true,
+      step: 1000,
       min: 0,
       max: 2315258,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
@@ -859,9 +915,9 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
+      step: 0.1,
+      min: -4,
+      max: 5,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
@@ -871,6 +927,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 400,
       info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
@@ -878,34 +935,39 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Total nitrogen (SPARROW model)</b><br>Total nitrogen loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b><br>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Total phosphorus (SPARROW model)</b><br>Total phosphorus loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Sediment (SPARROW model)</b><br>Local sediment loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Accumulated sediment (SPARROW model)</b><br>Sediment loading, according to SPARROW modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
@@ -913,6 +975,7 @@ const sliderObj = ref({
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -920,6 +983,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 222,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -927,6 +991,7 @@ const sliderObj = ref({
     EcoSig: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 396,
       info: "<b>Ecological Significance Ranking</b><br>Acres of floodplain in natural cover within an ecologically significant	area (significance ranking 4 or above). Data provided by the East-West Gateway Council of Governments. <a href='plugins/floodplain-explorer/2011_EAI_eco_significance.pdf' target='_blank'>More Info</a>",
@@ -934,6 +999,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -942,15 +1008,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.0,
       max: 4.801,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 9,
       shfld: true,
@@ -959,16 +1026,19 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 19,
       info: "<b>Population exposed to floods (present-day)</b><br>People currently living in forest/wetland floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
     },
     pop5: {
       vis: false,
+      step: 0.1,
     },
     pop100: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 745,
       shfld: true,
@@ -976,10 +1046,12 @@ const sliderObj = ref({
     },
     pop500: {
       vis: false,
+      step: 0.1,
     },
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 136,
       info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
@@ -987,6 +1059,7 @@ const sliderObj = ref({
     damages: {
       values: [],
       vis: true,
+      step: 1000,
       min: 0,
       max: 27400000,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
@@ -994,9 +1067,9 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
+      step: 0.1,
+      min: -4,
+      max: 5,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },
@@ -1006,6 +1079,7 @@ const sliderObj = ref({
     fpacres_unp: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 454,
       info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
@@ -1013,34 +1087,39 @@ const sliderObj = ref({
     iy_tn_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total nitrogen (SWAT model)</b><br>Total nitrogen loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Total nitrogen (SPARROW model)</b><br>Total nitrogen loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     iy_tp_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Total phosphorus (SWAT model)</b>Total phosphorus loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Total phosphorus (SPARROW model)</b>Total phosphorus loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     iy_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Sediment (SWAT model)</b><br>Local sediment loading, according to SWAT modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Sediment (SPARROW model)</b><br>Local sediment loading, according to SPARROW modeling. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     al_ss_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
-      info: '<b>Accumulated sediment (SWAT model)</b><br>Sediment loading, according to SWAT modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
+      info: '<b>Accumulated sediment (SPARROW model)</b><br>Sediment loading, according to SPARROW modeling -- accounts for all sediment coming in from upstream. Values normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric.',
     },
     tn_tp_del_avg_perc: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 100,
       info: "<b>Nutrient loading to Gulf of Mexico (SPARROW model)</b><br>Kg/yr of nitrogen and phosphorus from within a given watershed that reaches Gulf of Mexico, divided by watershed area in km2, all normalized to 0-100 scale. For protection priorities, identify catchments <i>lower</i> in this metric. <a href='https://sparrow.wim.usgs.gov/marb/' target='_blank'>More Info</a>",
@@ -1048,6 +1127,7 @@ const sliderObj = ref({
     nccpi: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 1,
       info: "The National Commodity Crop Productivity Index (NCCPI) characterizes soil's inherent capacity to produce non-irrigated commodity crops (0-1). Lower value suggests less productive soil, and therefore a more viable opportunity for restoration. <a href='https://www.nrcs.usda.gov/sites/default/files/2023-01/NCCPI-User-Guide.pdf' target='_blank'>More info</a>",
@@ -1055,6 +1135,7 @@ const sliderObj = ref({
     fpnearPADUS: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 254,
       info: '<b>Public Lands Adjacency</b><br>Acres of floodplain in natural land cover within 1/4 mile of protected land. Protected land includes areas from Protected Areas Database of the U.S. and Great Rivers Greenway infrastructure.',
@@ -1069,6 +1150,7 @@ const sliderObj = ref({
     WT_TOT: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 2,
       shfld: true,
@@ -1077,15 +1159,16 @@ const sliderObj = ref({
     cumu_hci: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 1.0,
       max: 4.801,
-      step: 0.001,
       shfld: true,
       info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
       vis: true,
+      step: 1,
       min: 0,
       max: 9,
       shfld: true,
@@ -1094,6 +1177,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 46,
       info: "<b>Population exposed to floods (present-day)</b><br>People currently living in forest/wetland floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
@@ -1115,6 +1199,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
+      step: 0.1,
       min: 0,
       max: 154,
       info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
@@ -1122,6 +1207,7 @@ const sliderObj = ref({
     damages: {
       values: [],
       vis: true,
+      step: 1000,
       min: 0,
       max: 40200000,
       info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
@@ -1129,9 +1215,9 @@ const sliderObj = ref({
     SOVI: {
       values: [],
       vis: true,
-      min: -3.881,
-      max: 1.749,
-      step: 0.001,
+      step: 0.1,
+      min: -4,
+      max: 5,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
     },

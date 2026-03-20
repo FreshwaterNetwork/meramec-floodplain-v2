@@ -248,6 +248,7 @@ import '@arcgis/map-components/components/arcgis-expand';
 import '@arcgis/map-components/components/arcgis-basemap-toggle';
 import '@arcgis/map-components/components/arcgis-home';
 import '@arcgis/map-components/components/arcgis-feature';
+import '@arcgis/map-components/components/arcgis-search';
 
 const ms = useMapStore();
 const $q = useQuasar();

@@ -57,7 +57,7 @@ export default {
           labels: true,
           rangeLabels: false,
         },
-        steps: 0.1,
+        steps: this.option.step,
         draggableSegmentsEnabled: true,
         disabled: false,
         labelFormatFunction: function (value) {
