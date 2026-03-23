@@ -331,8 +331,8 @@ const sliderObj = ref({
       values: [],
       vis: true,
       step: 0.1,
-      min: 16,
-      max: 633,
+      min: 0,
+      max: 2210,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {
@@ -479,8 +479,8 @@ const sliderObj = ref({
       values: [],
       vis: true,
       step: 0.1,
-      min: 36,
-      max: 1579,
+      min: 59,
+      max: 4050,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {
@@ -627,8 +627,8 @@ const sliderObj = ref({
       values: [],
       vis: true,
       step: 0.1,
-      min: 94,
-      max: 2500,
+      min: 72,
+      max: 6030,
       info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {

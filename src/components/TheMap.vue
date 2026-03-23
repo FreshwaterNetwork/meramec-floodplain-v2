@@ -120,7 +120,6 @@ const onReady = (event) => {
           : result.features[0].attributes.acres;
 
       if (ms.ffModel == 251) {
-        console.log(result.features[0].attributes);
         //20%
         ms.clickResults = {
           name: result.features[0].attributes.name,

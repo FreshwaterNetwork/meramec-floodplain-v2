@@ -789,6 +789,15 @@ export const useMapStore = defineStore('mapStore', () => {
 
   // PDF Functions
 
+  function getPdfScreenshotConfig(maxWidth, maxHeight, bottomMargin) {
+    return {
+      image: this.mapScreenshot,
+      fit: [maxWidth, maxHeight],
+      style: ['centerItem'],
+      margin: [0, 0, 0, bottomMargin],
+    };
+  }
+
   function generatePdf() {
     pdfMake.fonts = {
       Roboto: {
@@ -809,6 +818,12 @@ export const useMapStore = defineStore('mapStore', () => {
       month: 'long',
       day: 'numeric',
     });
+    let titleDate = today.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    });
+    titleDate = titleDate.replace('_', '/');
 
     // code to loop through pdffilters and compare a property (probably whatever is used during defExp) to grab slider values and radio values for filters section of pdf
 
@@ -847,7 +862,11 @@ export const useMapStore = defineStore('mapStore', () => {
 
     let docDefinition = {
       info: {
-        title: 'Meramec Floodplain Tool - ' + dateString,
+        title:
+          'Meramec Floodplain Tool - ' +
+          titleDate +
+          ' - ' +
+          this.clickResults.name,
       },
       header: {
         text: dateString,
@@ -868,13 +887,7 @@ export const useMapStore = defineStore('mapStore', () => {
           style: ['header1', 'centerItem'],
           margin: [0, 0, 0, 10],
         },
-        {
-          image: this.mapScreenshot,
-          width: 375,
-          height: 325,
-          style: ['centerItem'],
-          margin: [0, 0, 0, 10],
-        },
+        this.getPdfScreenshotConfig(325, 350, 10),
         {
           text: 'Selected Flood Frequency: ',
           style: ['underlineItem'],
@@ -965,13 +978,7 @@ export const useMapStore = defineStore('mapStore', () => {
           style: ['header1', 'centerItem'],
           margin: [0, 0, 0, 10],
         },
-        {
-          image: this.mapScreenshot,
-          width: 375,
-          height: 375,
-          style: ['centerItem'],
-          margin: [0, 0, 0, 20],
-        },
+        this.getPdfScreenshotConfig(375, 375, 20),
         {
           table: {
             widths: ['50%', '50%'],
@@ -990,24 +997,30 @@ export const useMapStore = defineStore('mapStore', () => {
               ],
               [
                 {
-                  text: 'Local nitrogen loading (5-year) 1-100 scale',
+                  text: 'Local nitrogen loading (1-100 scale/raw value)',
                   fillColor: '#ebebeb',
                 },
-                this.clickResults.nitrogenScale,
+                this.clickResults.nitrogenScale +
+                  ' / ' +
+                  this.clickResults.nitrogenRaw,
               ],
               [
                 {
-                  text: 'Local phosphorus loading (5-year) 1-100 scale',
+                  text: 'Local phosphorus loading (1-100 scale/raw value)',
                   fillColor: '#ebebeb',
                 },
-                this.clickResults.phosphorusScale,
+                this.clickResults.phosphorusScale +
+                  ' / ' +
+                  this.clickResults.phosphorusRaw,
               ],
               [
                 {
-                  text: 'Local sediment loading (5-year) 1-100 scale',
+                  text: 'Local sediment loading (1-100 scale/raw value)',
                   fillColor: '#ebebeb',
                 },
-                this.clickResults.sedimentScale,
+                this.clickResults.sedimentScale +
+                  ' / ' +
+                  this.clickResults.sedimentRaw,
               ],
               [
                 {
@@ -1126,11 +1139,23 @@ export const useMapStore = defineStore('mapStore', () => {
     if (!this.selectionMade) {
       pdfMake
         .createPdf(docDefinition)
-        .download('Meramec Floodplain Tool - ' + dateString + '.pdf');
+        .download(
+          'Meramec Floodplain Tool - ' +
+            titleDate +
+            ' - ' +
+            this.clickResults.name +
+            '.pdf',
+        );
     } else {
       pdfMake
         .createPdf(docDefinitionSelection)
-        .download('Meramec Floodplain Tool - ' + dateString + '.pdf');
+        .download(
+          'Meramec Floodplain Tool - ' +
+            titleDate +
+            ' - ' +
+            this.clickResults.name +
+            '.pdf',
+        );
     }
 
     this.printMap = false;
@@ -1211,5 +1236,6 @@ export const useMapStore = defineStore('mapStore', () => {
     findAnyLayerById,
     hucInfo,
     suppSlider,
+    getPdfScreenshotConfig,
   };
 });
