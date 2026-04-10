@@ -119,10 +119,18 @@ const onReady = (event) => {
           ? result.features[0].attributes.areaacres
           : result.features[0].attributes.acres;
 
+      let catchName;
+
+      if (newLayer == ms.fullCatch) {
+        catchName = 'Selected Catchment';
+      } else {
+        catchName = result.features[0].attributes.name;
+      }
+
       if (ms.ffModel == 251) {
         //20%
         ms.clickResults = {
-          name: result.features[0].attributes.name,
+          name: catchName,
           watershedAcres: formatValue(watershedAcresValue),
           floodplainAcres: formatValue(
             result.features[0].attributes.fpacres_unp_1,
@@ -147,7 +155,7 @@ const onReady = (event) => {
       } else if (ms.ffModel == 253) {
         // 1%
         ms.clickResults = {
-          name: result.features[0].attributes.name,
+          name: catchName,
           watershedAcres: formatValue(watershedAcresValue),
           floodplainAcres: formatValue(
             result.features[0].attributes.fpacres_unp_2,
@@ -172,7 +180,7 @@ const onReady = (event) => {
       } else if (ms.ffModel == 255) {
         // 0.2% 1/500
         ms.clickResults = {
-          name: result.features[0].attributes.name,
+          name: catchName,
           watershedAcres: formatValue(watershedAcresValue),
           floodplainAcres: formatValue(
             result.features[0].attributes.fpacres_unp_3,
