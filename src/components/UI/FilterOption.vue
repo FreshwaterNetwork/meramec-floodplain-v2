@@ -601,7 +601,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 15,
       max: 515,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland/grassland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
       values: [],
@@ -749,7 +749,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 42,
       max: 721,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
       values: [],
@@ -778,7 +778,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 232,
-      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {
       values: [],
@@ -860,7 +860,7 @@ const sliderObj = ref({
       min: 1.0,
       max: 4.801,
       shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
@@ -869,7 +869,7 @@ const sliderObj = ref({
       min: 0,
       max: 9,
       shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources.',
     },
     popnow: {
       values: [],
@@ -877,7 +877,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 5,
-      info: "<b>Population exposed to floods (present-day)</b><br>People currently living in the floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     pop5: {
       values: [],
@@ -902,7 +902,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 33,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in the floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
       values: [],
@@ -910,7 +910,7 @@ const sliderObj = ref({
       step: 1000,
       min: 0,
       max: 2315258,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
@@ -919,7 +919,7 @@ const sliderObj = ref({
       min: -4,
       max: 5,
       shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
   },
   // catchment + 1 in 100 year flood
@@ -930,7 +930,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 400,
-      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {
       values: [],
@@ -1012,7 +1012,7 @@ const sliderObj = ref({
       min: 1.0,
       max: 4.801,
       shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+      info: "<b><b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
@@ -1021,7 +1021,7 @@ const sliderObj = ref({
       min: 0,
       max: 9,
       shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources.',
     },
     popnow: {
       values: [],
@@ -1029,7 +1029,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 19,
-      info: "<b>Population exposed to floods (present-day)</b><br>People currently living in forest/wetland floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     pop5: {
       vis: false,
@@ -1054,7 +1054,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 136,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
       values: [],
@@ -1062,7 +1062,7 @@ const sliderObj = ref({
       step: 1000,
       min: 0,
       max: 27400000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
@@ -1071,7 +1071,7 @@ const sliderObj = ref({
       min: -4,
       max: 5,
       shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
   },
   // catchment + 1 in 500 year flood
@@ -1082,7 +1082,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 454,
-      info: '<b>Available floodplain area for given flood frequency</b><br>Area of floodplain in natural land cover that is not currently in protected status.',
+      info: '<b>Available floodplain area</b><br>Acres of floodplain potentially available for protection & restoration, not including areas within the Protected Areas Database of the U.S. (PAD-US)',
     },
     iy_tn_perc: {
       values: [],
@@ -1163,7 +1163,7 @@ const sliderObj = ref({
       min: 1.0,
       max: 4.801,
       shfld: true,
-      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. For protection priorities, identify catchments higher in this metric. <a href='http://assessment.fishhabitat.org/#578a9a48e4b0c1aacab8976c/578a99f4e4b0c1aacab89699' target='_blank'>More Info</a>",
+      info: "<b>National Fish Habitat Partnership Cumulative Habitat Condition Index</b><br>Degree to which anthropogenic stressors in the watershed may be affecting fish habitat. Higher value = less extreme stressors. <a href='https://www.usgs.gov/data/national-fish-habitat-partnership-nfhp-2015-cumulative-habitat-condition-indices-limiting-and' target='_blank'>More Info</a>",
     },
     fedendspecies: {
       values: [],
@@ -1172,7 +1172,7 @@ const sliderObj = ref({
       min: 0,
       max: 9,
       shfld: true,
-      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources. The information provided for your request is accurate and current as of the last observation date.',
+      info: '<b>Number of federally endangered species</b><br>This metric includes data provided by the Missouri Natural Heritage Program (MONHP), Missouri Department of Conservation. The MONHP houses the most complete database on the locations and status of species and natural communities of conservation concern. Data provided by the MONHP are not based on an exhaustive inventory of the state. The lack of data for any geographic area shall not be construed to mean that no significant features are present. Only an on-site survey can determine the presence or absence of natural heritage resources.',
     },
     popnow: {
       values: [],
@@ -1180,7 +1180,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 46,
-      info: "<b>Population exposed to floods (present-day)</b><br>People currently living in forest/wetland floodplain of the selected flood frequency. <a href='https://www.epa.gov/enviroatlas/dasymetric-toolbox' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     // pop5: {
     //   vis: false,
@@ -1202,7 +1202,7 @@ const sliderObj = ref({
       step: 0.1,
       min: 0,
       max: 154,
-      info: "<b>Population exposed to floods (2050)</b><br>People expected to be living in forest/wetland floodplain of the selected flood frequency in 2050. <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More Info</a>",
+      info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
       values: [],
@@ -1210,7 +1210,7 @@ const sliderObj = ref({
       step: 1000,
       min: 0,
       max: 40200000,
-      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Average between moderate (SSP2) and high (SSP5) socioeconomic development scenarios. Scenario descriptions are available in the <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>linked paper</a>.",
+      info: "<b>Potential Future Flood Damages to Structures (2050) ($)</b><br>Estimate of property damage in the floodplain corresponding to the currently selected flood frequency, given flood depth and projected 2050 land use / building type, according to a fossil-fuel-driven socioeconomic development scenario (SSP5). SSP scenario descriptions are available <a href='https://www.sciencedirect.com/science/article/pii/S0959378016300681' target='_blank'>here</a>. Estimated using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     SOVI: {
       values: [],
@@ -1219,7 +1219,7 @@ const sliderObj = ref({
       min: -4,
       max: 5,
       shfld: true,
-      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. <a href='http://artsandsciences.sc.edu/geog/hvri/faq' target='_blank'>More Info</a>",
+      info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
   },
 });

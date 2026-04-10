@@ -23,9 +23,11 @@
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
-          <q-item-label overline>Watershed area (acres)</q-item-label>
+          <q-item-label overline>Watershed area</q-item-label>
           <q-item-label
-            ><strong>{{ ms.clickResults.watershedAcres }}</strong></q-item-label
+            ><strong
+              >{{ ms.clickResults.watershedAcres }} acres</strong
+            ></q-item-label
           >
         </q-item-section>
       </q-item>
@@ -33,47 +35,41 @@
         <q-item-section>
           <q-item-label overline>Acres of floodplain</q-item-label>
           <q-item-label
-            ><strong>{{
-              ms.clickResults.floodplainAcres
-            }}</strong></q-item-label
-          >
-        </q-item-section>
-      </q-item>
-      <q-item dense class="q-py-sm">
-        <q-item-section>
-          <q-item-label overline
-            >Local nitrogen loading (1-100 scale/raw value)</q-item-label
-          >
-          <q-item-label
             ><strong
-              >{{ ms.clickResults.nitrogenScale }} /
-              {{ ms.clickResults.nitrogenRaw }}</strong
+              >{{ ms.clickResults.floodplainAcres }} acres</strong
             ></q-item-label
           >
         </q-item-section>
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
-          <q-item-label overline
-            >Local phosphorus loading (1-100 scale/raw value)</q-item-label
-          >
+          <q-item-label overline>Local nitrogen loading</q-item-label>
           <q-item-label
             ><strong
-              >{{ ms.clickResults.phosphorusScale }} /
-              {{ ms.clickResults.phosphorusRaw }}</strong
+              >{{ ms.clickResults.nitrogenScale }} (1-100 scale)<br />
+              {{ ms.clickResults.nitrogenRaw }} kg/yr</strong
             ></q-item-label
           >
         </q-item-section>
       </q-item>
       <q-item dense class="q-py-sm">
         <q-item-section>
-          <q-item-label overline
-            >Local sediment loading (1-100 scale/raw value)</q-item-label
-          >
+          <q-item-label overline>Local phosphorus loading</q-item-label>
           <q-item-label
             ><strong
-              >{{ ms.clickResults.sedimentScale }} /
-              {{ ms.clickResults.sedimentRaw }}</strong
+              >{{ ms.clickResults.phosphorusScale }} (1-100 scale)<br />
+              {{ ms.clickResults.phosphorusRaw }} kg/yr</strong
+            ></q-item-label
+          >
+        </q-item-section>
+      </q-item>
+      <q-item dense class="q-py-sm">
+        <q-item-section>
+          <q-item-label overline>Local sediment loading</q-item-label>
+          <q-item-label
+            ><strong
+              >{{ ms.clickResults.sedimentScale }} (1-100 scale)<br />
+              {{ ms.clickResults.sedimentRaw }} kg/yr</strong
             ></q-item-label
           >
         </q-item-section>
@@ -126,10 +122,12 @@
       <q-item dense class="q-py-sm">
         <q-item-section>
           <q-item-label overline
-            >Projected future flood damages (2050) ($)</q-item-label
+            >Projected future flood damages (2050)</q-item-label
           >
           <q-item-label
-            ><strong>{{ ms.clickResults.floodDamage }}</strong></q-item-label
+            ><strong
+              >${{ formatCurrency(ms.clickResults.floodDamage) }}</strong
+            ></q-item-label
           >
         </q-item-section>
       </q-item>
@@ -440,4 +438,15 @@
 import { useMapStore } from '../store/index';
 
 const ms = useMapStore();
+
+function formatCurrency(value) {
+  const numericValue = Number(String(value ?? 0).replace(/,/g, ''));
+
+  return Number.isFinite(numericValue)
+    ? numericValue.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+    : '0.00';
+}
 </script>

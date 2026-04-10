@@ -223,9 +223,15 @@ export const useMapStore = defineStore('mapStore', () => {
     let query = this.fullHuc.createQuery();
     query.outFields = ['name'];
     this.fullHuc.queryFeatures(query).then((results) => {
+      this.hucFilter.length = 0;
+
       results.features.forEach((feature) => {
-        this.hucFilter.push(feature.attributes.name);
+        if (feature.attributes.name) {
+          this.hucFilter.push(feature.attributes.name);
+        }
       });
+
+      this.hucFilter.sort((a, b) => a.localeCompare(b));
     });
   }
 
