@@ -55,6 +55,7 @@ export const useMapStore = defineStore('mapStore', () => {
   let infoText = ref({});
   let supportingLayers = ref([]);
   let showHelp = ref(true);
+  let showUserGuide = ref(false);
 
   let graphicsLayer = null;
   let selectionGraphic = null;
@@ -132,6 +133,9 @@ export const useMapStore = defineStore('mapStore', () => {
           if (sub.title == 'HUC 12s') {
             this.wsModel = sub.id;
             this.wsModelText = sub.title;
+            console.log(sub.id);
+          } else {
+            console.log(sub.id, sub.title);
           }
           sub.definitionExpression = this.defExp;
         });
@@ -254,7 +258,7 @@ export const useMapStore = defineStore('mapStore', () => {
       return val;
     }
 
-    if (this.wsModel == '19b4bcc2506-layer-10') {
+    if (this.wsModel == '19db59f428c-layer-16') {
       layer = this.fullHuc;
       query = layer.createQuery();
       query.where = "name = '" + val + "'";
@@ -375,7 +379,7 @@ export const useMapStore = defineStore('mapStore', () => {
         this.rightDrawerOpen = true;
         mapView.goTo(selectionGraphic);
       });
-    } else if (this.wsModel == '19b4bcc7eec-layer-11') {
+    } else if (this.wsModel == '19db59ecfe6-layer-15') {
       this.clickType = '';
       layer = this.fullHuc;
       query = layer.createQuery();
@@ -1207,6 +1211,7 @@ export const useMapStore = defineStore('mapStore', () => {
     infoText,
     supportingLayers,
     showHelp,
+    showUserGuide,
     graphicsLayer,
     selectionGraphic,
     runSupLayGraphic,

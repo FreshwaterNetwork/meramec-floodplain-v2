@@ -9,8 +9,16 @@
           ></q-toolbar-title
         >
         <q-btn
-          icon="help_outlined"
+          icon="info_outlined"
           @click="ms.showHelp = !ms.showHelp"
+          flat
+          dense
+          round
+          color="white"
+        />
+        <q-btn
+          icon="help_outlined"
+          @click="ms.showUserGuide = !ms.showUserGuide"
           flat
           dense
           round
@@ -87,6 +95,16 @@
       </q-card>
     </q-dialog>
 
+    <q-dialog v-if="ms.showUserGuide == true" v-model="ms.showUserGuide">
+      <q-card style="max-width: 830px; width: 830px">
+        <q-card-section class="column items-center">
+          <div>
+            <UserGuide></UserGuide>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <q-drawer
       show-if-above
       behavior="desktop"
@@ -123,8 +141,16 @@
         ></q-toolbar-title
       >
       <q-btn
-        icon="help_outlined"
+        icon="info_outlined"
         @click="ms.showHelp = !ms.showHelp"
+        flat
+        dense
+        round
+        color="white"
+      />
+      <q-btn
+        icon="help_outlined"
+        @click="ms.showUserGuide = !ms.showUserGuide"
         flat
         dense
         round
@@ -239,6 +265,7 @@ import { useQuasar } from 'quasar';
 import TheMap from './components/TheMap.vue';
 import TheLeftPanel from './components/TheLeftPanel.vue';
 import TheResults from './components/TheResults.vue';
+import UserGuide from './components/UI/UserGuide.vue';
 import { useMapStore } from './store/index';
 import '@arcgis/map-components/components/arcgis-map';
 import '@arcgis/map-components/components/arcgis-legend';

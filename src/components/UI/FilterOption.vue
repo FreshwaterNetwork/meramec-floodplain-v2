@@ -321,6 +321,27 @@ const filterObj = {
       },
     },
   },
+  group9: {
+    header: 'Development Pressure',
+    controls: {
+      con0: {
+        type: 'slider',
+        field: 'devpres',
+        label: 'Development pressure in the floodplain by 2050 (index)',
+        unit: '',
+        checkboxModel: ref(false),
+        radioModel: ref('present'),
+      },
+      con1: {
+        type: 'slider',
+        field: 'devpres_wshed',
+        label: 'Development pressure in the watershed by 2050 (index)',
+        unit: '',
+        checkboxModel: ref(false),
+        radioModel: ref('present'),
+      },
+    },
+  },
 };
 
 // object for range sliders
@@ -472,6 +493,24 @@ const sliderObj = ref({
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 4.5,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 5,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
   },
   // huc 12 + 1 in 100 year flood
   h12p2: {
@@ -620,6 +659,24 @@ const sliderObj = ref({
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 4.5,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 5,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
   },
   // huc 12 + 1 in 500 year flood
   h12p3: {
@@ -767,6 +824,24 @@ const sliderObj = ref({
       max: 2,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
+    },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 4.5,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 5,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
     },
   },
 
@@ -921,6 +996,24 @@ const sliderObj = ref({
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 26,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 21,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
   },
   // catchment + 1 in 100 year flood
   catchp2: {
@@ -1073,6 +1166,24 @@ const sliderObj = ref({
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
     },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 26,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 21,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
   },
   // catchment + 1 in 500 year flood
   catchp3: {
@@ -1220,6 +1331,24 @@ const sliderObj = ref({
       max: 5,
       shfld: true,
       info: "<b>Index of social vulnerability to environmental hazards</b><br>Index characterizing social vulnerability to environmental hazards, drawing on 22 demographic variables. At the national scale, values below -1 are considered low social vulnerability, -1 to +1 are medium, and above +1 are high. The value here is an average of the social vulnerability score within the unprotected floodplain of the currently selected flood frequency. <a href='https://sc.edu/study/colleges_schools/artsandsciences/centers_and_institutes/hvri/data_and_esources/sovi/' target='_blank'>More info</a>",
+    },
+    devpres: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 26,
+      shfld: true,
+      info: "<b>Development pressure in the floodplain by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
+    },
+    devpres_wshed: {
+      values: [],
+      vis: true,
+      step: 0.01,
+      min: 0,
+      max: 21,
+      shfld: true,
+      info: "<b>Development pressure in the watershed by 2050 (index)</b><br>Development pressure is characterized by comparing ICLUS EPA land use data for 2020 versus 2050 to identify projected land use transitions from less developed to more developed.</br>A weighting scheme was developed to assign higher weights to more developed land use types (e.g. urban-high) vs. less developed land use types (e.g. exurban-low), in accordance with dollar valuation estimates of these land use types based on the National Structure Inventory (NSI).</br>A higher index value indicates more extreme transitions (e.g. non-urban to very urban) in more places and a lower index value indicates less extreme transitions (e.g. suburban-low to suburban-high) and in fewer places. <a href='https://www.epa.gov/gcx/about-iclus' target='_blank'>More info</a>",
     },
   },
 });
@@ -1383,7 +1512,8 @@ function updateCheckbox(option, sliderVals) {
       if (
         option.field == 'WT_TOT' ||
         option.field == 'cumu_hci' ||
-        option.field == 'fedendspecies'
+        option.field == 'fedendspecies' ||
+        option.field == 'devpres_wshed'
       ) {
         ms.activeFilters.push({
           id: option.field,
@@ -1651,7 +1781,7 @@ function updateSlider(option, val) {
       option.field +
       ' <= ' +
       Math.round(val[1]);
-  } else if (option.field == 'nccpi') {
+  } else if (option.field == 'nccpi' || option.field == 'devpres') {
     if (ms.ffModel == 251) {
       stringVal =
         option.field +
@@ -1678,6 +1808,35 @@ function updateSlider(option, val) {
         ' AND ' +
         option.field +
         '_3 <= ' +
+        val[1];
+    }
+  } else if (option.field == 'devpres_wshed') {
+    if (ms.ffModel == 251) {
+      stringVal =
+        option.field +
+        ' >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        ' <= ' +
+        val[1];
+    } else if (ms.ffModel == 253) {
+      stringVal =
+        option.field +
+        ' >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        ' <= ' +
+        val[1];
+    } else if (ms.ffModel == 255) {
+      stringVal =
+        option.field +
+        ' >= ' +
+        val[0] +
+        ' AND ' +
+        option.field +
+        ' <= ' +
         val[1];
     }
   } else {

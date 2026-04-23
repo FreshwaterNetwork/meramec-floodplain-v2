@@ -228,7 +228,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 251 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'natural'
         "
         objName="h12p1"
@@ -236,7 +236,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 253 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'natural'
         "
         objName="h12p2"
@@ -244,7 +244,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 255 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'natural'
         "
         objName="h12p3"
@@ -253,7 +253,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 251 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'modified'
         "
         objName="h12r1"
@@ -261,7 +261,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 253 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'modified'
         "
         objName="h12r2"
@@ -269,7 +269,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 255 &&
-          ms.wsModel == '19b4bcc2506-layer-10' &&
+          ms.wsModel == '19db59f428c-layer-16' &&
           ms.maModel == 'modified'
         "
         objName="h12r3"
@@ -278,7 +278,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 251 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'natural'
         "
         objName="catchp1"
@@ -286,7 +286,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 253 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'natural'
         "
         objName="catchp2"
@@ -294,7 +294,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 255 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'natural'
         "
         objName="catchp3"
@@ -303,7 +303,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 251 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'modified'
         "
         objName="catchr1"
@@ -311,7 +311,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 253 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'modified'
         "
         objName="catchr2"
@@ -319,7 +319,7 @@
       <FilterOption
         v-if="
           ms.ffModel == 255 &&
-          ms.wsModel == '19b4bcc7eec-layer-11' &&
+          ms.wsModel == '19db59ecfe6-layer-15' &&
           ms.maModel == 'modified'
         "
         objName="catchr3"

@@ -98,9 +98,9 @@ const onReady = (event) => {
 
     let newLayer;
 
-    if (ms.wsModel == '19b4bcc2506-layer-10') {
+    if (ms.wsModel == '19db59f428c-layer-16') {
       newLayer = ms.fullHuc;
-    } else if (ms.wsModel == '19b4bcc7eec-layer-11') {
+    } else if (ms.wsModel == '19db59ecfe6-layer-15') {
       newLayer = ms.fullCatch;
     }
 

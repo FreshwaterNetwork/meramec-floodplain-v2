@@ -60,8 +60,17 @@ export default {
         steps: this.option.step,
         draggableSegmentsEnabled: true,
         disabled: false,
-        labelFormatFunction: function (value) {
-          return value.toFixed(1);
+        labelFormatFunction: (value) => {
+          if (
+            this.option.field == 'devpres_wshed' ||
+            this.option.field == 'devpres'
+          ) {
+            return value.toFixed(2);
+          } else if (this.option.field == 'fedendspecies') {
+            return value.toFixed(0);
+          } else {
+            return value.toFixed(1);
+          }
         },
       }),
     );
