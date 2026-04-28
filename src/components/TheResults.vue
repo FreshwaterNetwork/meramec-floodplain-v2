@@ -69,7 +69,7 @@
           <q-item-label
             ><strong
               >{{ ms.clickResults.sedimentScale }} (1-100 scale)<br />
-              {{ ms.clickResults.sedimentRaw }} kg/yr</strong
+              {{ ms.clickResults.sedimentRaw }} MT/yr</strong
             ></q-item-label
           >
         </q-item-section>
