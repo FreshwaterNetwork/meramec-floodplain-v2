@@ -89,6 +89,39 @@ const onReady = (event) => {
     queryClick(event);
   });
 
+  // fake layer for correct floodplain layer symbology
+  const fakeLegendLayer = new FeatureLayer({
+    id: 'legend-flood-frequency',
+    title: 'Flood Frequency',
+    source: [], // no features needed
+    geometryType: 'polygon',
+    objectIdField: 'ObjectID',
+    fields: [
+      {
+        name: 'ObjectID',
+        type: 'oid',
+      },
+    ],
+    renderer: {
+      type: 'simple',
+      symbol: {
+        type: 'simple-fill',
+        color: [118, 163, 247, 1],
+        outline: {
+          color: [118, 163, 247, 1],
+          width: 1,
+        },
+      },
+    },
+    opacity: 1,
+    visible: true,
+    legendEnabled: true,
+    listMode: 'show',
+    popupEnabled: false,
+  });
+
+  webMap.add(fakeLegendLayer);
+
   // METHODS
   function queryClick(event) {
     let layer;
@@ -374,17 +407,6 @@ const onReady = (event) => {
       }
     },
   );
-  // watch(
-  //   () => ms.activeShapefile,
-  //   () => {
-  //     if (ms.activeShapefile == false) {
-  //       let home = document.getElementById('home');
-  //       if (home) {
-  //         home.go();
-  //       }
-  //     }
-  //   }
-  // );
 };
 </script>
 
