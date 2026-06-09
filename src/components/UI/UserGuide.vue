@@ -3,7 +3,7 @@ import PDFObject from 'pdfobject/pdfobject';
 import { onMounted } from 'vue';
 
 onMounted(() => {
-  PDFObject.embed('/UserGuide.pdf', '#pdf', {
+  PDFObject.embed('/UserGuide_final.pdf', '#pdf', {
     height: '51rem',
     width: '50rem',
   });

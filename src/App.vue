@@ -71,6 +71,16 @@
               selections to identify sites meeting these criteria, identifying
               those geographies where floodplain conservation is likely to have
               the greatest positive impact on the health of this river system.
+              <br />
+              <br />
+              <q-btn
+                no-caps
+                flat
+                dense
+                color="primary"
+                @click="ms.showUserGuide = true"
+                >View the user guide here</q-btn
+              >
             </div>
           </div>
           <div class="q-pa-md">
