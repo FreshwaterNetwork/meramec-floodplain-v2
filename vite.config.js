@@ -15,4 +15,5 @@ export default defineConfig({
     }),
     quasar(),
   ],
+  base: '/meramec-floodplain/',
 });

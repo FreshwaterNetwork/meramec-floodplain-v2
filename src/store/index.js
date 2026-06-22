@@ -69,6 +69,12 @@ export const useMapStore = defineStore('mapStore', () => {
   let wsInfo = ref(false);
   let maInfo = ref(false);
   let opacSlider = ref(false);
+  let suppNwi = ref(false);
+  let suppPadus = ref(false);
+  let suppIba = ref(false);
+  let suppSuperfund = ref(false);
+  let suppEms = ref(false);
+  let suppEwg = ref(false);
 
   // Filter options
   const checkboxStates = ref([]); // Array of checked checkbox keys
@@ -1248,5 +1254,11 @@ export const useMapStore = defineStore('mapStore', () => {
     hucInfo,
     suppSlider,
     getPdfScreenshotConfig,
+    suppNwi,
+    suppPadus,
+    suppIba,
+    suppSuperfund,
+    suppEms,
+    suppEwg,
   };
 });

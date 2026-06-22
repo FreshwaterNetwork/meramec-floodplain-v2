@@ -384,15 +384,98 @@
         </div>
       </div>
       <div v-for="layer in ms.supportingLayers" :key="layer" class="q-my-xs">
-        <q-checkbox
-          dense
-          toggle-order="ft"
-          :label="layer.label"
-          v-model="layer.model"
-          :checked-icon="layer.checkedIcon"
-          :unchecked-icon="layer.uncheckedIcon"
-          @click="ms.updateLayerVisibility('', layer.value)"
-        ></q-checkbox>
+        <div style="display: flex">
+          <q-checkbox
+            dense
+            toggle-order="ft"
+            :label="layer.label"
+            v-model="layer.model"
+            :checked-icon="layer.checkedIcon"
+            :unchecked-icon="layer.uncheckedIcon"
+            @click="ms.updateLayerVisibility('', layer.value)"
+          ></q-checkbox>
+          <div
+            class="q-mx-sm"
+            v-if="
+              layer.label == 'National Wetlands Inventory' ||
+              layer.label == 'FAC Superfund Site Boundaries EPA Public' ||
+              layer.label == 'Protected Areas Database of the U.S.' ||
+              layer.label == 'Important Bird Areas (Audubon)' ||
+              layer.label == 'Ecological Mapping Systems 2023' ||
+              layer.label == 'EWG Ecological Significance 2022'
+            "
+          >
+            <IconButton
+              type="info"
+              method="show-info"
+              @show-info="showSuppInfo(layer.label)"
+            ></IconButton>
+          </div>
+        </div>
+        <div class="q-mx-lg">
+          <div
+            v-if="layer.label == 'National Wetlands Inventory' && ms.suppNwi"
+          >
+            <a
+              href="https://www.fws.gov/program/national-wetlands-inventory"
+              target="_blank"
+              >More Info</a
+            >
+          </div>
+          <div
+            v-if="
+              layer.label == 'Protected Areas Database of the U.S.' &&
+              ms.suppPadus
+            "
+          >
+            <a
+              href="https://www.usgs.gov/programs/gap-analysis-project/science/pad-us-data-overview"
+              target="_blank"
+              >More Info</a
+            >
+          </div>
+          <div
+            v-if="layer.label == 'Important Bird Areas (Audubon)' && ms.suppIba"
+          >
+            <a
+              href="https://www.audubon.org/important-bird-areas"
+              target="_blank"
+              >More Info</a
+            >
+          </div>
+          <div
+            v-if="
+              layer.label == 'FAC Superfund Site Boundaries EPA Public' &&
+              ms.suppSuperfund
+            "
+          >
+            <a href="https://www.epa.gov/superfund" target="_blank"
+              >More Info</a
+            >
+          </div>
+          <div
+            v-if="
+              layer.label == 'Ecological Mapping Systems 2023' && ms.suppEms
+            "
+          >
+            <a
+              href="https://www.ewgateway.org/wp-content/uploads/2022/08/10m-Upd-Landcover-and-Eco-Rpt-2022.pdf"
+              target="_blank"
+              >More Info</a
+            >
+          </div>
+          <div
+            v-if="
+              layer.label == 'EWG Ecological Significance 2022' && ms.suppEwg
+            "
+          >
+            <a
+              href="https://www.ewgateway.org/library-post/ecological-significance-2022-october-2022/"
+              target="_blank"
+              >More Info</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -480,6 +563,22 @@ function removeUpload() {
   ms.clearShapefilePoly();
 }
 
+function showSuppInfo(layer) {
+  if (layer == 'National Wetlands Inventory') {
+    ms.suppNwi = !ms.suppNwi;
+  } else if (layer == 'FAC Superfund Site Boundaries EPA Public') {
+    ms.suppSuperfund = !ms.suppSuperfund;
+  } else if (layer == 'Protected Areas Database of the U.S.') {
+    ms.suppPadus = !ms.suppPadus;
+  } else if (layer == 'Important Bird Areas (Audubon)') {
+    ms.suppIba = !ms.suppIba;
+  } else if (layer == 'Ecological Mapping Systems 2023') {
+    ms.suppEms = !ms.suppEms;
+  } else if (layer == 'EWG Ecological Significance 2022') {
+    ms.suppEwg = !ms.suppEwg;
+  }
+}
+
 watch(
   () => ms.printMap,
   () => {
@@ -508,6 +607,14 @@ watch(
   bottom: 0px;
   background-color: white;
   width: 95%;
-  /* border-top: 1px solid black; */
+}
+@media (max-width: 700px) {
+  #panel-footer {
+    height: 50px;
+    position: static;
+    display: block;
+    background-color: white;
+    width: 100%;
+  }
 }
 </style>
