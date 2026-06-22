@@ -15,5 +15,5 @@ export default defineConfig({
     }),
     quasar(),
   ],
-  base: '/meramec-floodplain/',
+  // base: '/meramec-floodplain/',
 });
