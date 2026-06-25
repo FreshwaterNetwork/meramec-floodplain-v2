@@ -449,9 +449,9 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
-      max: 7,
+      max: 431,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     // pop5: {
@@ -471,9 +471,9 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
-      min: 1,
-      max: 70,
+      step: 1,
+      min: 0,
+      max: 1520,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
@@ -615,9 +615,9 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
-      step: 0.1,
-      min: 7,
-      max: 92,
+      step: 1,
+      min: 0,
+      max: 746,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     // pop5: {
@@ -637,9 +637,9 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
-      min: 15,
-      max: 515,
+      step: 1,
+      min: 0,
+      max: 2978,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
@@ -781,9 +781,9 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
-      step: 0.1,
-      min: 14,
-      max: 384,
+      step: 1,
+      min: 0,
+      max: 1170,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
     },
     // pop5: {
@@ -803,9 +803,9 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
-      min: 42,
-      max: 721,
+      step: 1,
+      min: 0,
+      max: 3545,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
     },
     damages: {
@@ -974,7 +974,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
       max: 33,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
@@ -1119,7 +1119,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
       max: 19,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
@@ -1144,7 +1144,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
       max: 136,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",
@@ -1288,7 +1288,7 @@ const sliderObj = ref({
     popnow: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
       max: 46,
       info: "<b>Population exposed to floods (present-day)</b><br>Number of people currently living in unprotected floodplain of the currently selected flood frequency. Population determined using land-cover-weighted allocation of population. <a href='https://enviroatlas.epa.gov/enviroatlas/DataFactSheets/pdf/Supplemental/DasymetricAllocationofPopulation.pdf' target='_blank'>More info</a>",
@@ -1310,7 +1310,7 @@ const sliderObj = ref({
     pop2050: {
       values: [],
       vis: true,
-      step: 0.1,
+      step: 1,
       min: 0,
       max: 154,
       info: "<b>Population exposed to floods (2050)</b><br>Number of people expected to be living in the floodplain of the currently selected flood frequency by 2050, determined using the methods in Wing et al. (2018). <a href='https://iopscience.iop.org/article/10.1088/1748-9326/aaac65' target='_blank'>More info</a>",

@@ -68,6 +68,11 @@ export default {
             return value.toFixed(2);
           } else if (this.option.field == 'fedendspecies') {
             return value.toFixed(0);
+          } else if (
+            this.option.field == 'popnow' ||
+            this.option.field == 'pop2050'
+          ) {
+            return value.toFixed(0);
           } else {
             return value.toFixed(1);
           }
